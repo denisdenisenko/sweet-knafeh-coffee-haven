@@ -12,43 +12,51 @@ export default {
   theme: {
     container: {
       center: true,
-      padding: '2rem',
+      padding: "2rem",
       screens: {
-        '2xl': '1400px'
-      }
+        "2xl": "1400px",
+      },
     },
     extend: {
       colors: {
-        border: 'hsl(var(--border))',
-        input: 'hsl(var(--input))',
-        ring: 'hsl(var(--ring))',
-        background: 'hsl(var(--background))',
-        foreground: 'hsl(var(--foreground))',
+        border: "hsl(var(--border))",
+        input: "hsl(var(--input))",
+        ring: "hsl(var(--ring))",
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
         primary: {
-          DEFAULT: '#FEC6A1',
-          dark: '#E6B191',
+          DEFAULT: "#FEC6A1",
+          dark: "#1A1F2C",
+          light: "#FDE1D3",
         },
         secondary: {
-          DEFAULT: '#8B4513',
-          light: '#A65D2E',
+          DEFAULT: "#8B4513",
+          dark: "#221F26",
+          light: "#D6BCFA",
         },
         accent: {
-          DEFAULT: '#FEF7CD',
-          dark: '#E6DFB9',
+          DEFAULT: "#FEF7CD",
+          dark: "#333333",
+          light: "#F2FCE2",
         },
         textColor: {
-          DEFAULT: '#2C1810',
-          light: '#5C3620',
+          DEFAULT: "#2C1810",
+          dark: "#FFFFFF",
+          light: "#5C3620",
         }
       },
+      fontFamily: {
+        arabic: ["Amiri", "serif"],
+        heading: ["Scheherazade New", "serif"],
+      },
       animation: {
-        'fade-up': 'fadeUp 0.5s ease-out',
+        "fade-up": "fadeUp 0.5s ease-out",
       },
       keyframes: {
         fadeUp: {
-          '0%': { opacity: '0', transform: 'translateY(20px)' },
-          '100%': { opacity: '1', transform: 'translateY(0)' },
-        }
+          "0%": { opacity: "0", transform: "translateY(20px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
       },
     },
   },
