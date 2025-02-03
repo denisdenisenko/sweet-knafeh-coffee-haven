@@ -1,10 +1,10 @@
 const About = () => {
   return (
-    <div className="py-20 bg-white">
+    <div className="py-20 bg-white dark:bg-secondary-dark">
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-secondary mb-6">Our Story</h2>
-          <p className="text-lg text-textColor/80 mb-8">
+          <h2 className="text-3xl md:text-4xl font-bold text-secondary dark:text-primary mb-6">Our Story</h2>
+          <p className="text-lg text-textColor/80 dark:text-textColor-dark/80 mb-8">
             For generations, we've been crafting authentic Middle Eastern desserts using traditional recipes 
             and techniques. Our Knafeh is made fresh daily with the finest ingredients, creating the perfect 
             balance of crispy, sweet, and cheesy goodness that melts in your mouth.

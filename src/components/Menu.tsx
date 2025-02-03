@@ -1,10 +1,10 @@
 import { CakeSlice } from "lucide-react";
 
 const MenuItem = ({ name, description, price }: { name: string; description: string; price: string }) => (
-  <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
-    <h3 className="text-xl font-semibold text-secondary mb-2">{name}</h3>
-    <p className="text-textColor/70 mb-4">{description}</p>
-    <p className="text-primary-dark font-bold">{price}</p>
+  <div className="bg-white dark:bg-secondary-dark p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+    <h3 className="text-xl font-semibold text-secondary dark:text-primary mb-2">{name}</h3>
+    <p className="text-textColor/70 dark:text-textColor-dark/70 mb-4">{description}</p>
+    <p className="text-primary-dark dark:text-primary font-bold">{price}</p>
   </div>
 );
 
@@ -33,11 +33,11 @@ const Menu = () => {
   ];
 
   return (
-    <div className="bg-accent/30 py-20">
+    <div className="bg-accent/30 dark:bg-accent-dark/30 py-20">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-center gap-2 mb-12">
-          <CakeSlice className="w-8 h-8 text-secondary" />
-          <h2 className="text-3xl md:text-4xl font-bold text-secondary">Our Menu</h2>
+          <CakeSlice className="w-8 h-8 text-secondary dark:text-primary" />
+          <h2 className="text-3xl md:text-4xl font-bold text-secondary dark:text-primary">Our Menu</h2>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {menuItems.map((item, index) => (
