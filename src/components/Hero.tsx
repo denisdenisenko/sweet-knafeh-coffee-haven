@@ -40,7 +40,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="flex items-center justify-center gap-4 flex-wrap mb-16" // Added margin-bottom here
+          className="flex items-center justify-center gap-4 flex-wrap"
         >
           <Button
             size="lg"
@@ -58,17 +58,17 @@ const Hero = () => {
             Order Now
           </Button>
         </motion.div>
-
-        {/* Scroll indicator */}
-        <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.8 }}
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-        >
-          <ChevronDown className="w-8 h-8 text-primary dark:text-primary-light animate-bounce" />
-        </motion.div>
       </div>
+
+      {/* Scroll indicator */}
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.8 }}
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+      >
+        <ChevronDown className="w-8 h-8 text-primary dark:text-primary-light animate-bounce" />
+      </motion.div>
 
       {/* Decorative elements */}
       <div className="absolute top-20 left-20 w-64 h-64 bg-primary/20 dark:bg-primary-light/10 rounded-full blur-3xl" />
