@@ -5,19 +5,19 @@
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 20 10% 15%;
-    --border: 30 15% 90%;
-    --input: 30 15% 90%;
-    --ring: 20 14.3% 4.1%;
+    --foreground: 222 47% 11%;
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 222 47% 11%;
     --radius: 0.5rem;
   }
 
   .dark {
-    --background: 222 15% 15%;
-    --foreground: 0 0% 95%;
-    --border: 215 25% 27%;
-    --input: 215 25% 27%;
-    --ring: 216 12.2% 83.9%;
+    --background: 222 47% 11%;
+    --foreground: 210 40% 98%;
+    --border: 217 32% 17%;
+    --input: 217 32% 17%;
+    --ring: 212 40% 98%;
   }
 }
 
@@ -33,10 +33,6 @@
   h1, h2, h3, h4, h5, h6 {
     @apply font-heading;
   }
-}
-
-.arabic-pattern {
-  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0l30 30-30 30L0 30z' fill='%23FEC6A1' fill-opacity='0.1'/%3E%3C/svg%3E");
 }
 
 .glass-morphism {
