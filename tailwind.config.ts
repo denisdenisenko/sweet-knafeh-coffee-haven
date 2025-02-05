@@ -46,8 +46,8 @@ export default {
         }
       },
       fontFamily: {
-        arabic: ["Amiri", "serif"],
-        heading: ["Scheherazade New", "serif"],
+        hebrew: ["Heebo", "sans-serif"],
+        heading: ["Rubik", "sans-serif"],
       },
       animation: {
         "fade-up": "fadeUp 0.5s ease-out",

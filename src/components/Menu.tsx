@@ -15,7 +15,7 @@ const MenuItem = ({ name, description, price, index }: { name: string; descripti
         {index === 0 && (
           <div className="flex items-center gap-1 text-yellow-500">
             <Star className="w-4 h-4 fill-current" />
-            <span className="text-sm font-semibold">Popular</span>
+            <span className="text-sm font-semibold">פופולרי</span>
           </div>
         )}
       </div>
@@ -29,7 +29,7 @@ const MenuItem = ({ name, description, price, index }: { name: string; descripti
           "group-hover:bg-primary/20 dark:group-hover:bg-primary-light/20",
           "transition-colors duration-300"
         )}>
-          {name.toLowerCase().includes('coffee') ? (
+          {name.toLowerCase().includes('קפה') ? (
             <Coffee className="w-5 h-5 text-primary dark:text-primary-light" />
           ) : (
             <CakeSlice className="w-5 h-5 text-primary dark:text-primary-light" />
@@ -43,24 +43,24 @@ const MenuItem = ({ name, description, price, index }: { name: string; descripti
 const Menu = () => {
   const menuItems = [
     {
-      name: "Classic Knafeh",
-      description: "Traditional cheese-based dessert with crispy kataifi, pistachios, and sweet syrup",
-      price: "$12.99"
+      name: "קנאפה קלאסית",
+      description: "קינוח גבינה מסורתי עם שערות קדאיף פריכות, פיסטוקים וסירופ מתוק",
+      price: "₪48"
     },
     {
-      name: "Chocolate Knafeh",
-      description: "Our modern twist with rich chocolate filling and hazelnuts",
-      price: "$14.99"
+      name: "קנאפה שוקולד",
+      description: "הטוויסט המודרני שלנו עם מילוי שוקולד עשיר ואגוזי לוז",
+      price: "₪52"
     },
     {
-      name: "Arabic Coffee",
-      description: "Traditional cardamom-spiced coffee served in small cups",
-      price: "$3.99"
+      name: "קפה ערבי",
+      description: "קפה מסורתי מתובל בהל, מוגש בכוסות קטנות",
+      price: "₪15"
     },
     {
-      name: "Turkish Coffee",
-      description: "Rich and unfiltered coffee with optional cardamom flavor",
-      price: "$4.99"
+      name: "קפה טורקי",
+      description: "קפה עשיר ולא מסונן עם אפשרות לטעם הל",
+      price: "₪18"
     }
   ];
 
@@ -79,7 +79,7 @@ const Menu = () => {
           className="flex items-center justify-center gap-3 mb-16"
         >
           <CakeSlice className="w-10 h-10 text-primary dark:text-primary-light" />
-          <h2 className="text-4xl md:text-5xl font-bold text-primary dark:text-primary-light">Our Menu</h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-primary dark:text-primary-light">התפריט שלנו</h2>
         </motion.div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">

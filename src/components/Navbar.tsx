@@ -11,10 +11,10 @@ const Navbar = () => {
   const toggleMenu = () => setIsOpen(!isOpen);
 
   const menuItems = [
-    { name: "Home", path: "/" },
-    { name: "Gallery", path: "/gallery" },
-    { name: "Location", path: "/location" },
-    { name: "Contact", path: "/contact" },
+    { name: "בית", path: "/" },
+    { name: "גלריה", path: "/gallery" },
+    { name: "מיקום", path: "/location" },
+    { name: "צור קשר", path: "/contact" },
   ];
 
   return (
@@ -23,7 +23,7 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex-shrink-0">
-            <h1 className="text-2xl font-heading font-bold text-gradient">Knafeh</h1>
+            <h1 className="text-2xl font-heading font-bold text-gradient">קנאפה</h1>
           </Link>
 
           {/* Desktop Menu */}
@@ -33,7 +33,7 @@ const Navbar = () => {
                 <Link
                   key={item.path}
                   to={item.path}
-                  className="font-arabic text-foreground/80 hover:text-foreground px-3 py-2 rounded-md text-sm transition-colors"
+                  className="font-hebrew text-foreground/80 hover:text-foreground px-3 py-2 rounded-md text-sm transition-colors"
                 >
                   {item.name}
                 </Link>
@@ -42,7 +42,7 @@ const Navbar = () => {
                 variant="ghost"
                 size="icon"
                 onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-                className="ml-4"
+                className="mr-4"
               >
                 {theme === "dark" ? "🌞" : "🌙"}
               </Button>
@@ -71,7 +71,7 @@ const Navbar = () => {
               <Link
                 key={item.path}
                 to={item.path}
-                className="font-arabic text-foreground/80 hover:text-foreground block px-3 py-2 rounded-md text-base"
+                className="font-hebrew text-foreground/80 hover:text-foreground block px-3 py-2 rounded-md text-base"
                 onClick={() => setIsOpen(false)}
               >
                 {item.name}
@@ -86,7 +86,7 @@ const Navbar = () => {
               }}
               className="w-full justify-start px-3"
             >
-              {theme === "dark" ? "Light Mode 🌞" : "Dark Mode 🌙"}
+              {theme === "dark" ? "מצב יום 🌞" : "מצב לילה 🌙"}
             </Button>
           </div>
         </div>

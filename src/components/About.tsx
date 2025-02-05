@@ -21,18 +21,18 @@ const About = () => {
   const features = [
     {
       icon: Award,
-      title: "Premium Quality",
-      description: "Using only the finest ingredients for authentic taste"
+      title: "איכות מעולה",
+      description: "שימוש במרכיבים הטובים ביותר לטעם אותנטי"
     },
     {
       icon: Clock,
-      title: "Fresh Daily",
-      description: "Made fresh every morning for the best experience"
+      title: "טרי מדי יום",
+      description: "מוכן טרי בכל בוקר לחוויה הטובה ביותר"
     },
     {
       icon: Users,
-      title: "Family Recipe",
-      description: "Passed down through generations of expertise"
+      title: "מתכון משפחתי",
+      description: "עובר מדור לדור עם מומחיות של שנים"
     }
   ];
 
@@ -50,12 +50,12 @@ const About = () => {
             className="text-center space-y-8 mb-16"
           >
             <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-br from-primary to-primary/80 dark:from-primary-light dark:to-primary-light/80 bg-clip-text text-transparent">
-              Our Story
+              הסיפור שלנו
             </h2>
             <p className="text-lg text-foreground/80 dark:text-foreground/70 leading-relaxed">
-              For generations, we've been crafting authentic Middle Eastern desserts using traditional recipes 
-              and techniques. Our Knafeh is made fresh daily with the finest ingredients, creating the perfect 
-              balance of crispy, sweet, and cheesy goodness that melts in your mouth.
+              במשך דורות, אנחנו מכינים קינוחים מזרחיים אותנטיים באמצעות מתכונים וטכניקות מסורתיות. 
+              הקנאפה שלנו מוכנה טרייה מדי יום עם המרכיבים האיכותיים ביותר, יוצרת איזון מושלם 
+              של מרקמים ומתיקות שנמסה בפה.
             </p>
           </motion.div>
 
@@ -75,7 +75,7 @@ const About = () => {
             <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-primary/5 dark:from-primary-light/20 dark:to-primary-light/5 rounded-xl transform transition-transform duration-300 group-hover:scale-105" />
             <img 
               src="https://images.unsplash.com/photo-1618160702438-9b02ab6515c9" 
-              alt="Fresh Knafeh" 
+              alt="קנאפה טרייה" 
               className="relative rounded-xl shadow-xl w-full max-w-3xl mx-auto transition-transform duration-300 group-hover:scale-[1.02]"
             />
             <div className="absolute inset-0 rounded-xl bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
