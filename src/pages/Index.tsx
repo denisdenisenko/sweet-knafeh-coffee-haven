@@ -4,6 +4,7 @@ import About from "@/components/About";
 import Testimonials from "@/components/Testimonials";
 import Gallery from "@/components/Gallery";
 import Contact from "@/components/Contact";
+import LocationSection from "@/components/LocationSection";
 
 const Index = () => {
   return (
@@ -13,6 +14,7 @@ const Index = () => {
       <About />
       <Testimonials />
       <Gallery />
+      <LocationSection />
       <Contact />
     </div>
   );
