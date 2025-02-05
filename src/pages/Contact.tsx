@@ -7,30 +7,30 @@ const Contact = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     toast({
-      title: "Message sent!",
-      description: "We'll get back to you as soon as possible.",
+      title: "ההודעה נשלחה!",
+      description: "נחזור אליך בהקדם האפשרי.",
     });
   };
 
   return (
     <div className="min-h-screen bg-white py-20">
       <div className="container mx-auto px-4">
-        <h1 className="text-4xl font-bold text-center mb-8">Contact Us</h1>
+        <h1 className="text-4xl font-bold text-center mb-8">צור קשר</h1>
         <div className="max-w-2xl mx-auto">
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label htmlFor="name" className="block text-sm font-medium mb-2">Name</label>
-              <Input id="name" placeholder="Your name" required />
+              <label htmlFor="name" className="block text-sm font-medium mb-2">שם</label>
+              <Input id="name" placeholder="השם שלך" required />
             </div>
             <div>
-              <label htmlFor="email" className="block text-sm font-medium mb-2">Email</label>
-              <Input id="email" type="email" placeholder="your@email.com" required />
+              <label htmlFor="email" className="block text-sm font-medium mb-2">אימייל</label>
+              <Input id="email" type="email" placeholder="האימייל שלך" required />
             </div>
             <div>
-              <label htmlFor="message" className="block text-sm font-medium mb-2">Message</label>
-              <Textarea id="message" placeholder="How can we help you?" required className="min-h-[150px]" />
+              <label htmlFor="message" className="block text-sm font-medium mb-2">הודעה</label>
+              <Textarea id="message" placeholder="כיצד נוכל לעזור?" required className="min-h-[150px]" />
             </div>
-            <Button type="submit" className="w-full">Send Message</Button>
+            <Button type="submit" className="w-full">שלח הודעה</Button>
           </form>
         </div>
       </div>
