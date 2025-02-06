@@ -29,17 +29,7 @@ const Navbar = () => {
 
           {/* Mobile layout */}
           <div className="flex items-center justify-between w-full md:hidden">
-            {/* Left Icon */}
-            <div className="flex items-center">
-              <Utensils className="h-6 w-6 text-foreground/80" />
-            </div>
-
-            {/* Center Logo */}
-            <Link to="/" className="flex-shrink-0">
-              <h1 className="text-2xl font-heading font-bold text-gradient">קנאפה</h1>
-            </Link>
-
-            {/* Right Menu Button */}
+            {/* Menu Button (now on the left) */}
             <Button
               variant="ghost"
               size="icon"
@@ -48,6 +38,16 @@ const Navbar = () => {
             >
               <Menu className="h-6 w-6" />
             </Button>
+
+            {/* Center Logo */}
+            <Link to="/" className="flex-shrink-0">
+              <h1 className="text-2xl font-heading font-bold text-gradient">קנאפה</h1>
+            </Link>
+
+            {/* Utensils Icon (now on the right) */}
+            <div className="flex items-center">
+              <Utensils className="h-6 w-6 text-foreground/80" />
+            </div>
           </div>
 
           {/* Desktop Menu */}
