@@ -1,3 +1,4 @@
+
 import { motion } from "framer-motion";
 import { Award, Clock, Users } from "lucide-react";
 
@@ -38,7 +39,9 @@ const About = () => {
 
   return (
     <div className="relative py-32 overflow-hidden">
+      {/* Background decorations */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent dark:from-primary-dark/5" />
+      <div className="absolute inset-0 bg-[url('/pattern.svg')] opacity-5 bg-repeat" />
       
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
@@ -49,7 +52,7 @@ const About = () => {
             viewport={{ once: true }}
             className="text-center space-y-8 mb-16"
           >
-            <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-br from-primary to-primary/80 dark:from-primary-light dark:to-primary-light/80 bg-clip-text text-transparent">
+            <h2 className="text-4xl md:text-5xl font-bold text-gradient">
               הסיפור שלנו
             </h2>
             <p className="text-lg text-foreground/80 dark:text-foreground/70 leading-relaxed">
@@ -70,15 +73,46 @@ const About = () => {
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
-            className="relative group"
+            className="relative group cursor-pointer"
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-primary/5 dark:from-primary-light/20 dark:to-primary-light/5 rounded-xl transform transition-transform duration-300 group-hover:scale-105" />
-            <img 
-              src="https://images.unsplash.com/photo-1618160702438-9b02ab6515c9" 
-              alt="קנאפה טרייה" 
-              className="relative rounded-xl shadow-xl w-full max-w-3xl mx-auto transition-transform duration-300 group-hover:scale-[1.02]"
-            />
-            <div className="absolute inset-0 rounded-xl bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            {/* Card container with glass effect */}
+            <div className="relative overflow-hidden rounded-xl glass-morphism p-4">
+              {/* Hover overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              
+              {/* Image wrapper */}
+              <div className="relative rounded-lg overflow-hidden">
+                <motion.img 
+                  src="https://images.unsplash.com/photo-1618160702438-9b02ab6515c9" 
+                  alt="קנאפה טרייה" 
+                  className="w-full h-[500px] object-cover transform transition-transform duration-500 group-hover:scale-110"
+                  style={{ objectPosition: "center" }}
+                  initial={{ scale: 1.1 }}
+                  whileInView={{ scale: 1 }}
+                  transition={{ duration: 0.7 }}
+                />
+              </div>
+              
+              {/* Text overlay */}
+              <motion.div 
+                className="absolute inset-0 flex items-end justify-center p-8 text-white"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+              >
+                <div className="text-center relative z-10">
+                  <h3 className="text-2xl font-bold mb-2 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+                    הקנאפה המסורתית שלנו
+                  </h3>
+                  <p className="opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 delay-100">
+                    מתכון משפחתי מסורתי שעובר מדור לדור
+                  </p>
+                </div>
+              </motion.div>
+            </div>
+
+            {/* Decorative elements */}
+            <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 via-primary/10 to-primary/20 dark:from-primary-light/20 dark:via-primary-light/10 dark:to-primary-light/20 rounded-xl blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
           </motion.div>
         </div>
       </div>
