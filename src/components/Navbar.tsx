@@ -1,6 +1,7 @@
+
 import { Link } from "react-router-dom";
 import { useTheme } from "next-themes";
-import { Menu, X } from "lucide-react";
+import { Menu, Utensils } from "lucide-react";
 import { useState } from "react";
 import { Button } from "./ui/button";
 
@@ -21,8 +22,18 @@ const Navbar = () => {
     <nav className="fixed w-full z-50 bg-background/80 backdrop-blur-sm border-b">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <Link to="/" className="flex-shrink-0">
+          {/* Logo - Hidden on Mobile */}
+          <Link to="/" className="hidden md:flex flex-shrink-0">
+            <h1 className="text-2xl font-heading font-bold text-gradient">קנאפה</h1>
+          </Link>
+
+          {/* Mobile Left Icon */}
+          <div className="md:hidden flex items-center">
+            <Utensils className="h-6 w-6 text-foreground/80" />
+          </div>
+
+          {/* Center Logo - Mobile Only */}
+          <Link to="/" className="md:hidden flex-shrink-0">
             <h1 className="text-2xl font-heading font-bold text-gradient">קנאפה</h1>
           </Link>
 
@@ -57,7 +68,7 @@ const Navbar = () => {
               onClick={toggleMenu}
               className="inline-flex items-center justify-center"
             >
-              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              <Menu className="h-6 w-6" />
             </Button>
           </div>
         </div>
