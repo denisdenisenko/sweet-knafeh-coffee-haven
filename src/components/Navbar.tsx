@@ -27,15 +27,28 @@ const Navbar = () => {
             <h1 className="text-2xl font-heading font-bold text-gradient">קנאפה</h1>
           </Link>
 
-          {/* Mobile Left Icon */}
-          <div className="md:hidden flex items-center">
-            <Utensils className="h-6 w-6 text-foreground/80" />
-          </div>
+          {/* Mobile layout */}
+          <div className="flex items-center justify-between w-full md:hidden">
+            {/* Left Icon */}
+            <div className="flex items-center">
+              <Utensils className="h-6 w-6 text-foreground/80" />
+            </div>
 
-          {/* Center Logo - Mobile Only */}
-          <Link to="/" className="md:hidden flex-shrink-0">
-            <h1 className="text-2xl font-heading font-bold text-gradient">קנאפה</h1>
-          </Link>
+            {/* Center Logo */}
+            <Link to="/" className="flex-shrink-0">
+              <h1 className="text-2xl font-heading font-bold text-gradient">קנאפה</h1>
+            </Link>
+
+            {/* Right Menu Button */}
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={toggleMenu}
+              className="inline-flex items-center justify-center"
+            >
+              <Menu className="h-6 w-6" />
+            </Button>
+          </div>
 
           {/* Desktop Menu */}
           <div className="hidden md:block">
@@ -58,18 +71,6 @@ const Navbar = () => {
                 {theme === "dark" ? "🌞" : "🌙"}
               </Button>
             </div>
-          </div>
-
-          {/* Mobile menu button */}
-          <div className="md:hidden">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={toggleMenu}
-              className="inline-flex items-center justify-center"
-            >
-              <Menu className="h-6 w-6" />
-            </Button>
           </div>
         </div>
       </div>
