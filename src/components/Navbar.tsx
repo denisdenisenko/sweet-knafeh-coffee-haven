@@ -15,7 +15,6 @@ const Navbar = () => {
     { name: "בית", path: "/" },
     { name: "גלריה", path: "/gallery" },
     { name: "מיקום", path: "/location" },
-    { name: "צור קשר", path: "/contact" },
   ];
 
   return (

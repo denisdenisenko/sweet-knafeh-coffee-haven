@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -6,7 +7,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "next-themes";
 import Navbar from "./components/Navbar";
 import Index from "./pages/Index";
-import Contact from "./pages/Contact";
 import Gallery from "./pages/Gallery";
 import Location from "./pages/Location";
 import NotFound from "./pages/NotFound";
@@ -25,7 +25,6 @@ const App = () => (
             <main className="pt-16"> {/* Add padding to account for fixed navbar */}
               <Routes>
                 <Route path="/" element={<Index />} />
-                <Route path="/contact" element={<Contact />} />
                 <Route path="/gallery" element={<Gallery />} />
                 <Route path="/location" element={<Location />} />
                 <Route path="*" element={<NotFound />} />
