@@ -1,8 +1,56 @@
-import { CakeSlice, Coffee, Star } from "lucide-react";
+
+import { CakeSlice, Coffee, Star, Info } from "lucide-react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
-const MenuItem = ({ name, description, price, index }: { name: string; description: string; price: string; index: number }) => (
+interface MenuItem {
+  name: string;
+  description: string;
+  price: string;
+  image: string;
+  longDescription: string;
+}
+
+const menuItems: MenuItem[] = [
+  {
+    name: "קנאפה קלאסית",
+    description: "קינוח גבינה מסורתי עם שערות קדאיף פריכות, פיסטוקים וסירופ מתוק",
+    price: "₪48",
+    image: "/placeholder.svg",
+    longDescription: "קנאפה קלאסית היא קינוח ערבי מסורתי המורכב משכבות של שערות קדאיף פריכות, במילוי גבינה רכה ומתוקה. הקינוח מוגש חם ומעוטר בפיסטוקים קצוצים וסירופ סוכר ארומטי. זהו שילוב מושלם של מרקמים וטעמים - פריך מבחוץ ורך ועשיר מבפנים."
+  },
+  {
+    name: "קנאפה שוקולד",
+    description: "הטוויסט המודרני שלנו עם מילוי שוקולד עשיר ואגוזי לוז",
+    price: "₪52",
+    image: "/placeholder.svg",
+    longDescription: "קנאפה שוקולד היא גרסה מודרנית וייחודית לקינוח המסורתי. במקום גבינה, אנו משתמשים במילוי שוקולד בלגי איכותי ואגוזי לוז טחונים. השילוב של שערות הקדאיף הפריכות עם השוקולד החם והאגוזים יוצר חוויה קולינרית בלתי נשכחת."
+  },
+  {
+    name: "קפה ערבי",
+    description: "קפה מסורתי מתובל בהל, מוגש בכוסות קטנות",
+    price: "₪15",
+    image: "/placeholder.svg",
+    longDescription: "קפה ערבי מסורתי מוכן בשיטה העתיקה, כאשר הקפה נטחן דק במיוחד ומתובל בהל ארומטי. הקפה מוגש בכוסות קטנות מסורתיות ומלווה בכוס מים קרים. זוהי דרך מושלמת לסיים ארוחה או פשוט ליהנות מרגע של שקט."
+  },
+  {
+    name: "קפה טורקי",
+    description: "קפה עשיר ולא מסונן עם אפשרות לטעם הל",
+    price: "₪18",
+    image: "/placeholder.svg",
+    longDescription: "קפה טורקי מסורתי מוכן בפינג'אן נחושת על חול חם, מה שמעניק לו טעם עשיר ומיוחד. ניתן להוסיף הל לפי בקשה. הקפה מוגש לא מסונן בכוס מסורתית, עם קצף עשיר למעלה. מתאים במיוחד לחובבי קפה חזק ואותנטי."
+  }
+];
+
+const MenuItem = ({ item, index }: { item: MenuItem; index: number }) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
@@ -19,21 +67,53 @@ const MenuItem = ({ name, description, price, index }: { name: string; descripti
           </div>
         )}
       </div>
-      <h3 className="text-2xl font-semibold text-primary dark:text-primary-light mb-3">{name}</h3>
-      <p className="text-foreground/70 dark:text-foreground/60 mb-4 min-h-[60px]">{description}</p>
+      <h3 className="text-2xl font-semibold text-primary dark:text-primary-light mb-3">{item.name}</h3>
+      <p className="text-foreground/70 dark:text-foreground/60 mb-4 min-h-[60px]">{item.description}</p>
       <div className="flex items-center justify-between">
-        <p className="text-primary-dark dark:text-primary-light font-bold text-xl">{price}</p>
-        <div className={cn(
-          "p-2 rounded-full",
-          "bg-primary/10 dark:bg-primary-light/10",
-          "group-hover:bg-primary/20 dark:group-hover:bg-primary-light/20",
-          "transition-colors duration-300"
-        )}>
-          {name.toLowerCase().includes('קפה') ? (
-            <Coffee className="w-5 h-5 text-primary dark:text-primary-light" />
-          ) : (
-            <CakeSlice className="w-5 h-5 text-primary dark:text-primary-light" />
-          )}
+        <p className="text-primary-dark dark:text-primary-light font-bold text-xl">{item.price}</p>
+        <div className="flex gap-2">
+          <Dialog>
+            <DialogTrigger>
+              <div className={cn(
+                "p-2 rounded-full",
+                "bg-primary/10 dark:bg-primary-light/10",
+                "hover:bg-primary/20 dark:hover:bg-primary-light/20",
+                "transition-colors duration-300"
+              )}>
+                <Info className="w-5 h-5 text-primary dark:text-primary-light" />
+              </div>
+            </DialogTrigger>
+            <DialogContent className="max-w-2xl">
+              <DialogHeader>
+                <DialogTitle className="text-2xl font-bold mb-4">{item.name}</DialogTitle>
+                <div className="relative w-full h-48 mb-4 rounded-lg overflow-hidden">
+                  <img 
+                    src={item.image} 
+                    alt={item.name}
+                    className="object-cover w-full h-full"
+                  />
+                </div>
+                <DialogDescription className="text-lg">
+                  {item.longDescription}
+                </DialogDescription>
+              </DialogHeader>
+              <div className="mt-4">
+                <p className="text-xl font-bold text-primary dark:text-primary-light">{item.price}</p>
+              </div>
+            </DialogContent>
+          </Dialog>
+          <div className={cn(
+            "p-2 rounded-full",
+            "bg-primary/10 dark:bg-primary-light/10",
+            "group-hover:bg-primary/20 dark:group-hover:bg-primary-light/20",
+            "transition-colors duration-300"
+          )}>
+            {item.name.toLowerCase().includes('קפה') ? (
+              <Coffee className="w-5 h-5 text-primary dark:text-primary-light" />
+            ) : (
+              <CakeSlice className="w-5 h-5 text-primary dark:text-primary-light" />
+            )}
+          </div>
         </div>
       </div>
     </div>
@@ -41,32 +121,8 @@ const MenuItem = ({ name, description, price, index }: { name: string; descripti
 );
 
 const Menu = () => {
-  const menuItems = [
-    {
-      name: "קנאפה קלאסית",
-      description: "קינוח גבינה מסורתי עם שערות קדאיף פריכות, פיסטוקים וסירופ מתוק",
-      price: "₪48"
-    },
-    {
-      name: "קנאפה שוקולד",
-      description: "הטוויסט המודרני שלנו עם מילוי שוקולד עשיר ואגוזי לוז",
-      price: "₪52"
-    },
-    {
-      name: "קפה ערבי",
-      description: "קפה מסורתי מתובל בהל, מוגש בכוסות קטנות",
-      price: "₪15"
-    },
-    {
-      name: "קפה טורקי",
-      description: "קפה עשיר ולא מסונן עם אפשרות לטעם הל",
-      price: "₪18"
-    }
-  ];
-
   return (
     <div id="menu-section" className="relative py-32">
-      {/* Background effects */}
       <div className="absolute inset-0 bg-gradient-to-br from-accent/30 via-accent/20 to-transparent dark:from-accent-dark/30 dark:via-accent-dark/20" />
       <div className="absolute inset-0 bg-[url('/pattern.svg')] bg-repeat opacity-5" />
       
@@ -84,7 +140,7 @@ const Menu = () => {
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
           {menuItems.map((item, index) => (
-            <MenuItem key={index} {...item} index={index} />
+            <MenuItem key={index} item={item} index={index} />
           ))}
         </div>
       </div>

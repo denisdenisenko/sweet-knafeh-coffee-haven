@@ -1,3 +1,4 @@
+
 import { motion } from "framer-motion";
 import { Star, Quote } from "lucide-react";
 
@@ -44,13 +45,15 @@ const Testimonials = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="relative group"
+              className="relative group h-full flex"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-primary/10 dark:from-primary-light/5 dark:to-primary-light/10 rounded-xl transform transition-transform duration-300 group-hover:scale-105" />
-              <div className="relative glass-morphism p-8 rounded-xl">
-                <Quote className="w-10 h-10 text-primary dark:text-primary-light mb-4" />
-                <p className="text-foreground/80 dark:text-foreground/70 mb-6">{testimonial.text}</p>
-                <div className="flex items-center justify-between">
+              <div className="relative glass-morphism p-8 rounded-xl flex flex-col justify-between w-full">
+                <div>
+                  <Quote className="w-10 h-10 text-primary dark:text-primary-light mb-4" />
+                  <p className="text-foreground/80 dark:text-foreground/70 mb-6">{testimonial.text}</p>
+                </div>
+                <div className="flex items-center justify-between mt-auto">
                   <span className="font-semibold text-primary dark:text-primary-light">{testimonial.name}</span>
                   <div className="flex">
                     {[...Array(testimonial.rating)].map((_, i) => (
