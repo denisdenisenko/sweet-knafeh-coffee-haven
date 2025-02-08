@@ -1,4 +1,3 @@
-
 import { Coffee, ChevronDown } from "lucide-react";
 import { Button } from "./ui/button";
 import { motion } from "framer-motion";
@@ -13,14 +12,18 @@ const Hero = () => {
 
   return (
     <div className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background image */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{
-          backgroundImage: "url('/lovable-uploads/60e5108e-b684-4848-998c-830bf64f92ec.png')",
-        }}
-      />
-      
+      {/* Background Video */}
+      <video 
+        className="absolute inset-0 w-full h-full object-cover"
+        autoPlay 
+        loop 
+        muted 
+        playsInline
+      >
+        <source src="/videos/background.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+
       {/* Dark overlay */}
       <div className="absolute inset-0 bg-black/50" />
       
