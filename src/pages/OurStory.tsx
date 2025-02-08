@@ -3,8 +3,33 @@ import { motion } from "framer-motion";
 
 const OurStory = () => {
   return (
-    <div className="min-h-screen bg-background dark:bg-primary-dark transition-colors duration-300 py-20">
-      <div className="container mx-auto px-4">
+    <div className="min-h-screen bg-background dark:bg-primary-dark transition-colors duration-300">
+      {/* Hero Section */}
+      <div className="relative h-[70vh] w-full overflow-hidden">
+        <div className="absolute inset-0">
+          <img
+            src="/lovable-uploads/1a40e50f-e703-41dd-8021-4e0a7ef99a21.png"
+            alt="Traditional Knafeh setup"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black/40" />
+        </div>
+        <div className="relative h-full flex items-center justify-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-center text-white"
+          >
+            <h1 className="text-5xl md:text-7xl font-bold mb-4 font-heading">הסיפור שלנו</h1>
+            <p className="text-xl md:text-2xl">מסורת של טעמים וניחוחות</p>
+          </motion.div>
+        </div>
+        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-background dark:from-primary-dark to-transparent" />
+      </div>
+
+      {/* Content Section */}
+      <div className="container mx-auto px-4 py-20">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -12,17 +37,6 @@ const OurStory = () => {
           viewport={{ once: true }}
           className="max-w-4xl mx-auto space-y-12"
         >
-          <div className="text-center space-y-4">
-            <h1 className="text-4xl md:text-5xl font-bold text-gradient mb-8">
-              הסיפור שלנו
-            </h1>
-            <p className="text-lg text-foreground/70 dark:text-foreground/60 leading-relaxed">
-              מסע הטעמים שלנו התחיל לפני שנים רבות, כשסבא שלנו החל להכין את הקנאפה המסורתית 
-              בביתו הקטן בירושלים. המתכון המשפחתי הועבר מדור לדור, וכיום אנחנו ממשיכים 
-              את המסורת עם אותה תשוקה ומסירות.
-            </p>
-          </div>
-
           <div className="grid md:grid-cols-2 gap-8">
             <motion.div 
               initial={{ opacity: 0, x: -20 }}
