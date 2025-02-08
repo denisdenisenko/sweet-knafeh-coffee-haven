@@ -17,7 +17,7 @@ const LoadingScreen = () => {
           duration: 1.5,
           ease: "easeOut",
         }}
-        src="/lovable-uploads/4e700a1e-37af-492c-925e-0e35e0b70291.png"
+        src="/images/knafeh-logo.png"
         alt="House of Knafeh"
         className="w-32 h-32"
       />

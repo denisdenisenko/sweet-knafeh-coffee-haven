@@ -29,7 +29,7 @@ const Navbar = () => {
               initial={{ scale: 0.9 }}
               whileHover={{ scale: 1.1 }}
               transition={{ duration: 0.2 }}
-              src="/lovable-uploads/4e700a1e-37af-492c-925e-0e35e0b70291.png"
+              src="/images/knafeh-logo.png"
               alt="House of Knafeh"
               className="h-12 w-12"
             />
@@ -53,7 +53,7 @@ const Navbar = () => {
                 initial={{ scale: 0.9 }}
                 whileHover={{ scale: 1.1 }}
                 transition={{ duration: 0.2 }}
-                src="/lovable-uploads/4e700a1e-37af-492c-925e-0e35e0b70291.png"
+                src="/images/knafeh-logo.png"
                 alt="House of Knafeh"
                 className="h-10 w-10"
               />
