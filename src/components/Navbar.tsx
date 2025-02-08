@@ -13,7 +13,7 @@ const Navbar = () => {
 
   const menuItems = [
     { name: "בית", path: "/" },
-    { name: "גלריה", path: "/gallery" },
+    { name: "תפריט", path: "/gallery" },
     { name: "מיקום", path: "/location" },
   ];
 
