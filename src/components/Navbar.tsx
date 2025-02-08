@@ -35,7 +35,7 @@ const Navbar = () => {
               onClick={toggleMenu}
               className="inline-flex items-center justify-center"
             >
-              <Menu className="h-6 w-6" />
+              <MenuIcon className="h-6 w-6" />
             </Button>
 
             {/* Center Logo */}
