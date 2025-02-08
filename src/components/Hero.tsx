@@ -38,7 +38,7 @@ const Hero = () => {
           transition={{ duration: 0.6 }}
           className="text-7xl md:text-8xl font-heading font-bold text-white"
         >
-          גן עדן הקנאפה
+          היכנסו לעולם מתוק של הכנאפה
         </motion.h1>
         
         <motion.p 
@@ -47,7 +47,7 @@ const Hero = () => {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="text-xl md:text-2xl font-hebrew text-white/90"
         >
-          חווית הקינוחים המזרחיים האותנטית
+          טעמו של מסורת, ביס אחד בכל פעם
         </motion.p>
         
         <motion.div 
