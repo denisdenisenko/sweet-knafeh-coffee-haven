@@ -4,6 +4,7 @@ import { useTheme } from "next-themes";
 import { Menu as MenuIcon, Utensils } from "lucide-react";
 import { useState } from "react";
 import { Button } from "./ui/button";
+import { motion } from "framer-motion";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -24,7 +25,14 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo - Hidden on Mobile */}
           <Link to="/" className="hidden md:flex flex-shrink-0">
-            <h1 className="text-2xl font-heading font-bold text-gradient">קנאפה</h1>
+            <motion.img
+              initial={{ scale: 0.9 }}
+              whileHover={{ scale: 1.1 }}
+              transition={{ duration: 0.2 }}
+              src="/lovable-uploads/4e700a1e-37af-492c-925e-0e35e0b70291.png"
+              alt="House of Knafeh"
+              className="h-12 w-12"
+            />
           </Link>
 
           {/* Mobile layout */}
@@ -41,7 +49,14 @@ const Navbar = () => {
 
             {/* Center Logo */}
             <Link to="/" className="flex-shrink-0">
-              <h1 className="text-2xl font-heading font-bold text-gradient">קנאפה</h1>
+              <motion.img
+                initial={{ scale: 0.9 }}
+                whileHover={{ scale: 1.1 }}
+                transition={{ duration: 0.2 }}
+                src="/lovable-uploads/4e700a1e-37af-492c-925e-0e35e0b70291.png"
+                alt="House of Knafeh"
+                className="h-10 w-10"
+              />
             </Link>
 
             {/* Utensils Icon (now on the right) */}
