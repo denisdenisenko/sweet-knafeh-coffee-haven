@@ -2,11 +2,13 @@
 import { Coffee, ChevronDown } from "lucide-react";
 import { Button } from "./ui/button";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 const Hero = () => {
-  const scrollToMenu = () => {
-    const menuSection = document.querySelector("#menu-section");
-    menuSection?.scrollIntoView({ behavior: "smooth" });
+  const navigate = useNavigate();
+
+  const handleMenuClick = () => {
+    navigate('/menu');
   };
 
   return (
@@ -56,7 +58,7 @@ const Hero = () => {
         >
           <Button
             size="lg"
-            onClick={scrollToMenu}
+            onClick={handleMenuClick}
             className="bg-white text-primary hover:bg-white/90 dark:bg-white dark:text-primary-dark dark:hover:bg-white/90 transition-all duration-300 transform hover:scale-105"
           >
             לתפריט שלנו
