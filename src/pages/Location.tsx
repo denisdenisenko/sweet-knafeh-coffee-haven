@@ -6,7 +6,15 @@ const Location = () => {
   return (
     <div className="min-h-screen bg-background dark:bg-primary-dark transition-colors duration-300 py-20">
       <div className="container mx-auto px-4">
-        <h1 className="text-4xl font-bold text-center mb-12 text-gradient">בקרו אותנו</h1>
+        <motion.h1 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+          className="text-4xl font-bold text-center mb-12 text-gradient"
+        >
+          בקרו אותנו
+        </motion.h1>
         <div className="max-w-4xl mx-auto">
           <div className="grid md:grid-cols-2 gap-8">
             <motion.div 
