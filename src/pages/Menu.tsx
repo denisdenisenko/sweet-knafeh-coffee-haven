@@ -32,17 +32,33 @@ const Menu = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background dark:bg-primary-dark transition-colors duration-300 py-20">
-      <div className="container mx-auto px-4">
-        <motion.h1 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true }}
-          className="text-4xl font-bold text-center mb-12 text-gradient"
-        >
-          התפריט שלנו
-        </motion.h1>
+    <div className="min-h-screen bg-background dark:bg-primary-dark transition-colors duration-300">
+      {/* Hero Section */}
+      <div className="relative h-[70vh] w-full overflow-hidden">
+        <div className="absolute inset-0">
+          <img
+            src="/lovable-uploads/af376e6c-4e24-4b16-9452-bd4a34f7eedf.png"
+            alt="Coffee Hero"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black/40" />
+        </div>
+        <div className="relative h-full flex items-center justify-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-center text-white"
+          >
+            <h1 className="text-5xl md:text-7xl font-bold mb-4 font-heading">התפריט שלנו</h1>
+            <p className="text-xl md:text-2xl">טעמים מסורתיים בכל ביס</p>
+          </motion.div>
+        </div>
+        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-background dark:from-primary-dark to-transparent" />
+      </div>
+
+      {/* Menu Items Section */}
+      <div className="container mx-auto px-4 py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {menuItems.map((item, index) => (
             <motion.div
@@ -50,7 +66,7 @@ const Menu = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, margin: "-100px" }}
               className="glass-morphism rounded-xl overflow-hidden hover-lift"
             >
               <AspectRatio ratio={4/3}>
@@ -88,4 +104,3 @@ const Menu = () => {
 };
 
 export default Menu;
-
