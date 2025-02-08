@@ -21,17 +21,33 @@ const Location = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background dark:bg-primary-dark transition-colors duration-300 py-20">
-      <div className="container mx-auto px-4">
-        <motion.h1 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true }}
-          className="text-4xl font-bold text-center mb-12 text-gradient"
-        >
-          בקרו אותנו
-        </motion.h1>
+    <div className="min-h-screen bg-background dark:bg-primary-dark transition-colors duration-300">
+      {/* Hero Section */}
+      <div className="relative h-[70vh] w-full overflow-hidden">
+        <div className="absolute inset-0">
+          <img
+            src="/lovable-uploads/b9711b3b-bd2d-4f1d-9044-5f7084551b02.png"
+            alt="Traditional Middle Eastern restaurant exterior"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black/40" />
+        </div>
+        <div className="relative h-full flex items-center justify-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-center text-white"
+          >
+            <h1 className="text-5xl md:text-7xl font-bold mb-4 font-heading">המיקום שלנו</h1>
+            <p className="text-xl md:text-2xl">בואו לבקר אותנו</p>
+          </motion.div>
+        </div>
+        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-background dark:from-primary-dark to-transparent" />
+      </div>
+
+      {/* Content Section */}
+      <div className="container mx-auto px-4 py-20">
         <div className="max-w-4xl mx-auto">
           <div className="grid md:grid-cols-2 gap-8">
             <motion.div 
