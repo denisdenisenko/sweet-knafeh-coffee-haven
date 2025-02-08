@@ -7,7 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "next-themes";
 import Navbar from "./components/Navbar";
 import Index from "./pages/Index";
-import Gallery from "./pages/Gallery";
+import Menu from "./pages/Menu";
 import Location from "./pages/Location";
 import NotFound from "./pages/NotFound";
 
@@ -22,10 +22,10 @@ const App = () => (
         <BrowserRouter>
           <div className="min-h-screen bg-background">
             <Navbar />
-            <main className="pt-16"> {/* Add padding to account for fixed navbar */}
+            <main className="pt-16">
               <Routes>
                 <Route path="/" element={<Index />} />
-                <Route path="/gallery" element={<Gallery />} />
+                <Route path="/menu" element={<Menu />} />
                 <Route path="/location" element={<Location />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
@@ -38,3 +38,4 @@ const App = () => (
 );
 
 export default App;
+

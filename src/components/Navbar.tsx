@@ -1,7 +1,7 @@
 
 import { Link } from "react-router-dom";
 import { useTheme } from "next-themes";
-import { Menu, Utensils } from "lucide-react";
+import { Menu as MenuIcon, Utensils } from "lucide-react";
 import { useState } from "react";
 import { Button } from "./ui/button";
 
@@ -13,7 +13,7 @@ const Navbar = () => {
 
   const menuItems = [
     { name: "בית", path: "/" },
-    { name: "תפריט", path: "/gallery" },
+    { name: "תפריט", path: "/menu" },
     { name: "מיקום", path: "/location" },
   ];
 
@@ -107,3 +107,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
