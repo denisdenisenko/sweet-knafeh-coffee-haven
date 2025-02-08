@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -25,24 +26,24 @@ export default {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         primary: {
-          DEFAULT: "#9b87f5",
-          dark: "#1A1F2C",
-          light: "#E5DEFF",
+          DEFAULT: "#E6A168", // Warm caramel color
+          dark: "#2C1810", // Deep brown
+          light: "#FDE1D3", // Soft peach
         },
         secondary: {
-          DEFAULT: "#403E43",
-          dark: "#221F26",
-          light: "#D6BCFA",
+          DEFAULT: "#8B4513", // Saddle brown
+          dark: "#1A0F0A", // Very dark brown
+          light: "#DEB887", // Burlywood
         },
         accent: {
-          DEFAULT: "#F2FCE2",
-          dark: "#333333",
-          light: "#F1F0FB",
+          DEFAULT: "#FEF7CD", // Soft cream
+          dark: "#2D2A20", // Dark taupe
+          light: "#FFF8DC", // Cornsilk
         },
         textColor: {
-          DEFAULT: "#1A1F2C",
-          dark: "#FFFFFF",
-          light: "#403E43",
+          DEFAULT: "#2C1810", // Deep brown
+          dark: "#FFF8DC", // Cornsilk
+          light: "#4A2511", // Rich brown
         }
       },
       fontFamily: {
@@ -66,9 +67,7 @@ export default {
           "50%": { transform: "translateY(-10px)" },
         },
       },
-      
     },
-    
   },
   plugins: [require("tailwindcss-animate")],
 } satisfies Config;
