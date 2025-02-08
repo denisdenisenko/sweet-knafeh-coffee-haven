@@ -1,8 +1,25 @@
 
 import { motion } from "framer-motion";
-import { MapPin, Clock, Phone } from "lucide-react";
+import { MapPin, Clock, Phone, Instagram, Facebook, MessageCircle } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const Location = () => {
+  const openWaze = () => {
+    window.open("https://waze.com/ul?ll=32.0853,34.7818&navigate=yes", "_blank");
+  };
+
+  const openInstagram = () => {
+    window.open("https://instagram.com/your-handle", "_blank");
+  };
+
+  const openFacebook = () => {
+    window.open("https://facebook.com/your-page", "_blank");
+  };
+
+  const openWhatsApp = () => {
+    window.open("https://wa.me/+972123456789", "_blank");
+  };
+
   return (
     <div className="min-h-screen bg-background dark:bg-primary-dark transition-colors duration-300 py-20">
       <div className="container mx-auto px-4">
@@ -46,6 +63,40 @@ const Location = () => {
                   טלפון: 03-1234567<br />
                   אימייל: info@knafeh.co.il
                 </p>
+              </div>
+              <div className="flex gap-4 pt-4">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={openInstagram}
+                  className="hover:text-primary dark:hover:text-primary-light"
+                >
+                  <Instagram className="w-6 h-6" />
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={openFacebook}
+                  className="hover:text-primary dark:hover:text-primary-light"
+                >
+                  <Facebook className="w-6 h-6" />
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={openWhatsApp}
+                  className="hover:text-primary dark:hover:text-primary-light"
+                >
+                  <MessageCircle className="w-6 h-6" />
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={openWaze}
+                  className="hover:text-primary dark:hover:text-primary-light"
+                >
+                  <MapPin className="w-6 h-6" />
+                </Button>
               </div>
             </motion.div>
             <motion.div 

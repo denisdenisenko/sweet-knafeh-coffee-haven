@@ -14,6 +14,7 @@ const Navbar = () => {
   const menuItems = [
     { name: "בית", path: "/" },
     { name: "תפריט", path: "/menu" },
+    { name: "הסיפור שלנו", path: "/our-story" },
     { name: "מיקום", path: "/location" },
   ];
 
@@ -107,4 +108,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-

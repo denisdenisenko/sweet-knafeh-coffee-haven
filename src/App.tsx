@@ -9,6 +9,7 @@ import Navbar from "./components/Navbar";
 import Index from "./pages/Index";
 import Menu from "./pages/Menu";
 import Location from "./pages/Location";
+import OurStory from "./pages/OurStory";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -27,6 +28,7 @@ const App = () => (
                 <Route path="/" element={<Index />} />
                 <Route path="/menu" element={<Menu />} />
                 <Route path="/location" element={<Location />} />
+                <Route path="/our-story" element={<OurStory />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </main>
@@ -38,4 +40,3 @@ const App = () => (
 );
 
 export default App;
-
