@@ -1,7 +1,7 @@
 
 import { Link } from "react-router-dom";
 import { useTheme } from "next-themes";
-import { Menu as MenuIcon, Utensils } from "lucide-react";
+import { Menu as MenuIcon } from "lucide-react";
 import { useState } from "react";
 import { Button } from "./ui/button";
 import { motion } from "framer-motion";
@@ -37,14 +37,15 @@ const Navbar = () => {
 
           {/* Mobile layout */}
           <div className="flex items-center justify-between w-full md:hidden">
-            {/* Menu Button (now on the left) */}
+            {/* Menu Button with improved styling */}
             <Button
               variant="ghost"
               size="icon"
               onClick={toggleMenu}
-              className="inline-flex items-center justify-center"
+              className="inline-flex items-center justify-center hover:bg-accent/50"
+              aria-label="Toggle menu"
             >
-              <MenuIcon className="h-6 w-6" />
+              <MenuIcon className="h-5 w-5" />
             </Button>
 
             {/* Center Logo */}
@@ -59,10 +60,15 @@ const Navbar = () => {
               />
             </Link>
 
-            {/* Utensils Icon (now on the right) */}
-            <div className="flex items-center">
-              <Utensils className="h-6 w-6 text-foreground/80" />
-            </div>
+            {/* Right side logo (replacing Utensils icon) */}
+            <motion.img
+              initial={{ scale: 0.9 }}
+              whileHover={{ scale: 1.1 }}
+              transition={{ duration: 0.2 }}
+              src="/images/knafeh-logo.png"
+              alt="House of Knafeh"
+              className="h-8 w-8"
+            />
           </div>
 
           {/* Desktop Menu */}
