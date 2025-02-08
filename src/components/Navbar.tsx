@@ -48,19 +48,7 @@ const Navbar = () => {
               <MenuIcon className="h-5 w-5" />
             </Button>
 
-            {/* Center Logo */}
-            <Link to="/" className="flex-shrink-0">
-              <motion.img
-                initial={{ scale: 0.9 }}
-                whileHover={{ scale: 1.1 }}
-                transition={{ duration: 0.2 }}
-                src="/images/knafeh-logo.png"
-                alt="House of Knafeh"
-                className="h-10 w-10"
-              />
-            </Link>
-
-            {/* Right side logo (replacing Utensils icon) */}
+            {/* Right side logo */}
             <motion.img
               initial={{ scale: 0.9 }}
               whileHover={{ scale: 1.1 }}
