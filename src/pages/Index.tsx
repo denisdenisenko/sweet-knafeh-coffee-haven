@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 import Hero from "@/components/Hero";
 import Menu from "@/components/Menu";
 import About from "@/components/About";
-import Testimonials from "@/components/Testimonials";
 import Gallery from "@/components/Gallery";
 import LocationSection from "@/components/LocationSection";
 
@@ -26,14 +25,6 @@ const Index = () => {
         viewport={{ once: true }}
       >
         <About />
-      </motion.div>
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        viewport={{ once: true }}
-      >
-        <Testimonials />
       </motion.div>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
