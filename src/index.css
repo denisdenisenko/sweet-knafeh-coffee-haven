@@ -86,3 +86,10 @@ html {
 .animate-float {
   animation: float 3s ease-in-out infinite;
 }
+
+@font-face {
+  font-family: "ArabHeb";
+  src: url("/fonts/arab-heb-font.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}

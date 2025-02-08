@@ -48,6 +48,7 @@ export default {
       fontFamily: {
         hebrew: ["Heebo", "sans-serif"],
         heading: ["Rubik", "sans-serif"],
+        arabicHebrew: ["ArabHeb", "sans-serif"], 
       },
       animation: {
         "fade-up": "fadeUp 0.5s ease-out",
@@ -65,7 +66,9 @@ export default {
           "50%": { transform: "translateY(-10px)" },
         },
       },
+      
     },
+    
   },
   plugins: [require("tailwindcss-animate")],
 } satisfies Config;

@@ -36,7 +36,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-7xl md:text-8xl font-heading font-bold text-white"
+          className="text-7xl md:text-8xl font-heading font-bold text-white font-family"
         >
           היכנסו לעולם מתוק של הכנאפה
         </motion.h1>
