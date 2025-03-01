@@ -218,7 +218,14 @@ const Menu = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background dark:bg-primary-dark transition-colors duration-300 relative">
+    <motion.div
+      key="menu-page"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
+      transition={{ duration: 0.3 }}
+      className="min-h-screen bg-background dark:bg-primary-dark transition-colors duration-300 relative"
+    >
       <div className="relative h-[50vh] md:h-[70vh] w-full overflow-hidden">
         <div className="absolute inset-0">
           <img
@@ -354,7 +361,7 @@ const Menu = () => {
           </motion.div>
         </AnimatePresence>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
