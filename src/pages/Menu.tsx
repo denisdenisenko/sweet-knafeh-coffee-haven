@@ -208,33 +208,37 @@ const Menu = () => {
     offset: ["start end", "end start"]
   });
   
-  const opacity = useTransform(scrollYProgress, [0, 0.2], [0, 1]);
-  const translateY = useTransform(scrollYProgress, [0, 0.2], [100, 0]);
+  // Modified animations to be more subtle and prevent brightness flicker
+  const opacity = useTransform(scrollYProgress, [0, 0.2], [0.8, 1]);
+  const translateY = useTransform(scrollYProgress, [0, 0.2], [50, 0]);
 
   const containerVariants = {
-    hidden: { opacity: 0 },
+    hidden: { opacity: 0.8 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1
+        staggerChildren: 0.05,
+        ease: "easeOut"
       }
     }
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0.9, y: 10 },
     visible: { 
       opacity: 1, 
       y: 0,
       transition: {
-        duration: 0.5
+        duration: 0.3,
+        ease: "easeOut"
       }
     },
     hover: {
-      scale: 1.03,
-      boxShadow: "0 10px 25px rgba(0, 0, 0, 0.1)",
+      scale: 1.02,
+      boxShadow: "0 5px 15px rgba(0, 0, 0, 0.08)",
       transition: {
-        duration: 0.3
+        duration: 0.2,
+        ease: "easeOut"
       }
     }
   };
@@ -254,7 +258,10 @@ const Menu = () => {
   };
 
   return (
-    <div ref={containerRef} className="min-h-screen bg-background dark:bg-primary-dark transition-colors duration-300">
+    <div 
+      ref={containerRef} 
+      className="min-h-screen bg-background dark:bg-primary-dark transition-colors duration-300 relative"
+    >
       <div className="relative h-[50vh] md:h-[70vh] w-full overflow-hidden">
         <div className="absolute inset-0">
           <img
@@ -268,7 +275,7 @@ const Menu = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
             className="text-center text-white"
           >
             <h1 className="text-4xl md:text-7xl font-bold mb-4 font-heading">התפריט שלנו</h1>
@@ -278,8 +285,16 @@ const Menu = () => {
         <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-background dark:from-primary-dark to-transparent" />
       </div>
 
+      {/* Modified the motion.div to have less dramatic animations */}
       <motion.div 
-        style={{ opacity, translateY }} 
+        style={{ 
+          opacity, 
+          y: translateY,
+          willChange: "transform, opacity"
+        }} 
+        initial={{ opacity: 0.8, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4, ease: "easeOut" }}
         className="container mx-auto px-4 py-12 md:py-20"
       >
         <div className="relative mb-8 md:mb-12 max-w-5xl mx-auto">
@@ -318,34 +333,34 @@ const Menu = () => {
           </div>
         </div>
   
-        <AnimatePresence mode="wait">
+        <AnimatePresence mode="wait" initial={false}>
           <motion.div
             key={selectedCategory ?? 'all'}
-            initial={{ opacity: 0 }}
+            initial={{ opacity: 0.9 }}
             animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
+            exit={{ opacity: 0.9 }}
+            transition={{ duration: 0.2, ease: "easeInOut" }}
           >
             {displayedCategories.map((category, categoryIndex) => (
               <motion.div 
                 key={category}
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true, margin: "-100px" }}
+                viewport={{ once: true, margin: "-50px" }}
                 variants={containerVariants}
                 className="mb-12 md:mb-20"
               >
                 <motion.div 
                   className="flex items-center gap-3 mb-6 md:mb-10 justify-center"
-                  initial={{ opacity: 0, y: -20 }}
+                  initial={{ opacity: 0.9, y: -10 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: categoryIndex * 0.1 }}
+                  transition={{ duration: 0.3, ease: "easeOut" }}
                   viewport={{ once: true }}
                 >
                   {menuItems.find(item => item.category === category)?.icon && (
                     <motion.div
                       whileHover={{ rotate: 15, scale: 1.1 }}
-                      transition={{ duration: 0.2 }}
+                      transition={{ duration: 0.2, ease: "easeOut" }}
                     >
                       {React.createElement(
                         menuItems.find(item => item.category === category)?.icon || Coffee, 
@@ -367,6 +382,10 @@ const Menu = () => {
                         variants={itemVariants}
                         whileHover="hover"
                         className="glass-morphism rounded-xl overflow-hidden"
+                        style={{ 
+                          willChange: "transform, opacity",
+                          backfaceVisibility: "hidden"
+                        }}
                       >
                         <div className="flex flex-col md:flex-row">
                           <div className="w-full md:w-2/5">
@@ -375,6 +394,7 @@ const Menu = () => {
                                 src={item.src}
                                 alt={item.alt}
                                 className="object-cover w-full h-full transition-transform duration-300 hover:scale-105"
+                                loading="lazy"
                               />
                             </AspectRatio>
                           </div>
@@ -394,6 +414,7 @@ const Menu = () => {
                             <motion.div 
                               className="text-base md:text-lg font-bold text-primary dark:text-primary-light"
                               whileHover={{ scale: 1.05 }}
+                              transition={{ duration: 0.2, ease: "easeOut" }}
                             >
                               {item.price}
                             </motion.div>
