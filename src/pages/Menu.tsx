@@ -1,8 +1,7 @@
-
+import React, { useRef } from "react";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Coffee, CakeSlice, UtensilsCrossed, Candy, Cookie, Wheat, Salad, Milk, IceCream, Croissant } from "lucide-react";
-import { useRef } from "react";
 
 const Menu = () => {
   const menuItems = [
@@ -198,7 +197,6 @@ const Menu = () => {
     }
   ];
 
-  // Extract unique categories
   const categories = [...new Set(menuItems.map(item => item.category))];
 
   const containerRef = useRef(null);
@@ -210,7 +208,6 @@ const Menu = () => {
   const opacity = useTransform(scrollYProgress, [0, 0.2], [0, 1]);
   const translateY = useTransform(scrollYProgress, [0, 0.2], [100, 0]);
 
-  // Animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -241,7 +238,6 @@ const Menu = () => {
 
   return (
     <div ref={containerRef} className="min-h-screen bg-background dark:bg-primary-dark transition-colors duration-300">
-      {/* Hero Section */}
       <div className="relative h-[70vh] w-full overflow-hidden">
         <div className="absolute inset-0">
           <img
@@ -265,7 +261,6 @@ const Menu = () => {
         <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-background dark:from-primary-dark to-transparent" />
       </div>
 
-      {/* Menu Items Section */}
       <motion.div 
         style={{ opacity, translateY }} 
         className="container mx-auto px-4 py-20"
