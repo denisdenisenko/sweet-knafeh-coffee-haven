@@ -1,8 +1,7 @@
-
 import React, { useRef, useState } from "react";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
-import { Coffee, CakeSlice, UtensilsCrossed, Candy, Cookie, Wheat, Salad, Milk, IceCream, Croissant, ChevronLeft, ChevronRight } from "lucide-react";
+import { Coffee, CakeSlice, UtensilsCrossed, Candy, Cookie, Wheat, Salad, Milk, IceCream, Croissant } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const Menu = () => {
@@ -201,7 +200,6 @@ const Menu = () => {
 
   const categories = [...new Set(menuItems.map(item => item.category))];
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const [categoryScrollX, setCategoryScrollX] = useState(0);
   const categoryScrollRef = useRef<HTMLDivElement>(null);
 
   const containerRef = useRef(null);
@@ -255,22 +253,6 @@ const Menu = () => {
     );
   };
 
-  const scrollCategories = (direction: 'left' | 'right') => {
-    if (categoryScrollRef.current) {
-      const scrollAmount = 200;
-      const newScrollX = direction === 'left' 
-        ? categoryScrollX - scrollAmount
-        : categoryScrollX + scrollAmount;
-      
-      categoryScrollRef.current.scrollTo({
-        left: newScrollX,
-        behavior: 'smooth'
-      });
-      
-      setCategoryScrollX(newScrollX);
-    }
-  };
-
   return (
     <div ref={containerRef} className="min-h-screen bg-background dark:bg-primary-dark transition-colors duration-300">
       <div className="relative h-[70vh] w-full overflow-hidden">
@@ -301,27 +283,7 @@ const Menu = () => {
         className="container mx-auto px-4 py-20"
       >
         <div className="relative mb-12 max-w-5xl mx-auto">
-          <div className="flex items-center justify-between mb-2">
-            <h2 className="text-2xl font-bold">בחר קטגוריה</h2>
-            <div className="flex gap-2">
-              <Button 
-                variant="outline" 
-                size="icon" 
-                onClick={() => scrollCategories('right')}
-                className="rounded-full"
-              >
-                <ChevronLeft className="h-4 w-4" />
-              </Button>
-              <Button 
-                variant="outline" 
-                size="icon" 
-                onClick={() => scrollCategories('left')}
-                className="rounded-full"
-              >
-                <ChevronRight className="h-4 w-4" />
-              </Button>
-            </div>
-          </div>
+          <h2 className="text-2xl font-bold mb-4">בחר קטגוריה</h2>
           
           <div className="relative overflow-hidden">
             <div 
@@ -353,11 +315,11 @@ const Menu = () => {
                 );
               })}
             </div>
-            <style jsx global>{`
+            <style dangerouslySetInnerHTML={{ __html: `
               .scrollbar-hide::-webkit-scrollbar {
                 display: none;
               }
-            `}</style>
+            `}} />
           </div>
         </div>
   
