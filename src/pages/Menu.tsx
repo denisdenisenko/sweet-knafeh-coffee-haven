@@ -216,7 +216,6 @@ const Menu = () => {
 
   useEffect(() => {
     const scrollContainer = categoryScrollRef.current;
-    
     if (!scrollContainer) return;
     
     let scrollTimeout: number;
@@ -228,7 +227,7 @@ const Menu = () => {
       
       scrollTimeout = window.setTimeout(() => {
         setIsScrolling(false);
-      }, 400); // Increased timeout for better mobile experience
+      }, 600); // Increased timeout for better mobile experience
     };
     
     scrollContainer.addEventListener('scroll', handleScroll);
@@ -241,7 +240,6 @@ const Menu = () => {
 
   useEffect(() => {
     const scrollContainer = categoryScrollRef.current;
-    
     if (!scrollContainer) return;
     
     const handleTouchStart = () => {
@@ -254,7 +252,7 @@ const Menu = () => {
       
       setTimeout(() => {
         setIsScrolling(false);
-      }, touchDuration < 300 ? 100 : 300);
+      }, touchDuration < 300 ? 300 : 500);
     };
     
     scrollContainer.addEventListener('touchstart', handleTouchStart);
@@ -269,7 +267,7 @@ const Menu = () => {
       
       mainScrollTimeout = window.setTimeout(() => {
         setIsScrolling(false);
-      }, 400);
+      }, 600); // Increased timeout
     };
     
     mainContainer.addEventListener('scroll', handleMainScroll);
@@ -292,11 +290,9 @@ const Menu = () => {
     setLastTapTime(now);
     
     if (!isScrolling) {
-      setTimeout(() => {
-        setSelectedCategory(prevCategory => 
-          prevCategory === category ? null : category
-        );
-      }, 50);
+      setSelectedCategory(prevCategory => 
+        prevCategory === category ? null : category
+      );
     }
   };
 
@@ -310,9 +306,7 @@ const Menu = () => {
     setLastTapTime(now);
     
     if (!isScrolling) {
-      setTimeout(() => {
-        setSelectedCategory(null);
-      }, 50);
+      setSelectedCategory(null);
     }
   };
 

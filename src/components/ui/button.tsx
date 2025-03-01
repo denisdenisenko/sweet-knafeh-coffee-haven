@@ -48,13 +48,13 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const touchRef = React.useRef<boolean>(false)
     
     // Event handlers to improve touch device interaction
-    const handleTouchStart = React.useCallback((e: React.TouchEvent) => {
+    const handleTouchStart = React.useCallback((e: React.TouchEvent<HTMLButtonElement>) => {
       touchRef.current = true
       // Call the original onTouchStart if provided
       props.onTouchStart?.(e)
     }, [props.onTouchStart])
     
-    const handleTouchEnd = React.useCallback((e: React.TouchEvent) => {
+    const handleTouchEnd = React.useCallback((e: React.TouchEvent<HTMLButtonElement>) => {
       // Small delay to ensure the click event can fire properly
       setTimeout(() => {
         touchRef.current = false
