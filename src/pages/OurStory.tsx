@@ -37,39 +37,21 @@ const OurStory = () => {
           viewport={{ once: true }}
           className="max-w-4xl mx-auto space-y-12"
         >
-          <div className="grid md:grid-cols-2 gap-8">
-            <motion.div 
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
-              viewport={{ once: true }}
-              className="space-y-4"
-            >
-              <h2 className="text-2xl font-bold text-primary dark:text-primary-light">
-                המסורת שלנו
-              </h2>
-              <p className="text-foreground/70 dark:text-foreground/60">
-                אנחנו מאמינים שהסוד לקנאפה מושלמת טמון באיכות המרכיבים ובתשומת הלב לפרטים הקטנים. 
-                כל בוקר אנחנו מתחילים מחדש, עם חומרי גלם טריים ואהבה אמיתית למלאכה.
-              </p>
-            </motion.div>
-
-            <motion.div 
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
-              viewport={{ once: true }}
-              className="space-y-4"
-            >
-              <h2 className="text-2xl font-bold text-primary dark:text-primary-light">
-                החזון שלנו
-              </h2>
-              <p className="text-foreground/70 dark:text-foreground/60">
-                החזון שלנו הוא להמשיך ולשמר את המסורת תוך שילוב חדשנות וטכניקות מודרניות, 
-                כדי להביא לכם את חווית הקנאפה הטובה ביותר.
-              </p>
-            </motion.div>
-          </div>
+          <motion.div 
+            initial={{ opacity: 0, x: 0 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+            className="space-y-4 max-w-xl mx-auto text-center"
+          >
+            <h2 className="text-2xl font-bold text-primary dark:text-primary-light">
+              המסורת שלנו
+            </h2>
+            <p className="text-foreground/70 dark:text-foreground/60">
+              אנחנו מאמינים שהסוד לקנאפה מושלמת טמון באיכות המרכיבים ובתשומת הלב לפרטים הקטנים. 
+              כל בוקר אנחנו מתחילים מחדש, עם חומרי גלם טריים ואהבה אמיתית למלאכה.
+            </p>
+          </motion.div>
 
           <motion.div 
             initial={{ opacity: 0, scale: 0.95 }}
