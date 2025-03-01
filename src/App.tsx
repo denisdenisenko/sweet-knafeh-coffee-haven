@@ -3,9 +3,10 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { ThemeProvider } from "next-themes";
 import { useState, useEffect } from "react";
+import { AnimatePresence } from "framer-motion";
 import Navbar from "./components/Navbar";
 import Index from "./pages/Index";
 import Menu from "./pages/Menu";
@@ -15,6 +16,23 @@ import NotFound from "./pages/NotFound";
 import LoadingScreen from "./components/LoadingScreen";
 
 const queryClient = new QueryClient();
+
+// Component to handle AnimatePresence with routes
+const AnimatedRoutes = () => {
+  const location = useLocation();
+  
+  return (
+    <AnimatePresence mode="wait">
+      <Routes location={location} key={location.pathname}>
+        <Route path="/" element={<Index />} />
+        <Route path="/menu" element={<Menu />} />
+        <Route path="/location" element={<Location />} />
+        <Route path="/our-story" element={<OurStory />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </AnimatePresence>
+  );
+};
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -39,13 +57,7 @@ const App = () => {
             <div className="min-h-screen bg-background">
               <Navbar />
               <main className="pt-16">
-                <Routes>
-                  <Route path="/" element={<Index />} />
-                  <Route path="/menu" element={<Menu />} />
-                  <Route path="/location" element={<Location />} />
-                  <Route path="/our-story" element={<OurStory />} />
-                  <Route path="*" element={<NotFound />} />
-                </Routes>
+                <AnimatedRoutes />
               </main>
             </div>
           </BrowserRouter>
