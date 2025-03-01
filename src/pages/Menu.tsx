@@ -1,3 +1,4 @@
+
 import React, { useRef, useState } from "react";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Coffee, CakeSlice, UtensilsCrossed, Candy, Cookie, Wheat, Salad, Milk, IceCream, Croissant } from "lucide-react";
@@ -248,8 +249,7 @@ const Menu = () => {
                 key="all"
                 variant={selectedCategory === null ? "default" : "outline"}
                 onClick={() => setSelectedCategory(null)}
-                className="whitespace-nowrap bg-primary text-white hover:bg-primary/90"
-                style={selectedCategory === null ? {} : {}}
+                className="whitespace-nowrap"
               >
                 הכל
               </Button>
@@ -261,7 +261,7 @@ const Menu = () => {
                     key={category}
                     variant={selectedCategory === category ? "default" : "outline"}
                     onClick={() => handleCategoryClick(category)}
-                    className={`whitespace-nowrap gap-2 ${selectedCategory === category ? "bg-primary text-white" : "bg-background hover:bg-accent hover:text-primary"}`}
+                    className="whitespace-nowrap gap-2"
                   >
                     <CategoryIcon className="h-4 w-4" />
                     <span>{category}</span>
