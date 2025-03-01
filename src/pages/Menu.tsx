@@ -3,6 +3,7 @@ import React, { useRef, useState } from "react";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Coffee, CakeSlice, UtensilsCrossed, Candy, Cookie, Wheat, Salad, Milk, IceCream, Croissant } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Menu = () => {
   const menuItems = [
@@ -272,69 +273,85 @@ const Menu = () => {
           </div>
         </div>
   
-        <div>
-          {displayedCategories.map((category, categoryIndex) => (
-            <div 
-              key={category}
-              className="mb-12 md:mb-20"
-            >
-              <div className="flex items-center gap-3 mb-6 md:mb-10 justify-center">
-                {menuItems.find(item => item.category === category)?.icon && (
-                  <div>
-                    {React.createElement(
-                      menuItems.find(item => item.category === category)?.icon || Coffee, 
-                      { className: "w-6 h-6 md:w-8 md:h-8 text-primary" }
-                    )}
-                  </div>
-                )}
-                <h2 className="text-2xl md:text-4xl font-bold text-primary dark:text-primary-light">
-                  {category}
-                </h2>
-              </div>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
-                {filteredItems
-                  .filter(item => item.category === category)
-                  .map((item, index) => (
-                    <div
-                      key={`${category}-${index}`}
-                      className="glass-morphism rounded-xl overflow-hidden"
-                    >
-                      <div className="flex flex-col md:flex-row">
-                        <div className="w-full md:w-2/5">
-                          <AspectRatio ratio={1/1}>
-                            <img
-                              src={item.src}
-                              alt={item.alt}
-                              className="object-cover w-full h-full"
-                              loading="lazy"
-                            />
-                          </AspectRatio>
-                        </div>
-                        <div className="p-4 md:p-6 w-full md:w-3/5 flex flex-col justify-between">
-                          <div>
-                            <div className="flex items-center gap-2 mb-2">
-                              {React.createElement(item.icon, { className: "w-4 h-4 md:w-5 md:h-5 text-primary" })}
-                              <span className="text-xs md:text-sm text-foreground/60">{item.category}</span>
-                            </div>
-                            <h3 className="text-lg md:text-xl font-semibold text-foreground/80 dark:text-foreground/70 mb-2">
-                              {item.title}
-                            </h3>
-                            <p className="text-sm md:text-base text-foreground/60 dark:text-foreground/50 mb-4">
-                              {item.description}
-                            </p>
-                          </div>
-                          <div className="text-base md:text-lg font-bold text-primary dark:text-primary-light">
-                            {item.price}
-                          </div>
-                        </div>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={selectedCategory || "all"}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+          >
+            <div>
+              {displayedCategories.map((category, categoryIndex) => (
+                <div 
+                  key={category}
+                  className="mb-12 md:mb-20"
+                >
+                  <div className="flex items-center gap-3 mb-6 md:mb-10 justify-center">
+                    {menuItems.find(item => item.category === category)?.icon && (
+                      <div>
+                        {React.createElement(
+                          menuItems.find(item => item.category === category)?.icon || Coffee, 
+                          { className: "w-6 h-6 md:w-8 md:h-8 text-primary" }
+                        )}
                       </div>
-                    </div>
-                  ))}
-              </div>
+                    )}
+                    <h2 className="text-2xl md:text-4xl font-bold text-primary dark:text-primary-light">
+                      {category}
+                    </h2>
+                  </div>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
+                    {filteredItems
+                      .filter(item => item.category === category)
+                      .map((item, index) => (
+                        <motion.div
+                          key={`${category}-${index}`}
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ 
+                            duration: 0.3,
+                            delay: index * 0.1
+                          }}
+                          className="glass-morphism rounded-xl overflow-hidden"
+                        >
+                          <div className="flex flex-col md:flex-row">
+                            <div className="w-full md:w-2/5">
+                              <AspectRatio ratio={1/1}>
+                                <img
+                                  src={item.src}
+                                  alt={item.alt}
+                                  className="object-cover w-full h-full"
+                                  loading="lazy"
+                                />
+                              </AspectRatio>
+                            </div>
+                            <div className="p-4 md:p-6 w-full md:w-3/5 flex flex-col justify-between">
+                              <div>
+                                <div className="flex items-center gap-2 mb-2">
+                                  {React.createElement(item.icon, { className: "w-4 h-4 md:w-5 md:h-5 text-primary" })}
+                                  <span className="text-xs md:text-sm text-foreground/60">{item.category}</span>
+                                </div>
+                                <h3 className="text-lg md:text-xl font-semibold text-foreground/80 dark:text-foreground/70 mb-2">
+                                  {item.title}
+                                </h3>
+                                <p className="text-sm md:text-base text-foreground/60 dark:text-foreground/50 mb-4">
+                                  {item.description}
+                                </p>
+                              </div>
+                              <div className="text-base md:text-lg font-bold text-primary dark:text-primary-light">
+                                {item.price}
+                              </div>
+                            </div>
+                          </div>
+                        </motion.div>
+                      ))}
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
+          </motion.div>
+        </AnimatePresence>
       </div>
     </div>
   );
