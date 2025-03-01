@@ -212,9 +212,12 @@ const Menu = () => {
     : categories;
 
   const handleCategoryClick = (category: string) => {
-    setSelectedCategory(prevCategory => 
-      prevCategory === category ? null : category
-    );
+    // Add a small delay to ensure touch events are processed correctly on mobile
+    setTimeout(() => {
+      setSelectedCategory(prevCategory => 
+        prevCategory === category ? null : category
+      );
+    }, 10);
   };
 
   return (
@@ -257,7 +260,7 @@ const Menu = () => {
                 key="all"
                 variant={selectedCategory === null ? "default" : "outline"}
                 onClick={() => setSelectedCategory(null)}
-                className="whitespace-nowrap"
+                className="whitespace-nowrap touch-manipulation"
               >
                 הכל
               </Button>
@@ -269,7 +272,7 @@ const Menu = () => {
                     key={category}
                     variant={selectedCategory === category ? "default" : "outline"}
                     onClick={() => handleCategoryClick(category)}
-                    className="whitespace-nowrap gap-2"
+                    className="whitespace-nowrap gap-2 touch-manipulation"
                   >
                     <CategoryIcon className="h-4 w-4" />
                     <span>{category}</span>
