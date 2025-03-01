@@ -1,3 +1,4 @@
+
 import React, { useRef, useState, useEffect } from "react";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Coffee, CakeSlice, UtensilsCrossed, Candy, Cookie, Wheat, Salad, Milk, IceCream, Croissant } from "lucide-react";
@@ -202,6 +203,7 @@ const Menu = () => {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const categoryScrollRef = useRef<HTMLDivElement>(null);
   const [isScrolling, setIsScrolling] = useState(false);
+  const touchStartTimeRef = useRef<number | null>(null);
 
   const filteredItems = selectedCategory 
     ? menuItems.filter(item => item.category === selectedCategory)
@@ -225,7 +227,7 @@ const Menu = () => {
       
       scrollTimeout = window.setTimeout(() => {
         setIsScrolling(false);
-      }, 150);
+      }, 300); // Increased timeout for better mobile experience
     };
     
     scrollContainer.addEventListener('scroll', handleScroll);
@@ -236,17 +238,60 @@ const Menu = () => {
     };
   }, []);
 
+  // Add touch event handlers to improve mobile interaction
+  useEffect(() => {
+    const scrollContainer = categoryScrollRef.current;
+    
+    if (!scrollContainer) return;
+    
+    const handleTouchStart = () => {
+      touchStartTimeRef.current = Date.now();
+      setIsScrolling(true);
+    };
+    
+    const handleTouchEnd = () => {
+      const touchDuration = touchStartTimeRef.current ? Date.now() - touchStartTimeRef.current : 0;
+      
+      // If touch duration is less than 300ms, likely a tap rather than a scroll
+      if (touchDuration < 300) {
+        // Wait a bit to let the browser recognize if it was a scroll or tap
+        setTimeout(() => {
+          setIsScrolling(false);
+        }, 50);
+      } else {
+        // For longer touches, add an additional delay
+        setTimeout(() => {
+          setIsScrolling(false);
+        }, 200);
+      }
+    };
+    
+    scrollContainer.addEventListener('touchstart', handleTouchStart);
+    scrollContainer.addEventListener('touchend', handleTouchEnd);
+    
+    return () => {
+      scrollContainer.removeEventListener('touchstart', handleTouchStart);
+      scrollContainer.removeEventListener('touchend', handleTouchEnd);
+    };
+  }, []);
+
   const handleCategoryClick = (category: string) => {
     if (!isScrolling) {
-      setSelectedCategory(prevCategory => 
-        prevCategory === category ? null : category
-      );
+      // Adding a small delay to ensure we don't catch accidental taps
+      setTimeout(() => {
+        setSelectedCategory(prevCategory => 
+          prevCategory === category ? null : category
+        );
+      }, 10);
     }
   };
 
   const handleAllCategoryClick = () => {
     if (!isScrolling) {
-      setSelectedCategory(null);
+      // Adding a small delay to ensure we don't catch accidental taps
+      setTimeout(() => {
+        setSelectedCategory(null);
+      }, 10);
     }
   };
 
