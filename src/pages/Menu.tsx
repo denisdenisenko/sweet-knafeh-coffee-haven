@@ -202,10 +202,8 @@ const Menu = () => {
   
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const categoryScrollRef = useRef<HTMLDivElement>(null);
-  const [isScrolling, setIsScrolling] = useState(false);
-  const touchStartTimeRef = useRef<number | null>(null);
-  const [lastTapTime, setLastTapTime] = useState<number>(0);
-  const tapDebounceTime = 500; // Debounce time in ms to prevent double-tap issues
+  const lastClickTimeRef = useRef<number>(0);
+  const clickDebounceTime = 300; // ms between allowed clicks
 
   const filteredItems = selectedCategory 
     ? menuItems.filter(item => item.category === selectedCategory)
@@ -215,95 +213,44 @@ const Menu = () => {
     ? [selectedCategory] 
     : categories;
 
-  // Simplify the scrolling detection
-  useEffect(() => {
-    const scrollContainer = categoryScrollRef.current;
-    if (!scrollContainer) return;
-    
-    let scrollTimeout: number;
-    
-    const handleScroll = () => {
-      setIsScrolling(true);
-      
-      clearTimeout(scrollTimeout);
-      
-      scrollTimeout = window.setTimeout(() => {
-        setIsScrolling(false);
-      }, 300);
-    };
-    
-    scrollContainer.addEventListener('scroll', handleScroll);
-    
-    return () => {
-      scrollContainer.removeEventListener('scroll', handleScroll);
-      clearTimeout(scrollTimeout);
-    };
-  }, []);
-
-  // Handle document scroll separately
-  useEffect(() => {
-    const mainContainer = document.documentElement;
-    let mainScrollTimeout: number;
-    
-    const handleMainScroll = () => {
-      setIsScrolling(true);
-      
-      clearTimeout(mainScrollTimeout);
-      
-      mainScrollTimeout = window.setTimeout(() => {
-        setIsScrolling(false);
-      }, 300);
-    };
-    
-    mainContainer.addEventListener('scroll', handleMainScroll);
-    
-    return () => {
-      mainContainer.removeEventListener('scroll', handleMainScroll);
-      clearTimeout(mainScrollTimeout);
-    };
-  }, []);
-
-  // Simplified category click handler
+  // Direct category click handler with debounce
   const handleCategoryClick = (category: string) => {
     const now = Date.now();
     
-    // Debounce rapid taps
-    if (now - lastTapTime < tapDebounceTime) {
+    // Prevent rapid clicks
+    if (now - lastClickTimeRef.current < clickDebounceTime) {
       return;
     }
     
-    setLastTapTime(now);
+    lastClickTimeRef.current = now;
     
-    if (!isScrolling) {
-      // Force state update with a callback approach
-      setSelectedCategory((prevCategory) => {
-        console.log("Changing category from", prevCategory, "to", category === prevCategory ? null : category);
-        return prevCategory === category ? null : category;
-      });
+    // Directly set the state based on current click, not previous state
+    if (category === selectedCategory) {
+      console.log("Clearing category selection");
+      setSelectedCategory(null);
+    } else {
+      console.log("Setting category to:", category);
+      setSelectedCategory(category);
     }
   };
 
-  // Simplified "All" category handler
+  // Simple "All" category handler
   const handleAllCategoryClick = () => {
     const now = Date.now();
     
-    if (now - lastTapTime < tapDebounceTime) {
+    if (now - lastClickTimeRef.current < clickDebounceTime) {
       return;
     }
     
-    setLastTapTime(now);
-    
-    if (!isScrolling) {
-      console.log("Setting category to null (All)");
-      setSelectedCategory(null);
-    }
+    lastClickTimeRef.current = now;
+    console.log("Setting category to All (null)");
+    setSelectedCategory(null);
   };
 
-  // Log when categories or filtered items change for debugging
+  // Log state changes for debugging
   useEffect(() => {
-    console.log("Selected category changed to:", selectedCategory);
-    console.log("Filtered items:", filteredItems.map(item => item.title));
-  }, [selectedCategory, filteredItems]);
+    console.log("Current selected category:", selectedCategory);
+  }, [selectedCategory]);
 
   return (
     <motion.div

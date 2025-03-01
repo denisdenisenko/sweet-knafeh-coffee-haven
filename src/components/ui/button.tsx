@@ -51,6 +51,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         style={{
           WebkitTapHighlightColor: "transparent", // Remove default mobile tap highlight
           touchAction: "manipulation", // Improve touch handling
+          userSelect: "none", // Prevent text selection during rapid clicks
           ...props.style
         }}
         {...props}
