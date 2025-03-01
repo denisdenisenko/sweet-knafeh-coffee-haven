@@ -1,4 +1,3 @@
-
 import React, { useRef, useState, useEffect } from "react";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Coffee, CakeSlice, UtensilsCrossed, Candy, Cookie, Wheat, Salad, Milk, IceCream, Croissant } from "lucide-react";
@@ -204,6 +203,8 @@ const Menu = () => {
   const categoryScrollRef = useRef<HTMLDivElement>(null);
   const [isScrolling, setIsScrolling] = useState(false);
   const touchStartTimeRef = useRef<number | null>(null);
+  const [lastTapTime, setLastTapTime] = useState<number>(0);
+  const tapDebounceTime = 500; // Debounce time in ms to prevent double-tap issues
 
   const filteredItems = selectedCategory 
     ? menuItems.filter(item => item.category === selectedCategory)
@@ -227,7 +228,7 @@ const Menu = () => {
       
       scrollTimeout = window.setTimeout(() => {
         setIsScrolling(false);
-      }, 300); // Increased timeout for better mobile experience
+      }, 400); // Increased timeout for better mobile experience
     };
     
     scrollContainer.addEventListener('scroll', handleScroll);
@@ -238,7 +239,6 @@ const Menu = () => {
     };
   }, []);
 
-  // Add touch event handlers to improve mobile interaction
   useEffect(() => {
     const scrollContainer = categoryScrollRef.current;
     
@@ -252,46 +252,67 @@ const Menu = () => {
     const handleTouchEnd = () => {
       const touchDuration = touchStartTimeRef.current ? Date.now() - touchStartTimeRef.current : 0;
       
-      // If touch duration is less than 300ms, likely a tap rather than a scroll
-      if (touchDuration < 300) {
-        // Wait a bit to let the browser recognize if it was a scroll or tap
-        setTimeout(() => {
-          setIsScrolling(false);
-        }, 50);
-      } else {
-        // For longer touches, add an additional delay
-        setTimeout(() => {
-          setIsScrolling(false);
-        }, 200);
-      }
+      setTimeout(() => {
+        setIsScrolling(false);
+      }, touchDuration < 300 ? 100 : 300);
     };
     
     scrollContainer.addEventListener('touchstart', handleTouchStart);
     scrollContainer.addEventListener('touchend', handleTouchEnd);
     
+    const mainContainer = document.documentElement;
+    let mainScrollTimeout: number;
+    
+    const handleMainScroll = () => {
+      setIsScrolling(true);
+      clearTimeout(mainScrollTimeout);
+      
+      mainScrollTimeout = window.setTimeout(() => {
+        setIsScrolling(false);
+      }, 400);
+    };
+    
+    mainContainer.addEventListener('scroll', handleMainScroll);
+    
     return () => {
       scrollContainer.removeEventListener('touchstart', handleTouchStart);
       scrollContainer.removeEventListener('touchend', handleTouchEnd);
+      mainContainer.removeEventListener('scroll', handleMainScroll);
+      clearTimeout(mainScrollTimeout);
     };
   }, []);
 
   const handleCategoryClick = (category: string) => {
+    const now = Date.now();
+    
+    if (now - lastTapTime < tapDebounceTime) {
+      return;
+    }
+    
+    setLastTapTime(now);
+    
     if (!isScrolling) {
-      // Adding a small delay to ensure we don't catch accidental taps
       setTimeout(() => {
         setSelectedCategory(prevCategory => 
           prevCategory === category ? null : category
         );
-      }, 10);
+      }, 50);
     }
   };
 
   const handleAllCategoryClick = () => {
+    const now = Date.now();
+    
+    if (now - lastTapTime < tapDebounceTime) {
+      return;
+    }
+    
+    setLastTapTime(now);
+    
     if (!isScrolling) {
-      // Adding a small delay to ensure we don't catch accidental taps
       setTimeout(() => {
         setSelectedCategory(null);
-      }, 10);
+      }, 50);
     }
   };
 

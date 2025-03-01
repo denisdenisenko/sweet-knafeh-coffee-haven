@@ -10,14 +10,14 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-primary text-white hover:bg-primary/90",
+        default: "bg-primary text-white hover:bg-primary/90 active:bg-primary/80",
         destructive:
-          "bg-destructive text-destructive-foreground hover:bg-destructive/90",
+          "bg-destructive text-destructive-foreground hover:bg-destructive/90 active:bg-destructive/80",
         outline:
-          "border border-input bg-background hover:bg-accent hover:text-primary",
+          "border border-input bg-background hover:bg-accent hover:text-primary active:bg-accent/80",
         secondary:
-          "bg-secondary text-secondary-foreground hover:bg-secondary/80",
-        ghost: "hover:bg-accent hover:text-primary",
+          "bg-secondary text-secondary-foreground hover:bg-secondary/80 active:bg-secondary/70",
+        ghost: "hover:bg-accent hover:text-primary active:bg-accent/80",
         link: "text-primary underline-offset-4 hover:underline",
       },
       size: {
@@ -43,10 +43,36 @@ export interface ButtonProps
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, asChild = false, ...props }, ref) => {
     const Comp = asChild ? Slot : "button"
+    
+    // Create a ref to track touch interaction
+    const touchRef = React.useRef<boolean>(false)
+    
+    // Event handlers to improve touch device interaction
+    const handleTouchStart = React.useCallback((e: React.TouchEvent) => {
+      touchRef.current = true
+      // Call the original onTouchStart if provided
+      props.onTouchStart?.(e)
+    }, [props.onTouchStart])
+    
+    const handleTouchEnd = React.useCallback((e: React.TouchEvent) => {
+      // Small delay to ensure the click event can fire properly
+      setTimeout(() => {
+        touchRef.current = false
+      }, 100)
+      // Call the original onTouchEnd if provided
+      props.onTouchEnd?.(e)
+    }, [props.onTouchEnd])
+    
     return (
       <Comp
         className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+        style={{
+          WebkitTapHighlightColor: "transparent", // Remove default mobile tap highlight
+          ...props.style
+        }}
         {...props}
       />
     )
