@@ -1,4 +1,3 @@
-
 import React, { useRef, useState } from "react";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
@@ -256,7 +255,7 @@ const Menu = () => {
 
   return (
     <div ref={containerRef} className="min-h-screen bg-background dark:bg-primary-dark transition-colors duration-300">
-      <div className="relative h-[70vh] w-full overflow-hidden">
+      <div className="relative h-[50vh] md:h-[70vh] w-full overflow-hidden">
         <div className="absolute inset-0">
           <img
             src="/lovable-uploads/af376e6c-4e24-4b16-9452-bd4a34f7eedf.png"
@@ -272,8 +271,8 @@ const Menu = () => {
             transition={{ duration: 0.8 }}
             className="text-center text-white"
           >
-            <h1 className="text-5xl md:text-7xl font-bold mb-4 font-heading">התפריט שלנו</h1>
-            <p className="text-xl md:text-2xl">טעמים מסורתיים בכל ביס</p>
+            <h1 className="text-4xl md:text-7xl font-bold mb-4 font-heading">התפריט שלנו</h1>
+            <p className="text-lg md:text-2xl">טעמים מסורתיים בכל ביס</p>
           </motion.div>
         </div>
         <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-background dark:from-primary-dark to-transparent" />
@@ -281,16 +280,15 @@ const Menu = () => {
 
       <motion.div 
         style={{ opacity, translateY }} 
-        className="container mx-auto px-4 py-20"
+        className="container mx-auto px-4 py-12 md:py-20"
       >
-        <div className="relative mb-12 max-w-5xl mx-auto">
-          <h2 className="text-2xl font-bold mb-4">בחר קטגוריה</h2>
+        <div className="relative mb-8 md:mb-12 max-w-5xl mx-auto">
+          <h2 className="text-xl md:text-2xl font-bold mb-4">בחר קטגוריה</h2>
           
           <div className="relative overflow-hidden">
             <div 
               ref={categoryScrollRef}
-              className="flex gap-2 overflow-x-auto pb-4 scrollbar-hide"
-              style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+              className="flex gap-2 overflow-x-auto pb-4 no-scrollbar"
             >
               <Button
                 key="all"
@@ -317,11 +315,6 @@ const Menu = () => {
                 );
               })}
             </div>
-            <style dangerouslySetInnerHTML={{ __html: `
-              .scrollbar-hide::-webkit-scrollbar {
-                display: none;
-              }
-            `}} />
           </div>
         </div>
   
@@ -340,10 +333,10 @@ const Menu = () => {
                 whileInView="visible"
                 viewport={{ once: true, margin: "-100px" }}
                 variants={containerVariants}
-                className="mb-20"
+                className="mb-12 md:mb-20"
               >
                 <motion.div 
-                  className="flex items-center gap-3 mb-10 justify-center"
+                  className="flex items-center gap-3 mb-6 md:mb-10 justify-center"
                   initial={{ opacity: 0, y: -20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: categoryIndex * 0.1 }}
@@ -356,16 +349,16 @@ const Menu = () => {
                     >
                       {React.createElement(
                         menuItems.find(item => item.category === category)?.icon || Coffee, 
-                        { className: "w-8 h-8 text-primary" }
+                        { className: "w-6 h-6 md:w-8 md:h-8 text-primary" }
                       )}
                     </motion.div>
                   )}
-                  <h2 className="text-3xl md:text-4xl font-bold text-primary dark:text-primary-light">
+                  <h2 className="text-2xl md:text-4xl font-bold text-primary dark:text-primary-light">
                     {category}
                   </h2>
                 </motion.div>
                 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
                   {filteredItems
                     .filter(item => item.category === category)
                     .map((item, index) => (
@@ -376,7 +369,7 @@ const Menu = () => {
                         className="glass-morphism rounded-xl overflow-hidden"
                       >
                         <div className="flex flex-col md:flex-row">
-                          <div className="md:w-2/5">
+                          <div className="w-full md:w-2/5">
                             <AspectRatio ratio={1/1}>
                               <img
                                 src={item.src}
@@ -385,21 +378,21 @@ const Menu = () => {
                               />
                             </AspectRatio>
                           </div>
-                          <div className="p-6 md:w-3/5 flex flex-col justify-between">
+                          <div className="p-4 md:p-6 w-full md:w-3/5 flex flex-col justify-between">
                             <div>
                               <div className="flex items-center gap-2 mb-2">
-                                {React.createElement(item.icon, { className: "w-5 h-5 text-primary" })}
-                                <span className="text-sm text-foreground/60">{item.category}</span>
+                                {React.createElement(item.icon, { className: "w-4 h-4 md:w-5 md:h-5 text-primary" })}
+                                <span className="text-xs md:text-sm text-foreground/60">{item.category}</span>
                               </div>
-                              <h3 className="text-xl font-semibold text-foreground/80 dark:text-foreground/70 mb-2">
+                              <h3 className="text-lg md:text-xl font-semibold text-foreground/80 dark:text-foreground/70 mb-2">
                                 {item.title}
                               </h3>
-                              <p className="text-foreground/60 dark:text-foreground/50 mb-4">
+                              <p className="text-sm md:text-base text-foreground/60 dark:text-foreground/50 mb-4">
                                 {item.description}
                               </p>
                             </div>
                             <motion.div 
-                              className="text-lg font-bold text-primary dark:text-primary-light"
+                              className="text-base md:text-lg font-bold text-primary dark:text-primary-light"
                               whileHover={{ scale: 1.05 }}
                             >
                               {item.price}
