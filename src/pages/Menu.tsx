@@ -1,7 +1,9 @@
-import React, { useRef } from "react";
+
+import React, { useRef, useState } from "react";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { Coffee, CakeSlice, UtensilsCrossed, Candy, Cookie, Wheat, Salad, Milk, IceCream, Croissant } from "lucide-react";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import { Coffee, CakeSlice, UtensilsCrossed, Candy, Cookie, Wheat, Salad, Milk, IceCream, Croissant, ChevronLeft, ChevronRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const Menu = () => {
   const menuItems = [
@@ -198,6 +200,9 @@ const Menu = () => {
   ];
 
   const categories = [...new Set(menuItems.map(item => item.category))];
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [categoryScrollX, setCategoryScrollX] = useState(0);
+  const categoryScrollRef = useRef<HTMLDivElement>(null);
 
   const containerRef = useRef(null);
   const { scrollYProgress } = useScroll({
@@ -236,6 +241,36 @@ const Menu = () => {
     }
   };
 
+  const filteredItems = selectedCategory 
+    ? menuItems.filter(item => item.category === selectedCategory)
+    : menuItems;
+
+  const displayedCategories = selectedCategory 
+    ? [selectedCategory] 
+    : categories;
+
+  const handleCategoryClick = (category: string) => {
+    setSelectedCategory(prevCategory => 
+      prevCategory === category ? null : category
+    );
+  };
+
+  const scrollCategories = (direction: 'left' | 'right') => {
+    if (categoryScrollRef.current) {
+      const scrollAmount = 200;
+      const newScrollX = direction === 'left' 
+        ? categoryScrollX - scrollAmount
+        : categoryScrollX + scrollAmount;
+      
+      categoryScrollRef.current.scrollTo({
+        left: newScrollX,
+        behavior: 'smooth'
+      });
+      
+      setCategoryScrollX(newScrollX);
+    }
+  };
+
   return (
     <div ref={containerRef} className="min-h-screen bg-background dark:bg-primary-dark transition-colors duration-300">
       <div className="relative h-[70vh] w-full overflow-hidden">
@@ -265,84 +300,155 @@ const Menu = () => {
         style={{ opacity, translateY }} 
         className="container mx-auto px-4 py-20"
       >
-        {categories.map((category, categoryIndex) => (
-          <motion.div 
-            key={category}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={containerVariants}
-            className="mb-20"
-          >
-            <motion.div 
-              className="flex items-center gap-3 mb-10 justify-center"
-              initial={{ opacity: 0, y: -20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: categoryIndex * 0.1 }}
-              viewport={{ once: true }}
-            >
-              {menuItems.find(item => item.category === category)?.icon && (
-                <motion.div
-                  whileHover={{ rotate: 15, scale: 1.1 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  {React.createElement(
-                    menuItems.find(item => item.category === category)?.icon || Coffee, 
-                    { className: "w-8 h-8 text-primary" }
-                  )}
-                </motion.div>
-              )}
-              <h2 className="text-3xl md:text-4xl font-bold text-primary dark:text-primary-light">
-                {category}
-              </h2>
-            </motion.div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {menuItems
-                .filter(item => item.category === category)
-                .map((item, index) => (
-                  <motion.div
-                    key={`${category}-${index}`}
-                    variants={itemVariants}
-                    whileHover="hover"
-                    className="glass-morphism rounded-xl overflow-hidden"
-                  >
-                    <div className="flex flex-col md:flex-row">
-                      <div className="md:w-2/5">
-                        <AspectRatio ratio={1/1}>
-                          <img
-                            src={item.src}
-                            alt={item.alt}
-                            className="object-cover w-full h-full transition-transform duration-300 hover:scale-105"
-                          />
-                        </AspectRatio>
-                      </div>
-                      <div className="p-6 md:w-3/5 flex flex-col justify-between">
-                        <div>
-                          <div className="flex items-center gap-2 mb-2">
-                            {React.createElement(item.icon, { className: "w-5 h-5 text-primary" })}
-                            <span className="text-sm text-foreground/60">{item.category}</span>
-                          </div>
-                          <h3 className="text-xl font-semibold text-foreground/80 dark:text-foreground/70 mb-2">
-                            {item.title}
-                          </h3>
-                          <p className="text-foreground/60 dark:text-foreground/50 mb-4">
-                            {item.description}
-                          </p>
-                        </div>
-                        <motion.div 
-                          className="text-lg font-bold text-primary dark:text-primary-light"
-                          whileHover={{ scale: 1.05 }}
-                        >
-                          {item.price}
-                        </motion.div>
-                      </div>
-                    </div>
-                  </motion.div>
-                ))}
+        <div className="relative mb-12 max-w-5xl mx-auto">
+          <div className="flex items-center justify-between mb-2">
+            <h2 className="text-2xl font-bold">בחר קטגוריה</h2>
+            <div className="flex gap-2">
+              <Button 
+                variant="outline" 
+                size="icon" 
+                onClick={() => scrollCategories('right')}
+                className="rounded-full"
+              >
+                <ChevronLeft className="h-4 w-4" />
+              </Button>
+              <Button 
+                variant="outline" 
+                size="icon" 
+                onClick={() => scrollCategories('left')}
+                className="rounded-full"
+              >
+                <ChevronRight className="h-4 w-4" />
+              </Button>
             </div>
+          </div>
+          
+          <div className="relative overflow-hidden">
+            <div 
+              ref={categoryScrollRef}
+              className="flex gap-2 overflow-x-auto pb-4 scrollbar-hide"
+              style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+            >
+              <Button
+                key="all"
+                variant={selectedCategory === null ? "default" : "outline"}
+                onClick={() => setSelectedCategory(null)}
+                className="whitespace-nowrap"
+              >
+                הכל
+              </Button>
+              {categories.map((category) => {
+                const CategoryIcon = menuItems.find(item => item.category === category)?.icon || Coffee;
+                
+                return (
+                  <Button
+                    key={category}
+                    variant={selectedCategory === category ? "default" : "outline"}
+                    onClick={() => handleCategoryClick(category)}
+                    className="whitespace-nowrap gap-2"
+                  >
+                    <CategoryIcon className="h-4 w-4" />
+                    <span>{category}</span>
+                  </Button>
+                );
+              })}
+            </div>
+            <style jsx global>{`
+              .scrollbar-hide::-webkit-scrollbar {
+                display: none;
+              }
+            `}</style>
+          </div>
+        </div>
+  
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={selectedCategory ?? 'all'}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            {displayedCategories.map((category, categoryIndex) => (
+              <motion.div 
+                key={category}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                variants={containerVariants}
+                className="mb-20"
+              >
+                <motion.div 
+                  className="flex items-center gap-3 mb-10 justify-center"
+                  initial={{ opacity: 0, y: -20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: categoryIndex * 0.1 }}
+                  viewport={{ once: true }}
+                >
+                  {menuItems.find(item => item.category === category)?.icon && (
+                    <motion.div
+                      whileHover={{ rotate: 15, scale: 1.1 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      {React.createElement(
+                        menuItems.find(item => item.category === category)?.icon || Coffee, 
+                        { className: "w-8 h-8 text-primary" }
+                      )}
+                    </motion.div>
+                  )}
+                  <h2 className="text-3xl md:text-4xl font-bold text-primary dark:text-primary-light">
+                    {category}
+                  </h2>
+                </motion.div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  {filteredItems
+                    .filter(item => item.category === category)
+                    .map((item, index) => (
+                      <motion.div
+                        key={`${category}-${index}`}
+                        variants={itemVariants}
+                        whileHover="hover"
+                        className="glass-morphism rounded-xl overflow-hidden"
+                      >
+                        <div className="flex flex-col md:flex-row">
+                          <div className="md:w-2/5">
+                            <AspectRatio ratio={1/1}>
+                              <img
+                                src={item.src}
+                                alt={item.alt}
+                                className="object-cover w-full h-full transition-transform duration-300 hover:scale-105"
+                              />
+                            </AspectRatio>
+                          </div>
+                          <div className="p-6 md:w-3/5 flex flex-col justify-between">
+                            <div>
+                              <div className="flex items-center gap-2 mb-2">
+                                {React.createElement(item.icon, { className: "w-5 h-5 text-primary" })}
+                                <span className="text-sm text-foreground/60">{item.category}</span>
+                              </div>
+                              <h3 className="text-xl font-semibold text-foreground/80 dark:text-foreground/70 mb-2">
+                                {item.title}
+                              </h3>
+                              <p className="text-foreground/60 dark:text-foreground/50 mb-4">
+                                {item.description}
+                              </p>
+                            </div>
+                            <motion.div 
+                              className="text-lg font-bold text-primary dark:text-primary-light"
+                              whileHover={{ scale: 1.05 }}
+                            >
+                              {item.price}
+                            </motion.div>
+                          </div>
+                        </div>
+                      </motion.div>
+                    ))}
+                </div>
+              </motion.div>
+            ))}
           </motion.div>
-        ))}
+        </AnimatePresence>
       </motion.div>
     </div>
   );
