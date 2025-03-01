@@ -199,6 +199,7 @@ const Menu = () => {
   ];
 
   const categories = [...new Set(menuItems.map(item => item.category))];
+  
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const categoryScrollRef = useRef<HTMLDivElement>(null);
   const [isScrolling, setIsScrolling] = useState(false);
@@ -214,6 +215,7 @@ const Menu = () => {
     ? [selectedCategory] 
     : categories;
 
+  // Simplify the scrolling detection
   useEffect(() => {
     const scrollContainer = categoryScrollRef.current;
     if (!scrollContainer) return;
@@ -227,7 +229,7 @@ const Menu = () => {
       
       scrollTimeout = window.setTimeout(() => {
         setIsScrolling(false);
-      }, 600); // Increased timeout for better mobile experience
+      }, 300);
     };
     
     scrollContainer.addEventListener('scroll', handleScroll);
@@ -238,51 +240,34 @@ const Menu = () => {
     };
   }, []);
 
+  // Handle document scroll separately
   useEffect(() => {
-    const scrollContainer = categoryScrollRef.current;
-    if (!scrollContainer) return;
-    
-    const handleTouchStart = () => {
-      touchStartTimeRef.current = Date.now();
-      setIsScrolling(true);
-    };
-    
-    const handleTouchEnd = () => {
-      const touchDuration = touchStartTimeRef.current ? Date.now() - touchStartTimeRef.current : 0;
-      
-      setTimeout(() => {
-        setIsScrolling(false);
-      }, touchDuration < 300 ? 300 : 500);
-    };
-    
-    scrollContainer.addEventListener('touchstart', handleTouchStart);
-    scrollContainer.addEventListener('touchend', handleTouchEnd);
-    
     const mainContainer = document.documentElement;
     let mainScrollTimeout: number;
     
     const handleMainScroll = () => {
       setIsScrolling(true);
+      
       clearTimeout(mainScrollTimeout);
       
       mainScrollTimeout = window.setTimeout(() => {
         setIsScrolling(false);
-      }, 600); // Increased timeout
+      }, 300);
     };
     
     mainContainer.addEventListener('scroll', handleMainScroll);
     
     return () => {
-      scrollContainer.removeEventListener('touchstart', handleTouchStart);
-      scrollContainer.removeEventListener('touchend', handleTouchEnd);
       mainContainer.removeEventListener('scroll', handleMainScroll);
       clearTimeout(mainScrollTimeout);
     };
   }, []);
 
+  // Simplified category click handler
   const handleCategoryClick = (category: string) => {
     const now = Date.now();
     
+    // Debounce rapid taps
     if (now - lastTapTime < tapDebounceTime) {
       return;
     }
@@ -290,12 +275,15 @@ const Menu = () => {
     setLastTapTime(now);
     
     if (!isScrolling) {
-      setSelectedCategory(prevCategory => 
-        prevCategory === category ? null : category
-      );
+      // Force state update with a callback approach
+      setSelectedCategory((prevCategory) => {
+        console.log("Changing category from", prevCategory, "to", category === prevCategory ? null : category);
+        return prevCategory === category ? null : category;
+      });
     }
   };
 
+  // Simplified "All" category handler
   const handleAllCategoryClick = () => {
     const now = Date.now();
     
@@ -306,9 +294,16 @@ const Menu = () => {
     setLastTapTime(now);
     
     if (!isScrolling) {
+      console.log("Setting category to null (All)");
       setSelectedCategory(null);
     }
   };
+
+  // Log when categories or filtered items change for debugging
+  useEffect(() => {
+    console.log("Selected category changed to:", selectedCategory);
+    console.log("Filtered items:", filteredItems.map(item => item.title));
+  }, [selectedCategory, filteredItems]);
 
   return (
     <motion.div
@@ -350,7 +345,7 @@ const Menu = () => {
                 key="all"
                 variant={selectedCategory === null ? "default" : "outline"}
                 onClick={handleAllCategoryClick}
-                className="whitespace-nowrap touch-manipulation"
+                className="whitespace-nowrap"
               >
                 הכל
               </Button>
@@ -362,7 +357,7 @@ const Menu = () => {
                     key={category}
                     variant={selectedCategory === category ? "default" : "outline"}
                     onClick={() => handleCategoryClick(category)}
-                    className="whitespace-nowrap gap-2 touch-manipulation"
+                    className="whitespace-nowrap gap-2"
                   >
                     <CategoryIcon className="h-4 w-4" />
                     <span>{category}</span>

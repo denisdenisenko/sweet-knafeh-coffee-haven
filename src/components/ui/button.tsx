@@ -44,33 +44,13 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, asChild = false, ...props }, ref) => {
     const Comp = asChild ? Slot : "button"
     
-    // Create a ref to track touch interaction
-    const touchRef = React.useRef<boolean>(false)
-    
-    // Event handlers to improve touch device interaction
-    const handleTouchStart = React.useCallback((e: React.TouchEvent<HTMLButtonElement>) => {
-      touchRef.current = true
-      // Call the original onTouchStart if provided
-      props.onTouchStart?.(e)
-    }, [props.onTouchStart])
-    
-    const handleTouchEnd = React.useCallback((e: React.TouchEvent<HTMLButtonElement>) => {
-      // Small delay to ensure the click event can fire properly
-      setTimeout(() => {
-        touchRef.current = false
-      }, 100)
-      // Call the original onTouchEnd if provided
-      props.onTouchEnd?.(e)
-    }, [props.onTouchEnd])
-    
     return (
       <Comp
         className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
-        onTouchStart={handleTouchStart}
-        onTouchEnd={handleTouchEnd}
         style={{
           WebkitTapHighlightColor: "transparent", // Remove default mobile tap highlight
+          touchAction: "manipulation", // Improve touch handling
           ...props.style
         }}
         {...props}
