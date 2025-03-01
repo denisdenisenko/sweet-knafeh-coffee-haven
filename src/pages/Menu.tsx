@@ -1,7 +1,8 @@
 
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { Coffee, CakeSlice } from "lucide-react";
+import { useRef } from "react";
 
 const Menu = () => {
   const menuItems = [
@@ -31,8 +32,17 @@ const Menu = () => {
     }
   ];
 
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"]
+  });
+  
+  const opacity = useTransform(scrollYProgress, [0, 0.2], [0, 1]);
+  const translateY = useTransform(scrollYProgress, [0, 0.2], [100, 0]);
+
   return (
-    <div className="min-h-screen bg-background dark:bg-primary-dark transition-colors duration-300">
+    <div ref={containerRef} className="min-h-screen bg-background dark:bg-primary-dark transition-colors duration-300">
       {/* Hero Section */}
       <div className="relative h-[70vh] w-full overflow-hidden">
         <div className="absolute inset-0">
@@ -58,7 +68,10 @@ const Menu = () => {
       </div>
 
       {/* Menu Items Section */}
-      <div className="container mx-auto px-4 py-20">
+      <motion.div 
+        style={{ opacity, translateY }} 
+        className="container mx-auto px-4 py-20"
+      >
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {menuItems.map((item, index) => (
             <motion.div
@@ -98,7 +111,7 @@ const Menu = () => {
             </motion.div>
           ))}
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 };
