@@ -1,5 +1,4 @@
-
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Coffee, CakeSlice, UtensilsCrossed, Candy, Cookie, Wheat, Salad, Milk, IceCream, Croissant } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -202,6 +201,7 @@ const Menu = () => {
   const categories = [...new Set(menuItems.map(item => item.category))];
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const categoryScrollRef = useRef<HTMLDivElement>(null);
+  const [isScrolling, setIsScrolling] = useState(false);
 
   const filteredItems = selectedCategory 
     ? menuItems.filter(item => item.category === selectedCategory)
@@ -211,13 +211,43 @@ const Menu = () => {
     ? [selectedCategory] 
     : categories;
 
+  useEffect(() => {
+    const scrollContainer = categoryScrollRef.current;
+    
+    if (!scrollContainer) return;
+    
+    let scrollTimeout: number;
+    
+    const handleScroll = () => {
+      setIsScrolling(true);
+      
+      clearTimeout(scrollTimeout);
+      
+      scrollTimeout = window.setTimeout(() => {
+        setIsScrolling(false);
+      }, 150);
+    };
+    
+    scrollContainer.addEventListener('scroll', handleScroll);
+    
+    return () => {
+      scrollContainer.removeEventListener('scroll', handleScroll);
+      clearTimeout(scrollTimeout);
+    };
+  }, []);
+
   const handleCategoryClick = (category: string) => {
-    // Add a small delay to ensure touch events are processed correctly on mobile
-    setTimeout(() => {
+    if (!isScrolling) {
       setSelectedCategory(prevCategory => 
         prevCategory === category ? null : category
       );
-    }, 10);
+    }
+  };
+
+  const handleAllCategoryClick = () => {
+    if (!isScrolling) {
+      setSelectedCategory(null);
+    }
   };
 
   return (
@@ -259,7 +289,7 @@ const Menu = () => {
               <Button
                 key="all"
                 variant={selectedCategory === null ? "default" : "outline"}
-                onClick={() => setSelectedCategory(null)}
+                onClick={handleAllCategoryClick}
                 className="whitespace-nowrap touch-manipulation"
               >
                 הכל
