@@ -1,3 +1,4 @@
+
 import { motion } from "framer-motion";
 import { MapPin, Clock, Phone } from "lucide-react";
 
@@ -69,7 +70,7 @@ const LocationSection = () => {
           className="mt-16 h-[400px] max-w-4xl mx-auto rounded-xl overflow-hidden glass-morphism"
         >
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3381.6897129667604!2d34.7818!3d32.0853!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzLCsDA1JzA3LjEiTiAzNMKwNDYnNTQuNiJF!5e0!3m2!1sen!2sil!4v1635789245611!5m2!1sen!2sil"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3378.1167142317566!2d35.04611565119284!3d32.73750668087904!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151dba2b92af8c51%3A0xa1e0588aafe73ffb!2sIsefya!5e0!3m2!1sen!2sil!4v1719754234879!5m2!1sen!2sil"
             width="100%"
             height="100%"
             style={{ border: 0 }}
