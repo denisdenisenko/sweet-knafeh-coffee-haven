@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -14,6 +13,7 @@ import Location from "./pages/Location";
 import OurStory from "./pages/OurStory";
 import NotFound from "./pages/NotFound";
 import LoadingScreen from "./components/LoadingScreen";
+import BookPageAnimation from "./components/BookPageAnimation";
 
 const queryClient = new QueryClient();
 
@@ -47,11 +47,17 @@ const AnimatedRoutes = () => {
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
+  const [showBookAnimation, setShowBookAnimation] = useState(true);
 
   useEffect(() => {
     // Simulate loading time
     const timer = setTimeout(() => {
       setIsLoading(false);
+      
+      // Keep the book animation visible for a bit after loading is complete
+      setTimeout(() => {
+        setShowBookAnimation(false);
+      }, 3500);
     }, 3000);
 
     return () => clearTimeout(timer);
@@ -65,6 +71,7 @@ const App = () => {
           <Sonner />
           <BrowserRouter>
             {isLoading && <LoadingScreen />}
+            {showBookAnimation && <BookPageAnimation />}
             <div className="min-h-screen bg-background">
               <Navbar />
               <main className="pt-16">
