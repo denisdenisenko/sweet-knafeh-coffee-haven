@@ -30,7 +30,7 @@ const LocationSection = () => {
           >
             <MapPin className="w-8 h-8 text-primary dark:text-primary-light mx-auto mb-4" />
             <h3 className="text-xl font-semibold text-primary dark:text-primary-light mb-2">כתובת</h3>
-            <p className="text-foreground/70 dark:text-foreground/60">רחוב הרצל 1, תל אביב</p>
+            <p className="text-foreground/70 dark:text-foreground/60">כביש ראשי,אבא חושי, עיספיא, 3000900</p>
           </motion.div>
 
           <motion.div
@@ -43,9 +43,8 @@ const LocationSection = () => {
             <Clock className="w-8 h-8 text-primary dark:text-primary-light mx-auto mb-4" />
             <h3 className="text-xl font-semibold text-primary dark:text-primary-light mb-2">שעות פתיחה</h3>
             <div className="space-y-2 text-foreground/70 dark:text-foreground/60">
-              <p>ראשון - חמישי: 08:00 - 22:00</p>
-              <p>שישי: 08:00 - 15:00</p>
-              <p>שבת: סגור</p>
+              <p>ראשון - שבת: 10:00 - 22:00</p>
+              <p>שלישי: סגור</p>
             </div>
           </motion.div>
 
@@ -58,7 +57,7 @@ const LocationSection = () => {
           >
             <Phone className="w-8 h-8 text-primary dark:text-primary-light mx-auto mb-4" />
             <h3 className="text-xl font-semibold text-primary dark:text-primary-light mb-2">צור קשר</h3>
-            <p className="text-foreground/70 dark:text-foreground/60">טלפון: 03-1234567</p>
+            <p className="text-foreground/70 dark:text-foreground/60">טלפון: 04-886-4323</p>
           </motion.div>
         </div>
 
