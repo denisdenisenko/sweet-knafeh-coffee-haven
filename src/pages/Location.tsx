@@ -67,24 +67,22 @@ const Location = () => {
                 <div>
                   <h2 className="text-2xl font-semibold mb-4 text-foreground/80 dark:text-foreground/70">המיקום שלנו</h2>
                   <p className="text-foreground/70 dark:text-foreground/60">
-                    רחוב הרצל 123<br />
-                    תל אביב<br />
+                    כביש ראשי, אבא חושי<br />
+                    עיספיא<br />
                     ישראל
                   </p>
                 </div>
                 <div>
                   <h2 className="text-2xl font-semibold mb-4 text-foreground/80 dark:text-foreground/70">שעות פתיחה</h2>
                   <div className="space-y-2 text-foreground/70 dark:text-foreground/60">
-                    <p>ראשון - חמישי: 08:00 - 21:00</p>
-                    <p>שישי: 09:00 - 15:00</p>
-                    <p>שבת: סגור</p>
+                    <p>ראשון - שבת: 10:00 - 21:00</p>
+                    <p>שלישי: סגור</p>
                   </div>
                 </div>
                 <div>
                   <h2 className="text-2xl font-semibold mb-4 text-foreground/80 dark:text-foreground/70">צור קשר</h2>
                   <p className="text-foreground/70 dark:text-foreground/60">
-                    טלפון: 03-1234567<br />
-                    אימייל: info@knafeh.co.il
+                    טלפון: 04-886-4323<br />
                   </p>
                 </div>
                 <div className="flex gap-4 pt-4">
