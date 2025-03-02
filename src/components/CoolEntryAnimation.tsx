@@ -102,7 +102,7 @@ const CoolEntryAnimation = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8, duration: 0.5 }}
         >
-          הכנאפה
+          בית הכנאפה
         </motion.h1>
         
         <motion.div
