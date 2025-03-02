@@ -76,7 +76,7 @@ const Location = () => {
                 <div>
                   <h2 className="text-2xl font-semibold mb-4 text-foreground/80 dark:text-foreground/70">שעות פתיחה</h2>
                   <div className="space-y-2 text-foreground/70 dark:text-foreground/60">
-                    <p>ראשון - שבת: 10:00 - 21:00</p>
+                    <p>ראשון - שבת: 10:00 - 22:00</p>
                     <p>שלישי: סגור</p>
                   </div>
                 </div>
