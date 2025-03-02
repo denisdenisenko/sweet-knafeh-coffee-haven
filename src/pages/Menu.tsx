@@ -213,18 +213,15 @@ const Menu = () => {
     ? [selectedCategory] 
     : categories;
 
-  // Direct category click handler with debounce
   const handleCategoryClick = (category: string) => {
     const now = Date.now();
     
-    // Prevent rapid clicks
     if (now - lastClickTimeRef.current < clickDebounceTime) {
       return;
     }
     
     lastClickTimeRef.current = now;
     
-    // Directly set the state based on current click, not previous state
     if (category === selectedCategory) {
       console.log("Clearing category selection");
       setSelectedCategory(null);
@@ -234,7 +231,6 @@ const Menu = () => {
     }
   };
 
-  // Simple "All" category handler
   const handleAllCategoryClick = () => {
     const now = Date.now();
     
@@ -247,7 +243,6 @@ const Menu = () => {
     setSelectedCategory(null);
   };
 
-  // Log state changes for debugging
   useEffect(() => {
     console.log("Current selected category:", selectedCategory);
   }, [selectedCategory]);
@@ -283,16 +278,16 @@ const Menu = () => {
         <div className="relative mb-8 md:mb-12 max-w-5xl mx-auto">
           <h2 className="text-xl md:text-2xl font-bold mb-4">בחר קטגוריה</h2>
           
-          <div className="relative overflow-hidden">
+          <div className="relative">
             <div 
               ref={categoryScrollRef}
-              className="flex gap-2 overflow-x-auto pb-4 no-scrollbar"
+              className="flex flex-wrap gap-2"
             >
               <Button
                 key="all"
                 variant={selectedCategory === null ? "default" : "outline"}
                 onClick={handleAllCategoryClick}
-                className="whitespace-nowrap"
+                className="whitespace-nowrap mb-2"
               >
                 הכל
               </Button>
@@ -304,7 +299,7 @@ const Menu = () => {
                     key={category}
                     variant={selectedCategory === category ? "default" : "outline"}
                     onClick={() => handleCategoryClick(category)}
-                    className="whitespace-nowrap gap-2"
+                    className="whitespace-nowrap gap-2 mb-2"
                   >
                     <CategoryIcon className="h-4 w-4" />
                     <span>{category}</span>
