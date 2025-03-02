@@ -11,7 +11,7 @@ const Menu = () => {
       src: "/lovable-uploads/64c25164-f773-4859-b6f3-8992fabfdba9.png",
       alt: "קפה טרי",
       title: "קפה ערבי מסורתי",
-      category: "משקאות",
+      category: "שתיה חמה",
       price: "₪15",
       description: "קפה טחון דק בתוספת הל",
       icon: Coffee
@@ -20,7 +20,7 @@ const Menu = () => {
       src: "https://images.unsplash.com/photo-1573750215158-97a608a0986d",
       alt: "תה נענע",
       title: "תה נענע טרי",
-      category: "משקאות",
+      category: "שתיה חמה",
       price: "₪12",
       description: "תה עם עלי נענע טריים ונגיעת דבש",
       icon: Coffee
@@ -28,22 +28,32 @@ const Menu = () => {
     // Desserts Category
     {
       src: "https://images.unsplash.com/photo-1618160702438-9b02ab6515c9",
+      alt: "בורמה פיסטוק",
+      title: "בורמה פיסטוק",
+      category: "בקלאווה",
+      price: "₪130",
+      description: "קינוח גבינה מסורתי עם שערות קדאיף",
+      icon: CakeSlice
+    },
+    {
+      src: "https://images.unsplash.com/photo-1618160702438-9b02ab6515c9",
       alt: "קנאפה מסורתית",
       title: "קנאפה קלאסית",
-      category: "קינוחים",
+      category: "בקלאווה",
       price: "₪48",
       description: "קינוח גבינה מסורתי עם שערות קדאיף",
       icon: CakeSlice
     },
     {
-      src: "https://images.unsplash.com/photo-1721322800607-8c38375eef04",
-      alt: "קנאפה שוקולד",
-      title: "קנאפה שוקולד",
-      category: "קינוחים",
-      price: "₪52",
-      description: "קנאפה במילוי שוקולד בלגי ואגוזי לוז",
+      src: "https://images.unsplash.com/photo-1618160702438-9b02ab6515c9",
+      alt: "קנאפה מסורתית",
+      title: "קנאפה קלאסית",
+      category: "בקלאווה",
+      price: "₪48",
+      description: "קינוח גבינה מסורתי עם שערות קדאיף",
       icon: CakeSlice
     },
+ 
     // Main Dishes Category
     {
       src: "https://images.unsplash.com/photo-1633321702518-7feccafb94d5",
@@ -120,44 +130,8 @@ const Menu = () => {
       description: "לחם שטוח אפוי בטאבון מסורתי",
       icon: Wheat
     },
-    // Salads Category
-    {
-      src: "https://images.unsplash.com/photo-1529059997568-3d847b1154f0",
-      alt: "סלט טבולה",
-      title: "טבולה קלאסי",
-      category: "סלטים",
-      price: "₪32",
-      description: "סלט פטרוזיליה, בורגול, עגבניות ונענע",
-      icon: Salad
-    },
-    {
-      src: "https://images.unsplash.com/photo-1544489518-18591cf1374a",
-      alt: "סלט פתוש",
-      title: "פתוש לבנוני",
-      category: "סלטים",
-      price: "₪34",
-      description: "סלט ירקות עם פיתה קריספית וסומק",
-      icon: Salad
-    },
-    // Dairy Category
-    {
-      src: "https://images.unsplash.com/photo-1589367920969-ab8e050bbb04",
-      alt: "לבנה",
-      title: "לבנה עם זעתר",
-      category: "מוצרי חלב",
-      price: "₪22",
-      description: "גבינת לבנה מסורתית עם זעתר וזיתים",
-      icon: Milk
-    },
-    {
-      src: "https://images.unsplash.com/photo-1559561853-08451507cbe7",
-      alt: "לבן",
-      title: "לבן ביתי",
-      category: "מוצרי חלב",
-      price: "₪18",
-      description: "לבן טרי ועשיר בסגנון ביתי",
-      icon: Milk
-    },
+
+  
     // Ice Cream Category
     {
       src: "https://images.unsplash.com/photo-1563805042-7684c019e1cb",
