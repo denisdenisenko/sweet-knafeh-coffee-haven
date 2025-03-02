@@ -16,6 +16,29 @@ const Index = () => {
     return () => clearTimeout(timer);
   }, []);
 
+  // Define page transition variants
+  const pageVariants = {
+    hidden: { opacity: 0, scale: 0.98 },
+    visible: { 
+      opacity: 1, 
+      scale: 1,
+      transition: { 
+        duration: 0.8,
+        ease: "easeOut",
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const sectionVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: { duration: 0.7, ease: "easeOut" }
+    }
+  };
+
   return (
     <>
       <AnimatePresence mode="wait">
@@ -24,17 +47,17 @@ const Index = () => {
         ) : (
           <motion.div
             key="index-page"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
+            initial="hidden"
+            animate="visible"
+            variants={pageVariants}
             className="min-h-screen bg-background dark:bg-primary-dark transition-colors duration-300"
           >
-            <Hero />
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
+            <motion.div variants={sectionVariants}>
+              <Hero />
+            </motion.div>
+            
+            <motion.div 
+              variants={sectionVariants}
               viewport={{ once: true }}
             >
               <LocationSection />
