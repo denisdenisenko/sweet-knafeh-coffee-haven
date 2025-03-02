@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -58,7 +59,7 @@ const App = () => {
       setTimeout(() => {
         setShowBookAnimation(false);
       }, 3500);
-    }, 3000);
+    }, 2000); // Shorter initial loading time for better UX
 
     return () => clearTimeout(timer);
   }, []);

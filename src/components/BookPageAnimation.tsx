@@ -22,18 +22,18 @@ const BookPageAnimation = () => {
       className="fixed inset-0 z-50 flex items-center justify-center pointer-events-none"
       style={{ perspective: "1200px" }}
     >
-      {/* Left page */}
+      {/* Top page that flips down */}
       <motion.div
-        initial={{ rotateY: 0, x: 0 }}
+        initial={{ rotateX: 0, y: 0 }}
         animate={{ 
-          rotateY: isOpen ? -180 : 0,
-          x: isOpen ? -100 : 0
+          rotateX: isOpen ? 180 : 0,
+          y: isOpen ? 100 : 0
         }}
         transition={{
           duration: 1.5,
           ease: [0.4, 0, 0.2, 1]
         }}
-        className="bg-amber-50 w-[45vw] h-[80vh] shadow-xl origin-right"
+        className="bg-amber-50 w-[80vw] h-[45vh] shadow-xl origin-top"
         style={{
           backfaceVisibility: "hidden",
           transformStyle: "preserve-3d",
@@ -41,6 +41,8 @@ const BookPageAnimation = () => {
           backgroundRepeat: "repeat",
           backgroundSize: "10%",
           backgroundBlendMode: "overlay",
+          position: "absolute",
+          top: "20vh",
         }}
       >
         <div className="h-full flex items-center justify-center">
@@ -55,30 +57,21 @@ const BookPageAnimation = () => {
         </div>
       </motion.div>
 
-      {/* Right page - moves like it's being turned */}
+      {/* Bottom page - stationary */}
       <motion.div
-        initial={{ rotateY: 0, x: 0 }}
-        animate={{ 
-          rotateY: isOpen ? -180 : 0,
-          x: isOpen ? -100 : 0 
-        }}
-        transition={{
-          duration: 1.5,
-          ease: [0.4, 0, 0.2, 1]
-        }}
-        className="bg-amber-100 w-[45vw] h-[80vh] shadow-xl origin-left"
+        className="bg-amber-100 w-[80vw] h-[45vh] shadow-xl"
         style={{
-          backfaceVisibility: "hidden",
-          transformStyle: "preserve-3d",
           backgroundImage: "url('/pattern.svg')",
           backgroundRepeat: "repeat",
           backgroundSize: "10%",
           backgroundBlendMode: "overlay",
+          position: "absolute",
+          top: "calc(20vh + 45vh)",
         }}
       />
 
       {/* Book spine */}
-      <div className="absolute h-[80vh] w-4 bg-gradient-to-r from-amber-200 to-amber-300 z-10" />
+      <div className="absolute w-[80vw] h-4 bg-gradient-to-b from-amber-200 to-amber-300 z-10" style={{ top: "20vh" }} />
     </motion.div>
   );
 };
