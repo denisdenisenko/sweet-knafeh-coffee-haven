@@ -1,11 +1,24 @@
 
 import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect } from "react";
 import Hero from "@/components/Hero";
 import LocationSection from "@/components/LocationSection";
+import CoolEntryAnimation from "@/components/CoolEntryAnimation";
 
 const Index = () => {
+  const [showAnimation, setShowAnimation] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowAnimation(false);
+    }, 3500); // Slightly longer than the animation itself
+    
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <AnimatePresence mode="wait">
+      {showAnimation && <CoolEntryAnimation />}
       <motion.div
         key="index-page"
         initial={{ opacity: 0 }}
