@@ -66,7 +66,7 @@ const Navbar = () => {
                 <Link
                   key={item.path}
                   to={item.path}
-                  className="font-hebrew text-foreground/80 hover:text-foreground px-3 py-2 rounded-md text-sm transition-colors"
+                  className="font-hebrew text-foreground/80 hover:text-foreground px-3 py-2 rounded-md text-base font-medium transition-colors"
                 >
                   {item.name}
                 </Link>
@@ -92,7 +92,7 @@ const Navbar = () => {
               <Link
                 key={item.path}
                 to={item.path}
-                className="font-hebrew text-foreground/80 hover:text-foreground block px-3 py-2 rounded-md text-base"
+                className="font-hebrew text-foreground/80 hover:text-foreground block px-3 py-2 rounded-md text-lg font-medium"
                 onClick={() => setIsOpen(false)}
               >
                 {item.name}
@@ -105,7 +105,7 @@ const Navbar = () => {
                 setTheme(theme === "light" ? "dark" : "light");
                 setIsOpen(false);
               }}
-              className="w-full justify-start px-3"
+              className="w-full justify-start px-3 text-base"
             >
               {theme === "dark" ? "מצב יום 🌞" : "מצב לילה 🌙"}
             </Button>
