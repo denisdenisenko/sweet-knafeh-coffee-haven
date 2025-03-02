@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 
 const Location = () => {
   const openWaze = () => {
-    window.open("https://waze.com/ul?ll=32.7375,35.0461&navigate=yes", "_blank");
+    window.open("https://waze.com/ul?ll=32.7389,35.0438&navigate=yes", "_blank");
   };
 
   const openInstagram = () => {
@@ -68,8 +68,8 @@ const Location = () => {
                 <div>
                   <h2 className="text-2xl font-semibold mb-4 text-foreground/80 dark:text-foreground/70">המיקום שלנו</h2>
                   <p className="text-foreground/70 dark:text-foreground/60">
-                    כביש ראשי, אבא חושי<br />
-                    עיספיא<br />
+                    אבא חושי 352<br />
+                    עיספיא, 3009000<br />
                     ישראל
                   </p>
                 </div>
@@ -129,7 +129,7 @@ const Location = () => {
                 className="h-[400px] glass-morphism rounded-xl overflow-hidden"
               >
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3378.1167142317566!2d35.04611565119284!3d32.73750668087904!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151dba2b92af8c51%3A0xa1e0588aafe73ffb!2sIsefya!5e0!3m2!1sen!2sil!4v1719754234879!5m2!1sen!2sil"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3378.096889482175!2d35.04384287627518!3d32.73888437397088!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151dba2baa639c61%3A0x7200f4cd4ec99954!2sAbba%20Khoushy%20St%20352%2C%20Isfiya!5e0!3m2!1sen!2sil!4v1719755998765!5m2!1sen!2sil"
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}

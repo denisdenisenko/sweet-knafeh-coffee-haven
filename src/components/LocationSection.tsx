@@ -31,7 +31,7 @@ const LocationSection = () => {
           >
             <MapPin className="w-8 h-8 text-primary dark:text-primary-light mx-auto mb-4" />
             <h3 className="text-xl font-semibold text-primary dark:text-primary-light mb-2">כתובת</h3>
-            <p className="text-foreground/70 dark:text-foreground/60">כביש ראשי,אבא חושי, עיספיא, 3000900</p>
+            <p className="text-foreground/70 dark:text-foreground/60">אבא חושי 352, עיספיא, 3009000</p>
           </motion.div>
 
           <motion.div
@@ -70,7 +70,7 @@ const LocationSection = () => {
           className="mt-16 h-[400px] max-w-4xl mx-auto rounded-xl overflow-hidden glass-morphism"
         >
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3378.1167142317566!2d35.04611565119284!3d32.73750668087904!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151dba2b92af8c51%3A0xa1e0588aafe73ffb!2sIsefya!5e0!3m2!1sen!2sil!4v1719754234879!5m2!1sen!2sil"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3378.096889482175!2d35.04384287627518!3d32.73888437397088!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151dba2baa639c61%3A0x7200f4cd4ec99954!2sAbba%20Khoushy%20St%20352%2C%20Isfiya!5e0!3m2!1sen!2sil!4v1719755998765!5m2!1sen!2sil"
             width="100%"
             height="100%"
             style={{ border: 0 }}
