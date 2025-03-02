@@ -1,4 +1,3 @@
-
 import { motion, AnimatePresence } from "framer-motion";
 import { MapPin, Clock, Phone, Instagram, Facebook, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -138,11 +137,6 @@ const Location = () => {
                   referrerPolicy="no-referrer-when-downgrade"
                   className="w-full h-full"
                 ></iframe>
-                
-                {/* Adding a pin overlay */}
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 pointer-events-none">
-                  <MapPin className="w-12 h-12 text-primary animate-bounce" />
-                </div>
               </motion.div>
             </div>
           </div>

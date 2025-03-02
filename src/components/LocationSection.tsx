@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import { MapPin, Clock, Phone } from "lucide-react";
 
@@ -67,7 +66,7 @@ const LocationSection = () => {
           whileInView={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5, delay: 0.3 }}
           viewport={{ once: true }}
-          className="mt-16 h-[400px] max-w-4xl mx-auto rounded-xl overflow-hidden glass-morphism relative"
+          className="mt-16 h-[400px] max-w-4xl mx-auto rounded-xl overflow-hidden glass-morphism"
         >
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3378.096889482175!2d35.04384287627518!3d32.73888437397088!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151dba2baa639c61%3A0x7200f4cd4ec99954!2sAbba%20Khoushy%20St%20352%2C%20Isfiya!5e0!3m2!1sen!2sil!4v1719755998765!5m2!1sen!2sil"
@@ -78,11 +77,6 @@ const LocationSection = () => {
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
           ></iframe>
-          
-          {/* Adding a pin overlay */}
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 pointer-events-none">
-            <MapPin className="w-12 h-12 text-primary animate-bounce" />
-          </div>
         </motion.div>
       </div>
     </section>
