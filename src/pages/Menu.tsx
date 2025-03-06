@@ -1,3 +1,4 @@
+
 import React, { useRef, useState, useEffect } from "react";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Coffee, CakeSlice, UtensilsCrossed, Candy, Cookie, Wheat, Salad, Milk, IceCream, Croissant } from "lucide-react";
@@ -354,7 +355,7 @@ const Menu = () => {
   
         <div 
           ref={menuGridRef} 
-          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 gap-3 md:gap-6" 
+          className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-2 md:gap-3" 
           style={{ direction: "rtl" }}
         >
           {menuItems.map((item, index) => (
@@ -365,9 +366,9 @@ const Menu = () => {
             >
               <div 
                 className="glass-morphism rounded-lg overflow-hidden flex flex-col"
-                style={{ height: '320px' }}
+                style={{ height: '260px' }}
               >
-                <div className="w-full" style={{ height: '150px' }}>
+                <div className="w-full" style={{ height: '120px' }}>
                   <AspectRatio ratio={4/3} className="w-full h-full">
                     <img
                       src={item.src}
@@ -377,20 +378,20 @@ const Menu = () => {
                     />
                   </AspectRatio>
                 </div>
-                <div className="p-3 flex flex-col h-[170px]">
+                <div className="p-2 flex flex-col h-[140px]">
                   <div>
                     <div className="flex items-center gap-1 mb-1">
                       {React.createElement(item.icon, { className: "w-3 h-3 text-primary" })}
                       <span className="text-xs text-foreground/60">{item.category}</span>
                     </div>
-                    <h3 className="text-sm font-semibold text-foreground/80 dark:text-foreground/70 mb-1 h-[2.5rem] line-clamp-2">
+                    <h3 className="text-xs font-semibold text-foreground/80 dark:text-foreground/70 mb-1 h-[2rem] line-clamp-2">
                       {item.title}
                     </h3>
-                    <p className="text-xs text-foreground/60 dark:text-foreground/50 mb-2 h-[3rem] line-clamp-3">
+                    <p className="text-[10px] text-foreground/60 dark:text-foreground/50 mb-1 h-[2.5rem] line-clamp-3">
                       {item.description}
                     </p>
                   </div>
-                  <div className="text-sm font-bold text-primary dark:text-primary-light mt-auto">
+                  <div className="text-xs font-bold text-primary dark:text-primary-light mt-auto">
                     {item.price}
                   </div>
                 </div>
