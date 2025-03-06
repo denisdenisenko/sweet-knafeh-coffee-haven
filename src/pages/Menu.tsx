@@ -1,4 +1,3 @@
-
 import React, { useRef, useState, useEffect } from "react";
 import { Coffee, CakeSlice, UtensilsCrossed, Candy, Cookie, Wheat, Glasses, IceCream, Croissant } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -71,7 +70,7 @@ const Menu = () => {
       category: "שתייה קרה",
       price: "25₪",
       description: "גלידה בטעמים לבחירה עם קצפת",
-      icon: Glass
+      icon: Glasses
     },
     {
       src: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735",
@@ -80,7 +79,7 @@ const Menu = () => {
       category: "שתייה קרה",
       price: "15₪",
       description: "אספרסו עם חלב טרי, קרח וקצפת",
-      icon: Glass
+      icon: Glasses
     },
     {
       src: "https://images.unsplash.com/photo-1558645836-e44122a743ee",
@@ -89,7 +88,7 @@ const Menu = () => {
       category: "שתייה קרה",
       price: "12₪",
       description: "וניל, קרח גרוס וחלב, עם קצפת",
-      icon: Glass
+      icon: Glasses
     },
     {
       src: "https://images.unsplash.com/photo-1595981267035-7b04ca84a82d",
@@ -98,7 +97,7 @@ const Menu = () => {
       category: "שתייה קרה",
       price: "12₪",
       description: "קפה נמס, קרח גרוס וחלב, עם קצפת",
-      icon: Glass
+      icon: Glasses
     },
     {
       src: "https://images.unsplash.com/photo-1627824087252-4c8012923553",
@@ -107,7 +106,7 @@ const Menu = () => {
       category: "שתייה קרה",
       price: "12₪",
       description: "לימון, נענע, קרח וסירופ מתקתק",
-      icon: Glass
+      icon: Glasses
     },
     
     // מתוקים
