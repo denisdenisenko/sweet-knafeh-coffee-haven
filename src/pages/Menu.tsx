@@ -1,3 +1,4 @@
+
 import React, { useRef, useState, useEffect } from "react";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Coffee, CakeSlice, UtensilsCrossed, Candy, Cookie, Wheat, Salad, Milk, IceCream, Croissant } from "lucide-react";
@@ -228,7 +229,7 @@ const Menu = () => {
             itemSelector: '.menu-item',
             layoutMode: 'fitRows',
             fitRows: {
-              gutter: 20 // Increase the gutter size between items
+              gutter: 20 // Maintain spacing between items
             },
             percentPosition: true,
             stagger: 30,
@@ -355,7 +356,7 @@ const Menu = () => {
         <div className="mx-auto max-w-6xl">
           <div 
             ref={menuGridRef} 
-            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8" 
+            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8 justify-center" 
             style={{ direction: "rtl" }}
           >
             {menuItems.map((item, index) => (
@@ -364,9 +365,10 @@ const Menu = () => {
                 className={`menu-item ${item.category.replace(/\s+/g, '-')} mb-6`}
               >
                 <div 
-                  className="glass-morphism rounded-lg overflow-hidden flex flex-col h-[290px] shadow-md hover:shadow-lg transition-shadow duration-300"
+                  className="glass-morphism rounded-lg overflow-hidden flex flex-col shadow-md hover:shadow-lg transition-shadow duration-300"
+                  style={{ width: '100%', height: '290px' }} // Fixed height for all cards
                 >
-                  <div className="w-full h-[150px]">
+                  <div className="w-full h-[150px] overflow-hidden"> {/* Fixed height for image container */}
                     <AspectRatio ratio={4/3} className="w-full h-full">
                       <img
                         src={item.src}
@@ -376,7 +378,7 @@ const Menu = () => {
                       />
                     </AspectRatio>
                   </div>
-                  <div className="p-4 flex flex-col flex-1 justify-between">
+                  <div className="p-4 flex flex-col flex-1 justify-between overflow-hidden"> {/* Content area with fixed height */}
                     <div>
                       <div className="flex items-center justify-between mb-2">
                         <div className="flex items-center gap-1">
