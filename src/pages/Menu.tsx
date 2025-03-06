@@ -226,8 +226,9 @@ const Menu = () => {
         if (menuGridRef.current) {
           isotopeRef.current = new Isotope(menuGridRef.current, {
             itemSelector: '.menu-item',
-            layoutMode: 'fitRows',
-            fitRows: {
+            layoutMode: 'masonry',
+            masonry: {
+              columnWidth: '.menu-item',
               gutter: 20
             },
             percentPosition: true,
