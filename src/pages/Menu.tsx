@@ -347,7 +347,7 @@ const Menu = () => {
               >
                 <div className="flex flex-col h-full">
                   <div className="w-full">
-                    <AspectRatio ratio={4/3}>
+                    <AspectRatio ratio={4/3} className="w-full">
                       <img
                         src={item.src}
                         alt={item.alt}
@@ -365,7 +365,7 @@ const Menu = () => {
                       <h3 className="text-lg md:text-xl font-semibold text-foreground/80 dark:text-foreground/70 mb-2">
                         {item.title}
                       </h3>
-                      <p className="text-sm md:text-base text-foreground/60 dark:text-foreground/50 mb-4">
+                      <p className="text-sm md:text-base text-foreground/60 dark:text-foreground/50 mb-4 min-h-[3rem]">
                         {item.description}
                       </p>
                     </div>
