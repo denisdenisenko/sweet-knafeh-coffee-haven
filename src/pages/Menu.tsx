@@ -354,7 +354,7 @@ const Menu = () => {
   
         <div 
           ref={menuGridRef} 
-          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-4" 
+          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 gap-3 md:gap-6" 
           style={{ direction: "rtl" }}
         >
           {menuItems.map((item, index) => (
@@ -364,7 +364,7 @@ const Menu = () => {
               style={{ width: '100%' }}
             >
               <div 
-                className="glass-morphism rounded-lg overflow-hidden"
+                className="glass-morphism rounded-lg overflow-hidden flex flex-col"
                 style={{ height: '320px' }}
               >
                 <div className="w-full" style={{ height: '150px' }}>
