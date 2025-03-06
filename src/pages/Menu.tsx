@@ -1,4 +1,3 @@
-
 import React, { useRef, useState, useEffect } from "react";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Coffee, CakeSlice, UtensilsCrossed, Candy, Cookie, Wheat, Salad, Milk, IceCream, Croissant } from "lucide-react";
@@ -221,10 +220,8 @@ const Menu = () => {
     setSelectedCategory(null);
   };
 
-  // Initialize Isotope after the component mounts
   useEffect(() => {
     if (menuGridRef.current) {
-      // Add a small delay to ensure DOM is fully ready
       setTimeout(() => {
         if (menuGridRef.current) {
           isotopeRef.current = new Isotope(menuGridRef.current, {
@@ -233,7 +230,7 @@ const Menu = () => {
             fitRows: {
               gutter: 20
             },
-            percentPosition: true, // Use percentage-based sizing for better responsiveness
+            percentPosition: true,
             stagger: 30,
             transitionDuration: '0.4s',
             hiddenStyle: {
@@ -244,7 +241,7 @@ const Menu = () => {
               opacity: 1,
               transform: 'scale(1)'
             },
-            originLeft: false // This ensures items flow from right to left
+            originLeft: false
           });
         }
       }, 100);
@@ -257,17 +254,14 @@ const Menu = () => {
     };
   }, []);
 
-  // Filter items when selectedCategory changes
   useEffect(() => {
     if (isotopeRef.current) {
-      // Force a relayout after a category change
       setTimeout(() => {
         if (isotopeRef.current) {
           isotopeRef.current.arrange({
             filter: selectedCategory ? `.${selectedCategory.replace(/\s+/g, '-')}` : '*'
           });
           
-          // Force layout update after filter
           setTimeout(() => {
             if (isotopeRef.current) {
               isotopeRef.current.layout();
@@ -278,7 +272,6 @@ const Menu = () => {
     }
   }, [selectedCategory]);
 
-  // Force layout recalculation on window resize
   useEffect(() => {
     const handleResize = () => {
       if (isotopeRef.current) {
@@ -305,7 +298,7 @@ const Menu = () => {
       transition={{ duration: 0.3 }}
       className="min-h-screen bg-background dark:bg-primary-dark transition-colors duration-300 relative"
     >
-      <div className="relative h-[50vh] md:h-[70vh] w-full overflow-hidden">
+      <div className="relative h-[40vh] md:h-[60vh] w-full overflow-hidden">
         <div className="absolute inset-0">
           <img
             src="/lovable-uploads/af376e6c-4e24-4b16-9452-bd4a34f7eedf.png"
@@ -323,8 +316,8 @@ const Menu = () => {
         <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-background dark:from-primary-dark to-transparent" />
       </div>
 
-      <div className="container mx-auto px-4 py-12 md:py-20">
-        <div className="relative mb-8 md:mb-12 max-w-5xl mx-auto">
+      <div className="container mx-auto px-4 py-8 md:py-12">
+        <div className="relative mb-6 md:mb-8 max-w-5xl mx-auto">
           <h2 className="text-xl md:text-2xl font-bold mb-4">בחר קטגוריה</h2>
           
           <div className="relative">
@@ -361,46 +354,44 @@ const Menu = () => {
   
         <div 
           ref={menuGridRef} 
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" 
+          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-4" 
           style={{ direction: "rtl" }}
         >
           {menuItems.map((item, index) => (
             <div 
               key={`item-${index}`}
               className={`menu-item ${item.category.replace(/\s+/g, '-')}`}
-              style={{ width: '100%' }} // Ensure equal width for all items
+              style={{ width: '100%' }}
             >
               <div 
-                className="glass-morphism rounded-xl overflow-hidden"
-                style={{ height: '450px' }} // Fixed height for all cards
+                className="glass-morphism rounded-lg overflow-hidden"
+                style={{ height: '320px' }}
               >
-                <div className="flex flex-col h-full">
-                  <div className="w-full" style={{ height: '200px' }}>
-                    <AspectRatio ratio={4/3} className="w-full h-full">
-                      <img
-                        src={item.src}
-                        alt={item.alt}
-                        className="object-cover w-full h-full"
-                        loading="lazy"
-                      />
-                    </AspectRatio>
+                <div className="w-full" style={{ height: '150px' }}>
+                  <AspectRatio ratio={4/3} className="w-full h-full">
+                    <img
+                      src={item.src}
+                      alt={item.alt}
+                      className="object-cover w-full h-full"
+                      loading="lazy"
+                    />
+                  </AspectRatio>
+                </div>
+                <div className="p-3 flex flex-col h-[170px]">
+                  <div>
+                    <div className="flex items-center gap-1 mb-1">
+                      {React.createElement(item.icon, { className: "w-3 h-3 text-primary" })}
+                      <span className="text-xs text-foreground/60">{item.category}</span>
+                    </div>
+                    <h3 className="text-sm font-semibold text-foreground/80 dark:text-foreground/70 mb-1 h-[2.5rem] line-clamp-2">
+                      {item.title}
+                    </h3>
+                    <p className="text-xs text-foreground/60 dark:text-foreground/50 mb-2 h-[3rem] line-clamp-3">
+                      {item.description}
+                    </p>
                   </div>
-                  <div className="p-4 md:p-6 flex flex-col h-[250px]">
-                    <div>
-                      <div className="flex items-center gap-2 mb-2">
-                        {React.createElement(item.icon, { className: "w-4 h-4 md:w-5 md:h-5 text-primary" })}
-                        <span className="text-xs md:text-sm text-foreground/60">{item.category}</span>
-                      </div>
-                      <h3 className="text-lg md:text-xl font-semibold text-foreground/80 dark:text-foreground/70 mb-2 h-[3.5rem] line-clamp-2">
-                        {item.title}
-                      </h3>
-                      <p className="text-sm md:text-base text-foreground/60 dark:text-foreground/50 mb-4 h-[4.5rem] line-clamp-3">
-                        {item.description}
-                      </p>
-                    </div>
-                    <div className="text-base md:text-lg font-bold text-primary dark:text-primary-light mt-auto">
-                      {item.price}
-                    </div>
+                  <div className="text-sm font-bold text-primary dark:text-primary-light mt-auto">
+                    {item.price}
                   </div>
                 </div>
               </div>
