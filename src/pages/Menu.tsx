@@ -1,176 +1,208 @@
 import React, { useRef, useState, useEffect } from "react";
-import { Coffee, CakeSlice, UtensilsCrossed, Candy, Cookie, Wheat, Salad, Milk, IceCream, Croissant } from "lucide-react";
+import { Coffee, CakeSlice, UtensilsCrossed, Candy, Cookie, Wheat, Glass, IceCream, Croissant } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import Isotope from "isotope-layout";
 import MenuItemCard from "@/components/MenuItemCard";
 
 const Menu = () => {
+  const categoryIcons: Record<string, React.FC<any>> = {
+    "שתייה חמה": Coffee,
+    "שתייה קרה": Glass,
+    "מתוקים": CakeSlice,
+    "כנאפה": CakeSlice,
+    "בקלאווה": Candy,
+  };
+
   const menuItems = [
-    // Drinks Category
+    // שתייה חמה
     {
       src: "/lovable-uploads/64c25164-f773-4859-b6f3-8992fabfdba9.png",
-      alt: "קפה טרי",
-      title: "קפה ערבי מסורתי",
-      category: "שתיה חמה",
-      price: "₪15",
-      description: "קפה טחון דק בתוספת הל",
+      alt: "תה",
+      title: "תה",
+      category: "שתייה חמה",
+      price: "10₪",
+      description: "מים חמים עם נענע/ פרוסות לימון/ מקלות קינמון.",
       icon: Coffee
     },
     {
       src: "https://images.unsplash.com/photo-1573750215158-97a608a0986d",
-      alt: "תה נענע",
-      title: "תה נענע טרי",
-      category: "שתיה חמה",
-      price: "₪12",
-      description: "תה עם עלי נענע טריים ונגיעת דבש",
+      alt: "קנקן תה",
+      title: "קנקן תה",
+      category: "שתייה חמה",
+      price: "30₪",
+      description: "מים חמים עם נענע/פרוסות לימון/ מקלות קינמון (ל-5 סועדים)",
       icon: Coffee
     },
-    // Desserts Category
+    {
+      src: "https://images.unsplash.com/photo-1510707577719-ae7afe3e6a58",
+      alt: "אספרסו",
+      title: "אספרסו",
+      category: "שתייה חמה",
+      price: "12₪",
+      description: "אספרסו קצר/ארוך/כפול קצר/כפול ארוך",
+      icon: Coffee
+    },
+    {
+      src: "https://images.unsplash.com/photo-1571658734946-f816bf04d706",
+      alt: "מקיאטו",
+      title: "מקיאטו",
+      category: "שתייה חמה",
+      price: "12₪",
+      description: "אספרסו קצר/ארוך/כפול קצר/כפול ארוך ומעל חלב חם מוקצף",
+      icon: Coffee
+    },
+    {
+      src: "https://images.unsplash.com/photo-1560624052-53e88eee2555",
+      alt: "אפוגטו",
+      title: "אפוגטו",
+      category: "שתייה חמה",
+      price: "15₪",
+      description: "כדור גלידה לבחירה עם אספרסו קצר/ארוך/כפול קצר/כפול ארוך",
+      icon: Coffee
+    },
+    
+    // שתייה קרה
+    {
+      src: "https://images.unsplash.com/photo-1563805042-7684c019e1cb",
+      alt: "מילקשייק",
+      title: "מילקשייק",
+      category: "שתייה קרה",
+      price: "25₪",
+      description: "גלידה בטעמים לבחירה עם קצפת",
+      icon: Glass
+    },
+    {
+      src: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735",
+      alt: "קפה קר",
+      title: "קפה קר",
+      category: "שתייה קרה",
+      price: "15₪",
+      description: "אספרסו עם חלב טרי, קרח וקצפת",
+      icon: Glass
+    },
+    {
+      src: "https://images.unsplash.com/photo-1558645836-e44122a743ee",
+      alt: "אייס וניל",
+      title: "אייס וניל",
+      category: "שתייה קרה",
+      price: "12₪",
+      description: "וניל, קרח גרוס וחלב, עם קצפת",
+      icon: Glass
+    },
+    {
+      src: "https://images.unsplash.com/photo-1595981267035-7b04ca84a82d",
+      alt: "אייס קפה",
+      title: "אייס קפה",
+      category: "שתייה קרה",
+      price: "12₪",
+      description: "קפה נמס, קרח גרוס וחלב, עם קצפת",
+      icon: Glass
+    },
+    {
+      src: "https://images.unsplash.com/photo-1627824087252-4c8012923553",
+      alt: "לימונענע גרוס",
+      title: "לימונענע גרוס",
+      category: "שתייה קרה",
+      price: "12₪",
+      description: "לימון, נענע, קרח וסירופ מתקתק",
+      icon: Glass
+    },
+    
+    // מתוקים
+    {
+      src: "https://images.unsplash.com/photo-1475856033578-76b4a228f5c5",
+      alt: "וופל בלגי מפנק",
+      title: "וופל בלגי מפנק",
+      category: "מתוקים",
+      price: "45₪",
+      description: "רטבי שוקולד לבחירה, גלידה וקצפת",
+      icon: CakeSlice
+    },
+    {
+      src: "https://images.unsplash.com/photo-1565299543923-37dd37887442",
+      alt: "פנקייק קלאסי",
+      title: "פנקייק קלאסי",
+      category: "מתוקים",
+      price: "35₪",
+      description: "זוג פנקייקים עם רטבים, גלידה וקצפת",
+      icon: CakeSlice
+    },
+    {
+      src: "https://images.unsplash.com/photo-1634215751955-9bdf3735186d",
+      alt: "קרפ צרפתי",
+      title: "קרפ צרפתי",
+      category: "מתוקים",
+      price: "25₪",
+      description: "רטבים לבחירה, גלידה וקצפת",
+      icon: CakeSlice
+    },
+    {
+      src: "https://images.unsplash.com/photo-1626803775151-61d756612f97",
+      alt: "צ'ורוס",
+      title: "צ'ורוס",
+      category: "מתוקים",
+      price: "45₪",
+      description: "8 יח' צ'ורוס עם סוכר, קינמון וקצפת",
+      icon: CakeSlice
+    },
+    
+    // כנאפה
     {
       src: "https://images.unsplash.com/photo-1618160702438-9b02ab6515c9",
+      alt: "כנאפת הבית",
+      title: "כנאפת הבית",
+      category: "כנאפה",
+      sizes: { "אישית": "20₪", "זוגית": "35₪", "משפחתית": "70₪" },
+      icon: Candy
+    },
+    {
+      src: "https://images.unsplash.com/photo-1618160702438-9b02ab6515c9",
+      alt: "כנאפה פיסטוק",
+      title: "כנאפה פיסטוק",
+      category: "כנאפה",
+      price: "45₪",
+      description: "קדאיף עם קרם פיסטוק, שוקולד לבן וגלידה",
+      icon: Candy
+    },
+    {
+      src: "https://images.unsplash.com/photo-1618160702438-9b02ab6515c9",
+      alt: "כנאפה נוטלה",
+      title: "כנאפה נוטלה",
+      category: "כנאפה",
+      price: "45₪",
+      description: "קדאיף עם נוטלה, שוקולד לבן וגלידה",
+      icon: Candy
+    },
+    
+    // בקלאווה
+    {
+      src: "https://images.unsplash.com/photo-1514910367230-3be03a9a9528",
+      alt: "קולאז' אגוזים וקינמון",
+      title: "קולאז' אגוזים וקינמון",
+      category: "בקלאווה",
+      price: "110₪ לקילו",
+      description: "בצק פילו עם אגוזים וקינמון, בסירופ סוכר",
+      icon: Cookie
+    },
+    {
+      src: "https://images.unsplash.com/photo-1514910367230-3be03a9a9528",
       alt: "בורמה פיסטוק",
       title: "בורמה פיסטוק",
       category: "בקלאווה",
-      price: "₪130",
-      description: "קינוח גבינה מסורתי עם שערות קדאיף",
-      icon: CakeSlice
+      price: "130₪ לקילו",
+      description: "בצק פילו ממולא פיסטוק, בסירופ סוכר",
+      icon: Cookie
     },
-    {
-      src: "https://images.unsplash.com/photo-1618160702438-9b02ab6515c9",
-      alt: "קנאפה מסורתית",
-      title: "קנאפה קלאסית",
-      category: "בקלאווה",
-      price: "₪48",
-      description: "קינוח גבינה מסורתי עם שערות קדאיף",
-      icon: CakeSlice
-    },
-    {
-      src: "https://images.unsplash.com/photo-1618160702438-9b02ab6515c9",
-      alt: "קנאפה מסורתית",
-      title: "קנאפה קלאסית",
-      category: "בקלאווה",
-      price: "₪48",
-      description: "קינוח גבינה מסורתי עם שערות קדאיף",
-      icon: CakeSlice
-    },
- 
-    // Main Dishes Category
-    {
-      src: "https://images.unsplash.com/photo-1633321702518-7feccafb94d5",
-      alt: "מנסף",
-      title: "מנסף ירדני",
-      category: "מנות עיקריות",
-      price: "₪85",
-      description: "אורז עם בשר כבש וצנוברים בסגנון ירדני מסורתי",
-      icon: UtensilsCrossed
-    },
-    {
-      src: "https://images.unsplash.com/photo-1611742046824-935663633372",
-      alt: "מקלובה",
-      title: "מקלובה מסורתית",
-      category: "מנות עיקריות",
-      price: "₪75",
-      description: "אורז עם ירקות, בשר ותבלינים מסורתיים",
-      icon: UtensilsCrossed
-    },
-    // Sweets Category
     {
       src: "https://images.unsplash.com/photo-1514910367230-3be03a9a9528",
-      alt: "בקלאווה",
-      title: "בקלאווה פיסטוק",
-      category: "ממתקים",
-      price: "₪42",
-      description: "שכבות של בצק פילו, פיסטוקים וסירופ דבש",
-      icon: Candy
-    },
-    {
-      src: "https://images.unsplash.com/photo-1588195500881-53d468964000",
-      alt: "עוגיות תמרים",
-      title: "עוגיות תמרים",
-      category: "ממתקים",
-      price: "₪32",
-      description: "עוגיות מסורתיות במילוי תמרים וקינמון",
-      icon: Candy
-    },
-    // Cookies Category
-    {
-      src: "https://images.unsplash.com/photo-1558961363-fa8fdf82db35",
-      alt: "עוגיות תבלינים",
-      title: "עוגיות שבבי שוקולד",
-      category: "עוגיות",
-      price: "₪28",
-      description: "עוגיות רכות עם שבבי שוקולד בלגי",
+      alt: "הריסה סולת",
+      title: "הריסה סולת",
+      category: "בקלאווה",
+      price: "40₪ לקילו",
+      description: "עוגת סולת מסורתית עם שקדים",
       icon: Cookie
     },
-    {
-      src: "https://images.unsplash.com/photo-1585803114088-cd027dd872d1",
-      alt: "מעמול",
-      title: "מעמול תמרים",
-      category: "עוגיות",
-      price: "₪35",
-      description: "עוגיות מסורתיות ממולאות במחית תמרים",
-      icon: Cookie
-    },
-    // Bread Category
-    {
-      src: "https://images.unsplash.com/photo-1555507036-ab1f4038808a",
-      alt: "פיתה טרייה",
-      title: "פיתה ביתית",
-      category: "לחמים",
-      price: "₪8",
-      description: "פיתה טרייה אפויה בתנור אבן מסורתי",
-      icon: Wheat
-    },
-    {
-      src: "https://images.unsplash.com/photo-1590030580235-872a348a9224",
-      alt: "לחם טאבון",
-      title: "לחם טאבון",
-      category: "לחמים",
-      price: "₪12",
-      description: "לחם שטוח אפוי בטאבון מסורתי",
-      icon: Wheat
-    },
-
-  
-    // Ice Cream Category
-    {
-      src: "https://images.unsplash.com/photo-1563805042-7684c019e1cb",
-      alt: "בוזה",
-      title: "בוזה פיסטוק",
-      category: "גלידות",
-      price: "₪24",
-      description: "גלידה ערבית מסורתית בטעם פיסטוק",
-      icon: IceCream
-    },
-    {
-      src: "https://images.unsplash.com/photo-1497034825429-c343d7c6a68f",
-      alt: "סורבה",
-      title: "סורבה פירות",
-      category: "גלידות",
-      price: "₪22",
-      description: "סורבה טבעי מפירות טריים",
-      icon: IceCream
-    },
-    // Pastries Category
-    {
-      src: "https://images.unsplash.com/photo-1602351447937-745cb720612f",
-      alt: "מאפה גבינה",
-      title: "מאפה גבינה",
-      category: "מאפים",
-      price: "₪16",
-      description: "מאפה פילו במילוי גבינות מסורתיות",
-      icon: Croissant
-    },
-    {
-      src: "https://images.unsplash.com/photo-1509440159596-0249088772ff",
-      alt: "מאפה תרד",
-      title: "מאפה תרד",
-      category: "מאפים",
-      price: "₪14",
-      description: "מאפה פילו במילוי תרד ובצל מטוגן",
-      icon: Croissant
-    }
   ];
 
   const categories = [...new Set(menuItems.map(item => item.category))];
@@ -334,7 +366,7 @@ const Menu = () => {
                 הכל
               </Button>
               {categories.map((category) => {
-                const CategoryIcon = menuItems.find(item => item.category === category)?.icon || Coffee;
+                const CategoryIcon = categoryIcons[category] || Coffee;
                 
                 return (
                   <Button
@@ -369,6 +401,7 @@ const Menu = () => {
                   title={item.title}
                   category={item.category}
                   price={item.price}
+                  sizes={item.sizes}
                   description={item.description}
                   icon={item.icon}
                 />

@@ -8,8 +8,9 @@ interface MenuItemProps {
   alt: string;
   title: string;
   category: string;
-  price: string;
-  description: string;
+  price?: string;
+  sizes?: Record<string, string>;
+  description?: string;
   icon: LucideIcon;
 }
 
@@ -19,6 +20,7 @@ const MenuItemCard: React.FC<MenuItemProps> = ({
   title,
   category,
   price,
+  sizes,
   description,
   icon: Icon,
 }) => {
@@ -43,16 +45,29 @@ const MenuItemCard: React.FC<MenuItemProps> = ({
               <Icon className="w-4 h-4 text-primary" />
               <span className="text-xs text-foreground/60">{category}</span>
             </div>
-            <div className="text-sm font-bold text-primary dark:text-primary-light">
-              {price}
-            </div>
+            {price && (
+              <div className="text-sm font-bold text-primary dark:text-primary-light">
+                {price}
+              </div>
+            )}
           </div>
           <h3 className="text-base font-semibold text-foreground/90 dark:text-foreground/80 mb-1 line-clamp-1">
             {title}
           </h3>
-          <p className="text-sm text-foreground/70 dark:text-foreground/60 line-clamp-2">
-            {description}
-          </p>
+          {description && (
+            <p className="text-sm text-foreground/70 dark:text-foreground/60 line-clamp-2">
+              {description}
+            </p>
+          )}
+          {sizes && (
+            <div className="mt-1 flex flex-wrap gap-1 text-xs">
+              {Object.entries(sizes).map(([size, price]) => (
+                <span key={size} className="bg-primary/10 dark:bg-primary-light/10 px-2 py-1 rounded">
+                  {size}: {price}
+                </span>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>
