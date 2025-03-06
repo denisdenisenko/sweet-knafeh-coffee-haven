@@ -346,8 +346,8 @@ const Menu = () => {
                 className="mb-8 glass-morphism rounded-xl overflow-hidden h-full"
               >
                 <div className="flex flex-col h-full">
-                  <div className="w-full">
-                    <AspectRatio ratio={4/3} className="w-full">
+                  <div className="w-full h-[200px]">
+                    <AspectRatio ratio={4/3} className="w-full h-full">
                       <img
                         src={item.src}
                         alt={item.alt}
@@ -362,10 +362,10 @@ const Menu = () => {
                         {React.createElement(item.icon, { className: "w-4 h-4 md:w-5 md:h-5 text-primary" })}
                         <span className="text-xs md:text-sm text-foreground/60">{item.category}</span>
                       </div>
-                      <h3 className="text-lg md:text-xl font-semibold text-foreground/80 dark:text-foreground/70 mb-2">
+                      <h3 className="text-lg md:text-xl font-semibold text-foreground/80 dark:text-foreground/70 mb-2 h-[3.5rem] line-clamp-2">
                         {item.title}
                       </h3>
-                      <p className="text-sm md:text-base text-foreground/60 dark:text-foreground/50 mb-4 min-h-[3rem]">
+                      <p className="text-sm md:text-base text-foreground/60 dark:text-foreground/50 mb-4 min-h-[4.5rem] line-clamp-3">
                         {item.description}
                       </p>
                     </div>
