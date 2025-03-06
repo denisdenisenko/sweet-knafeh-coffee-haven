@@ -1,10 +1,9 @@
-
 import React, { useRef, useState, useEffect } from "react";
-import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Coffee, CakeSlice, UtensilsCrossed, Candy, Cookie, Wheat, Salad, Milk, IceCream, Croissant } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import Isotope from "isotope-layout";
+import MenuItemCard from "@/components/MenuItemCard";
 
 const Menu = () => {
   const menuItems = [
@@ -364,40 +363,15 @@ const Menu = () => {
                 key={`item-${index}`}
                 className={`menu-item ${item.category.replace(/\s+/g, '-')} mb-6`}
               >
-                <div 
-                  className="glass-morphism rounded-lg overflow-hidden flex flex-col shadow-md hover:shadow-lg transition-shadow duration-300"
-                  style={{ width: '100%', height: '290px' }} // Fixed height for all cards
-                >
-                  <div className="w-full h-[150px] overflow-hidden"> {/* Fixed height for image container */}
-                    <AspectRatio ratio={4/3} className="w-full h-full">
-                      <img
-                        src={item.src}
-                        alt={item.alt}
-                        className="object-cover w-full h-full"
-                        loading="lazy"
-                      />
-                    </AspectRatio>
-                  </div>
-                  <div className="p-4 flex flex-col flex-1 justify-between overflow-hidden"> {/* Content area with fixed height */}
-                    <div>
-                      <div className="flex items-center justify-between mb-2">
-                        <div className="flex items-center gap-1">
-                          {React.createElement(item.icon, { className: "w-4 h-4 text-primary" })}
-                          <span className="text-xs text-foreground/60">{item.category}</span>
-                        </div>
-                        <div className="text-sm font-bold text-primary dark:text-primary-light">
-                          {item.price}
-                        </div>
-                      </div>
-                      <h3 className="text-base font-semibold text-foreground/90 dark:text-foreground/80 mb-1 line-clamp-1">
-                        {item.title}
-                      </h3>
-                      <p className="text-sm text-foreground/70 dark:text-foreground/60 line-clamp-2">
-                        {item.description}
-                      </p>
-                    </div>
-                  </div>
-                </div>
+                <MenuItemCard 
+                  src={item.src}
+                  alt={item.alt}
+                  title={item.title}
+                  category={item.category}
+                  price={item.price}
+                  description={item.description}
+                  icon={item.icon}
+                />
               </div>
             ))}
           </div>
