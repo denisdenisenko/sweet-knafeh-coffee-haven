@@ -1,3 +1,4 @@
+
 import React, { useRef, useState, useEffect } from "react";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Coffee, CakeSlice, UtensilsCrossed, Candy, Cookie, Wheat, Salad, Milk, IceCream, Croissant } from "lucide-react";
@@ -317,13 +318,13 @@ const Menu = () => {
       </div>
 
       <div className="container mx-auto px-4 py-8 md:py-12">
-        <div className="relative mb-6 md:mb-8 max-w-5xl mx-auto">
+        <div className="relative mb-8 md:mb-10 max-w-5xl mx-auto">
           <h2 className="text-xl md:text-2xl font-bold mb-4">בחר קטגוריה</h2>
           
           <div className="relative">
             <div 
               ref={categoryScrollRef}
-              className="flex flex-wrap justify-end gap-2"
+              className="flex flex-wrap justify-center gap-3"
             >
               <Button
                 key="all"
@@ -354,7 +355,7 @@ const Menu = () => {
   
         <div 
           ref={menuGridRef} 
-          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4" 
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-6 mx-auto max-w-6xl" 
           style={{ direction: "rtl" }}
         >
           {menuItems.map((item, index) => (
@@ -363,9 +364,9 @@ const Menu = () => {
               className={`menu-item ${item.category.replace(/\s+/g, '-')}`}
             >
               <div 
-                className="glass-morphism rounded-lg overflow-hidden flex flex-col h-[260px]"
+                className="glass-morphism rounded-lg overflow-hidden flex flex-col h-[290px] shadow-md hover:shadow-lg transition-shadow duration-300"
               >
-                <div className="w-full h-[130px]">
+                <div className="w-full h-[150px]">
                   <AspectRatio ratio={4/3} className="w-full h-full">
                     <img
                       src={item.src}
@@ -375,21 +376,23 @@ const Menu = () => {
                     />
                   </AspectRatio>
                 </div>
-                <div className="p-3 flex flex-col flex-1">
+                <div className="p-4 flex flex-col flex-1 justify-between">
                   <div>
-                    <div className="flex items-center gap-1 mb-1">
-                      {React.createElement(item.icon, { className: "w-4 h-4 text-primary" })}
-                      <span className="text-xs text-foreground/60">{item.category}</span>
+                    <div className="flex items-center justify-between mb-2">
+                      <div className="flex items-center gap-1">
+                        {React.createElement(item.icon, { className: "w-4 h-4 text-primary" })}
+                        <span className="text-xs text-foreground/60">{item.category}</span>
+                      </div>
+                      <div className="text-sm font-bold text-primary dark:text-primary-light">
+                        {item.price}
+                      </div>
                     </div>
-                    <h3 className="text-sm font-semibold text-foreground/80 dark:text-foreground/70 mb-1 line-clamp-1">
+                    <h3 className="text-base font-semibold text-foreground/90 dark:text-foreground/80 mb-1 line-clamp-1">
                       {item.title}
                     </h3>
-                    <p className="text-xs text-foreground/60 dark:text-foreground/50 mb-1 line-clamp-2">
+                    <p className="text-sm text-foreground/70 dark:text-foreground/60 line-clamp-2">
                       {item.description}
                     </p>
-                  </div>
-                  <div className="text-sm font-bold text-primary dark:text-primary-light mt-auto">
-                    {item.price}
                   </div>
                 </div>
               </div>
