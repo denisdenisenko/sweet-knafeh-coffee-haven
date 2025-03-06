@@ -1,4 +1,3 @@
-
 import React, { useRef, useState, useEffect } from "react";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Coffee, CakeSlice, UtensilsCrossed, Candy, Cookie, Wheat, Salad, Milk, IceCream, Croissant } from "lucide-react";
@@ -343,10 +342,11 @@ const Menu = () => {
               className={`menu-item ${item.category.replace(/\s+/g, '-')}`}
             >
               <div 
-                className="mb-8 glass-morphism rounded-xl overflow-hidden h-full"
+                className="glass-morphism rounded-xl overflow-hidden"
+                style={{ height: '450px' }} // Fixed height for all cards
               >
                 <div className="flex flex-col h-full">
-                  <div className="w-full h-[200px]">
+                  <div className="w-full" style={{ height: '200px' }}>
                     <AspectRatio ratio={4/3} className="w-full h-full">
                       <img
                         src={item.src}
@@ -356,7 +356,7 @@ const Menu = () => {
                       />
                     </AspectRatio>
                   </div>
-                  <div className="p-4 md:p-6 flex flex-col justify-between flex-grow">
+                  <div className="p-4 md:p-6 flex flex-col h-[250px]">
                     <div>
                       <div className="flex items-center gap-2 mb-2">
                         {React.createElement(item.icon, { className: "w-4 h-4 md:w-5 md:h-5 text-primary" })}
@@ -365,7 +365,7 @@ const Menu = () => {
                       <h3 className="text-lg md:text-xl font-semibold text-foreground/80 dark:text-foreground/70 mb-2 h-[3.5rem] line-clamp-2">
                         {item.title}
                       </h3>
-                      <p className="text-sm md:text-base text-foreground/60 dark:text-foreground/50 mb-4 min-h-[4.5rem] line-clamp-3">
+                      <p className="text-sm md:text-base text-foreground/60 dark:text-foreground/50 mb-4 h-[4.5rem] line-clamp-3">
                         {item.description}
                       </p>
                     </div>
