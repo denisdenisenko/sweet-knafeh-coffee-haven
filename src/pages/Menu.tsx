@@ -1,4 +1,3 @@
-
 import React, { useRef, useState, useEffect } from "react";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Coffee, CakeSlice, UtensilsCrossed, Candy, Cookie, Wheat, Salad, Milk, IceCream, Croissant } from "lucide-react";
@@ -228,8 +227,7 @@ const Menu = () => {
         itemSelector: '.menu-item',
         layoutMode: 'fitRows',
         fitRows: {
-          gutter: 20,
-          equalheight: true
+          gutter: 20
         },
         stagger: 30,
         transitionDuration: '0.4s',
