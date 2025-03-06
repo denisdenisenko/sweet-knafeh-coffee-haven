@@ -1,13 +1,12 @@
-
 import React, { useRef, useState, useEffect } from "react";
-import { Coffee, CakeSlice, UtensilsCrossed, Candy, Cookie, Wheat, Glasses, IceCream, Croissant } from "lucide-react";
+import { Coffee, CakeSlice, UtensilsCrossed, Candy, Cookie, Wheat, Glasses, IceCream, Croissant, LucideIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import Isotope from "isotope-layout";
 import MenuItemCard from "@/components/MenuItemCard";
 
 const Menu = () => {
-  const categoryIcons: Record<string, React.FC<any>> = {
+  const categoryIcons: Record<string, LucideIcon> = {
     "שתייה חמה": Coffee,
     "שתייה קרה": Glasses,
     "מתוקים": CakeSlice,
@@ -33,7 +32,7 @@ const Menu = () => {
     "מתוקים": [
       { "name": "וופל בלגי מפנק", "description": "וופל בלגי טרי ופריך, מוגש עם רטבי שוקולד לבחירה: נוטלה, שוקולד לבן, קינדר, פיסטוק, מייפל או לוטוס. כולל כדור גלידה לבחירה (שוקולד, וניל, תות ועוד) וקצפת עשירה בצד.", "price": "45₪" },
       { "name": "פנקייק קלאסי", "description": "זוג פנקייקים זהובים, אווריריים וטריים, מוגשים עם רטבים לבחירה: נוטלה, שוקולד לבן, קינדר, פיסטוק, מייפל או לוטוס. כולל כדור גלידה לבחירה (שוקולד, וניל, תות ועוד) וקצפת עשירה בצד.", "price": "35₪" },
-      { "name": "קרפ צרפתי", "description": "קרפ דקיק וזהוב, מוגש עם רטבים מפנקים לבחירה: נוטלה, שוקולד לבן, קינדר, פיסטוק, מייפל או לוטוס. כולל כדור גלידה לבחירה (וניל, שוקולד, תות ועוד) וקצפת מעל. ניתן להוסיף תוספות לבחירה: מקופלת, פירורי לוטוס או אוראו, בוטנים קלויים, דובדבן מסוכר ועוד.", "price": "25₪" },
+      { "name": "קרפ צרפתי", "description": "קרפ דקיק וזהוב, מוגש עם רטבים מפנקים לבחירה: נוטלה, שוקולד לבן, קינדר, פיסטוק, מייפל או לוטוס. כולל כדור גלידה לבחירה (וניל, שוקולד, תות ועוד) וקצפת מעל. ניתן להוסיף תוספות לבחירה: מקופלת, פירורי לוטוס או אורא��, בוטנים קלויים, דובדבן מסוכר ועוד.", "price": "25₪" },
       { "name": "צ'ורוס", "description": "8 יחידות של צ'ורוס טריים, זהובים ופריכים, מצופים בסוכר וקינמון. מוגשים לצד קצפת עם רטבים לבחירה: קינדר, נוטלה או שוקולד לבן.", "price": "45₪" }
     ],
     "כנאפה": [
@@ -48,7 +47,6 @@ const Menu = () => {
     ]
   };
 
-  // Convert menu data to flat array format for rendering
   const menuItems = Object.entries(menuData).flatMap(([category, items]) => 
     items.map(item => {
       const categoryIcon = categoryIcons[category] || Coffee;
