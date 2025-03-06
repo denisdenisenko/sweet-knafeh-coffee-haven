@@ -1,3 +1,4 @@
+
 import React, { useRef, useState, useEffect } from "react";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Coffee, CakeSlice, UtensilsCrossed, Candy, Cookie, Wheat, Salad, Milk, IceCream, Croissant } from "lucide-react";
@@ -238,7 +239,8 @@ const Menu = () => {
         visibleStyle: {
           opacity: 1,
           transform: 'scale(1)'
-        }
+        },
+        originLeft: false // This ensures items flow from right to left
       });
     }
 
@@ -301,7 +303,7 @@ const Menu = () => {
           <div className="relative">
             <div 
               ref={categoryScrollRef}
-              className="flex flex-wrap gap-2"
+              className="flex flex-wrap justify-end gap-2"
             >
               <Button
                 key="all"
@@ -330,7 +332,11 @@ const Menu = () => {
           </div>
         </div>
   
-        <div ref={menuGridRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div 
+          ref={menuGridRef} 
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" 
+          style={{ direction: "rtl" }}
+        >
           {menuItems.map((item, index) => (
             <div 
               key={`item-${index}`}
