@@ -366,9 +366,9 @@ const Menu = () => {
             >
               <div 
                 className="glass-morphism rounded-lg overflow-hidden flex flex-col"
-                style={{ height: '260px' }}
+                style={{ height: '240px' }}
               >
-                <div className="w-full" style={{ height: '120px' }}>
+                <div className="w-full" style={{ height: '100px' }}>
                   <AspectRatio ratio={4/3} className="w-full h-full">
                     <img
                       src={item.src}
