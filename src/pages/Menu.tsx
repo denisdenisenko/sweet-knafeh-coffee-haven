@@ -1,5 +1,6 @@
+
 import React, { useRef, useState, useEffect } from "react";
-import { Coffee, CakeSlice, UtensilsCrossed, Candy, Cookie, Wheat, Glass, IceCream, Croissant } from "lucide-react";
+import { Coffee, CakeSlice, UtensilsCrossed, Candy, Cookie, Wheat, Glasses, IceCream, Croissant } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import Isotope from "isotope-layout";
@@ -8,7 +9,7 @@ import MenuItemCard from "@/components/MenuItemCard";
 const Menu = () => {
   const categoryIcons: Record<string, React.FC<any>> = {
     "שתייה חמה": Coffee,
-    "שתייה קרה": Glass,
+    "שתייה קרה": Glasses,
     "מתוקים": CakeSlice,
     "כנאפה": CakeSlice,
     "בקלאווה": Candy,
