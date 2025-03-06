@@ -226,10 +226,9 @@ const Menu = () => {
         if (menuGridRef.current) {
           isotopeRef.current = new Isotope(menuGridRef.current, {
             itemSelector: '.menu-item',
-            layoutMode: 'masonry',
-            masonry: {
-              columnWidth: '.menu-item',
-              gutter: 20
+            layoutMode: 'fitRows',
+            fitRows: {
+              gutter: 16
             },
             percentPosition: true,
             stagger: 30,
@@ -355,20 +354,18 @@ const Menu = () => {
   
         <div 
           ref={menuGridRef} 
-          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6" 
+          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4" 
           style={{ direction: "rtl" }}
         >
           {menuItems.map((item, index) => (
             <div 
               key={`item-${index}`}
               className={`menu-item ${item.category.replace(/\s+/g, '-')}`}
-              style={{ width: '100%' }}
             >
               <div 
-                className="glass-morphism rounded-lg overflow-hidden flex flex-col"
-                style={{ height: '300px' }}
+                className="glass-morphism rounded-lg overflow-hidden flex flex-col h-[260px]"
               >
-                <div className="w-full" style={{ height: '150px' }}>
+                <div className="w-full h-[130px]">
                   <AspectRatio ratio={4/3} className="w-full h-full">
                     <img
                       src={item.src}
@@ -378,16 +375,16 @@ const Menu = () => {
                     />
                   </AspectRatio>
                 </div>
-                <div className="p-4 flex flex-col h-[150px]">
+                <div className="p-3 flex flex-col flex-1">
                   <div>
                     <div className="flex items-center gap-1 mb-1">
                       {React.createElement(item.icon, { className: "w-4 h-4 text-primary" })}
-                      <span className="text-sm text-foreground/60">{item.category}</span>
+                      <span className="text-xs text-foreground/60">{item.category}</span>
                     </div>
-                    <h3 className="text-sm font-semibold text-foreground/80 dark:text-foreground/70 mb-2">
+                    <h3 className="text-sm font-semibold text-foreground/80 dark:text-foreground/70 mb-1 line-clamp-1">
                       {item.title}
                     </h3>
-                    <p className="text-xs text-foreground/60 dark:text-foreground/50 mb-2 line-clamp-3">
+                    <p className="text-xs text-foreground/60 dark:text-foreground/50 mb-1 line-clamp-2">
                       {item.description}
                     </p>
                   </div>
