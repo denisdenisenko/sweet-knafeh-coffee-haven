@@ -24,11 +24,10 @@ const MenuItemCard: React.FC<MenuItemProps> = ({
 }) => {
   return (
     <div 
-      className="glass-morphism rounded-lg overflow-hidden flex flex-col shadow-md hover:shadow-lg transition-shadow duration-300"
-      style={{ width: '100%', height: '290px' }}
+      className="glass-morphism rounded-lg overflow-hidden flex flex-col shadow-md hover:shadow-lg transition-shadow duration-300 h-[290px] w-full"
     >
       <div className="w-full h-[150px] overflow-hidden">
-        <AspectRatio ratio={4/3} className="w-full h-full">
+        <AspectRatio ratio={16/9} className="w-full h-full">
           <img
             src={src}
             alt={alt}
