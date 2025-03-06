@@ -1,3 +1,4 @@
+
 import React, { useRef, useState, useEffect } from "react";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Coffee, CakeSlice, UtensilsCrossed, Candy, Cookie, Wheat, Salad, Milk, IceCream, Croissant } from "lucide-react";
@@ -223,24 +224,30 @@ const Menu = () => {
   // Initialize Isotope after the component mounts
   useEffect(() => {
     if (menuGridRef.current) {
-      isotopeRef.current = new Isotope(menuGridRef.current, {
-        itemSelector: '.menu-item',
-        layoutMode: 'fitRows',
-        fitRows: {
-          gutter: 20
-        },
-        stagger: 30,
-        transitionDuration: '0.4s',
-        hiddenStyle: {
-          opacity: 0,
-          transform: 'scale(0.8)'
-        },
-        visibleStyle: {
-          opacity: 1,
-          transform: 'scale(1)'
-        },
-        originLeft: false // This ensures items flow from right to left
-      });
+      // Add a small delay to ensure DOM is fully ready
+      setTimeout(() => {
+        if (menuGridRef.current) {
+          isotopeRef.current = new Isotope(menuGridRef.current, {
+            itemSelector: '.menu-item',
+            layoutMode: 'fitRows',
+            fitRows: {
+              gutter: 20
+            },
+            percentPosition: true, // Use percentage-based sizing for better responsiveness
+            stagger: 30,
+            transitionDuration: '0.4s',
+            hiddenStyle: {
+              opacity: 0,
+              transform: 'scale(0.8)'
+            },
+            visibleStyle: {
+              opacity: 1,
+              transform: 'scale(1)'
+            },
+            originLeft: false // This ensures items flow from right to left
+          });
+        }
+      }, 100);
     }
 
     return () => {
@@ -259,10 +266,31 @@ const Menu = () => {
           isotopeRef.current.arrange({
             filter: selectedCategory ? `.${selectedCategory.replace(/\s+/g, '-')}` : '*'
           });
+          
+          // Force layout update after filter
+          setTimeout(() => {
+            if (isotopeRef.current) {
+              isotopeRef.current.layout();
+            }
+          }, 100);
         }
       }, 100);
     }
   }, [selectedCategory]);
+
+  // Force layout recalculation on window resize
+  useEffect(() => {
+    const handleResize = () => {
+      if (isotopeRef.current) {
+        isotopeRef.current.layout();
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   useEffect(() => {
     console.log("Current selected category:", selectedCategory);
@@ -340,6 +368,7 @@ const Menu = () => {
             <div 
               key={`item-${index}`}
               className={`menu-item ${item.category.replace(/\s+/g, '-')}`}
+              style={{ width: '100%' }} // Ensure equal width for all items
             >
               <div 
                 className="glass-morphism rounded-xl overflow-hidden"
