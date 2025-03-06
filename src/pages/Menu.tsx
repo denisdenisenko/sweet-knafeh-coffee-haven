@@ -1,3 +1,4 @@
+
 import React, { useRef, useState, useEffect } from "react";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Coffee, CakeSlice, UtensilsCrossed, Candy, Cookie, Wheat, Salad, Milk, IceCream, Croissant } from "lucide-react";
@@ -226,6 +227,10 @@ const Menu = () => {
       isotopeRef.current = new Isotope(menuGridRef.current, {
         itemSelector: '.menu-item',
         layoutMode: 'fitRows',
+        fitRows: {
+          gutter: 20,
+          equalheight: true
+        },
         stagger: 30,
         transitionDuration: '0.4s',
         hiddenStyle: {
@@ -327,18 +332,18 @@ const Menu = () => {
           </div>
         </div>
   
-        <div ref={menuGridRef} className="w-full">
+        <div ref={menuGridRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {menuItems.map((item, index) => (
             <div 
               key={`item-${index}`}
               className={`menu-item ${item.category.replace(/\s+/g, '-')}`}
             >
               <div 
-                className="mb-8 glass-morphism rounded-xl overflow-hidden"
+                className="mb-8 glass-morphism rounded-xl overflow-hidden h-full"
               >
-                <div className="flex flex-col md:flex-row">
-                  <div className="w-full md:w-2/5">
-                    <AspectRatio ratio={1/1}>
+                <div className="flex flex-col h-full">
+                  <div className="w-full">
+                    <AspectRatio ratio={4/3}>
                       <img
                         src={item.src}
                         alt={item.alt}
@@ -347,7 +352,7 @@ const Menu = () => {
                       />
                     </AspectRatio>
                   </div>
-                  <div className="p-4 md:p-6 w-full md:w-3/5 flex flex-col justify-between">
+                  <div className="p-4 md:p-6 flex flex-col justify-between flex-grow">
                     <div>
                       <div className="flex items-center gap-2 mb-2">
                         {React.createElement(item.icon, { className: "w-4 h-4 md:w-5 md:h-5 text-primary" })}
@@ -360,7 +365,7 @@ const Menu = () => {
                         {item.description}
                       </p>
                     </div>
-                    <div className="text-base md:text-lg font-bold text-primary dark:text-primary-light">
+                    <div className="text-base md:text-lg font-bold text-primary dark:text-primary-light mt-auto">
                       {item.price}
                     </div>
                   </div>
