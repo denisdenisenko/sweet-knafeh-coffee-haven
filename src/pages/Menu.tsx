@@ -1,3 +1,4 @@
+
 import React, { useState, useRef } from "react";
 import { Coffee, CakeSlice, Candy, Cookie, Glasses, LucideIcon } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -74,12 +75,13 @@ const Menu = () => {
       const categoryIcon = categoryIcons[category] || Coffee;
       return {
         src: item.image ? 
-             category === "שתייה חמה" && !item.image.includes('/') ? `https://images.unsplash.com/photo-1509042239860-f0ca3bf6d889` :
+             (category === "שתייה חמה" && !item.image.includes('/') ? `https://images.unsplash.com/photo-1509042239860-f0ca3bf6d889` :
              category === "שתייה קרה" && !item.image.includes('/') ? `https://images.unsplash.com/photo-1573750215158-97a608a0986d` :
              category === "מתוקים" && !item.image.includes('/') ? `https://images.unsplash.com/photo-1565299543923-37dd37887442` :
              category === "כנאפה" && !item.image.includes('/') ? `https://images.unsplash.com/photo-1618160702438-9b02ab6515c9` :
              category === "בקלאווה" && !item.image.includes('/') ? `https://images.unsplash.com/photo-1514910367230-3be03a9a9528` : 
-             item.image,
+             item.image) : 
+             "https://images.unsplash.com/photo-1509042239860-f0ca3bf6d889",
         alt: item.name,
         title: item.name,
         category: category,
