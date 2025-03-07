@@ -70,22 +70,22 @@ const MenuItemCard: React.FC<MenuItemProps> = ({
           <div className="flex items-center justify-between mb-2">
             <div className="flex items-center gap-1">
               <Icon className="w-4 h-4 text-primary" />
-              <span className="text-xs text-foreground/60">{category}</span>
+              <span className="text-sm text-foreground/60">{category}</span>
             </div>
             {price && (
-              <div className="text-sm font-bold text-primary dark:text-primary-light">
+              <div className="text-base sm:text-sm font-bold text-primary dark:text-primary-light">
                 {price}
               </div>
             )}
           </div>
-          <h3 className="text-base font-semibold text-foreground/90 dark:text-foreground/80 mb-1 line-clamp-1">
+          <h3 className="text-lg sm:text-base font-semibold text-foreground/90 dark:text-foreground/80 mb-1 line-clamp-1">
             {title}
           </h3>
           {description && (
             <div className="mb-2">
               <p 
                 ref={textRef}
-                className={`text-sm text-foreground/70 dark:text-foreground/60 ${isExpanded ? '' : 'line-clamp-2'} transition-all duration-200`}
+                className={`text-base sm:text-sm text-foreground/70 dark:text-foreground/60 ${isExpanded ? '' : 'line-clamp-2'} transition-all duration-200`}
               >
                 {description}
               </p>
@@ -94,7 +94,7 @@ const MenuItemCard: React.FC<MenuItemProps> = ({
                   variant="ghost" 
                   size="sm" 
                   onClick={toggleDescription} 
-                  className="mt-1 h-6 px-2 py-0 text-xs text-primary hover:bg-primary/10"
+                  className="mt-1 h-7 px-3 py-0 text-sm text-primary hover:bg-primary/10"
                 >
                   {isExpanded ? (
                     <span className="flex items-center gap-1">הסתר <ChevronUp className="w-3 h-3" /></span>
@@ -107,7 +107,7 @@ const MenuItemCard: React.FC<MenuItemProps> = ({
           )}
         </div>
         {sizes && (
-          <div className="mt-auto pt-2 flex flex-wrap gap-1 text-xs">
+          <div className="mt-auto pt-2 flex flex-wrap gap-1 text-sm sm:text-xs">
             {Object.entries(sizes).map(([size, price]) => (
               <span key={size} className="bg-primary/10 dark:bg-primary-light/10 px-2 py-1 rounded">
                 {size}: {price}
