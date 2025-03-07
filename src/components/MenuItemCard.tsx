@@ -1,8 +1,9 @@
 
-import React from "react";
+import React, { useState } from "react";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { LucideIcon } from "lucide-react";
+import { LucideIcon, ChevronDown, ChevronUp } from "lucide-react";
 import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
 
 interface MenuItemProps {
   src: string;
@@ -27,6 +28,13 @@ const MenuItemCard: React.FC<MenuItemProps> = ({
   icon: Icon,
   index = 0,
 }) => {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const hasLongDescription = description && description.length > 70;
+
+  const toggleDescription = () => {
+    setIsExpanded(!isExpanded);
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -65,9 +73,25 @@ const MenuItemCard: React.FC<MenuItemProps> = ({
             {title}
           </h3>
           {description && (
-            <p className="text-sm text-foreground/70 dark:text-foreground/60 line-clamp-2 mb-2 min-h-[2.5rem]">
-              {description}
-            </p>
+            <div className="mb-2">
+              <p className={`text-sm text-foreground/70 dark:text-foreground/60 ${isExpanded ? '' : 'line-clamp-2'} transition-all duration-200`}>
+                {description}
+              </p>
+              {hasLongDescription && (
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  onClick={toggleDescription} 
+                  className="mt-1 h-6 px-2 py-0 text-xs text-primary hover:bg-primary/10"
+                >
+                  {isExpanded ? (
+                    <span className="flex items-center gap-1">הסתר <ChevronUp className="w-3 h-3" /></span>
+                  ) : (
+                    <span className="flex items-center gap-1">קרא עוד <ChevronDown className="w-3 h-3" /></span>
+                  )}
+                </Button>
+              )}
+            </div>
           )}
         </div>
         {sizes && (
