@@ -70,22 +70,22 @@ const MenuItemCard: React.FC<MenuItemProps> = ({
           <div className="flex items-center justify-between mb-2">
             <div className="flex items-center gap-1">
               <Icon className="w-5 h-5 text-primary" />
-              <span className="text-base md:text-sm text-foreground/60">{category}</span>
+              <span className="text-base text-foreground/60">{category}</span>
             </div>
             {price && (
-              <div className="text-lg md:text-base font-bold text-primary dark:text-primary-light">
+              <div className="text-lg font-bold text-primary dark:text-primary-light">
                 {price}
               </div>
             )}
           </div>
-          <h3 className="text-xl md:text-lg font-semibold text-foreground/90 dark:text-foreground/80 mb-2 line-clamp-1">
+          <h3 className="text-xl font-semibold text-foreground/90 dark:text-foreground/80 mb-2 line-clamp-1">
             {title}
           </h3>
           {description && (
             <div className="mb-3">
               <p 
                 ref={textRef}
-                className={`text-lg md:text-base text-foreground/70 dark:text-foreground/60 ${isExpanded ? '' : 'line-clamp-2'} transition-all duration-200`}
+                className={`text-lg text-foreground/70 dark:text-foreground/60 ${isExpanded ? '' : 'line-clamp-2'} transition-all duration-200`}
               >
                 {description}
               </p>
@@ -94,7 +94,7 @@ const MenuItemCard: React.FC<MenuItemProps> = ({
                   variant="ghost" 
                   size="sm" 
                   onClick={toggleDescription} 
-                  className="mt-2 h-8 px-4 py-0 text-base md:text-sm text-primary hover:bg-primary/10"
+                  className="mt-2 h-8 px-4 py-0 text-base text-primary hover:bg-primary/10"
                 >
                   {isExpanded ? (
                     <span className="flex items-center gap-1">הסתר <ChevronUp className="w-4 h-4" /></span>
@@ -107,7 +107,7 @@ const MenuItemCard: React.FC<MenuItemProps> = ({
           )}
         </div>
         {sizes && (
-          <div className="mt-auto pt-2 flex flex-wrap gap-2 text-base md:text-sm">
+          <div className="mt-auto pt-2 flex flex-wrap gap-2 text-base">
             {Object.entries(sizes).map(([size, price]) => (
               <span key={size} className="bg-primary/10 dark:bg-primary-light/10 px-3 py-1 rounded">
                 {size}: {price}
