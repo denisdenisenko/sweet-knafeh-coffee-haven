@@ -44,9 +44,20 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, asChild = false, ...props }, ref) => {
     const Comp = asChild ? Slot : "button"
     
+    // Create a click handler that ensures button actions fire correctly on mobile
+    const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+      // Prevent any default behaviors that might interfere
+      e.preventDefault();
+      
+      // If there's an onClick handler in props, call it
+      if (props.onClick) {
+        props.onClick(e);
+      }
+    };
+    
     return (
       <Comp
-        className={cn(buttonVariants({ variant, size, className }))}
+        className={cn(buttonVariants({ variant, size, className }), "touch-manipulation")}
         ref={ref}
         style={{
           WebkitTapHighlightColor: "transparent", // Remove default mobile tap highlight
@@ -54,7 +65,14 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           userSelect: "none", // Prevent text selection during rapid clicks
           ...props.style
         }}
+        onClick={handleClick}
         {...props}
+        onTouchStart={(e) => {
+          // Ensure touch events are handled properly
+          if (props.onTouchStart) {
+            props.onTouchStart(e);
+          }
+        }}
       />
     )
   }

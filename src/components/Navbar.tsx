@@ -10,21 +10,36 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { theme, setTheme } = useTheme();
   const navRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
+  const toggleMenu = (e?: React.MouseEvent) => {
+    // If provided, prevent default behavior
+    if (e) {
+      e.preventDefault();
+    }
+    setIsOpen(prevState => !prevState);
   };
 
   // Handle clicks outside the navbar to close the menu
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (isOpen && navRef.current && !navRef.current.contains(event.target as Node)) {
+    const handleClickOutside = (event: MouseEvent | TouchEvent) => {
+      // Check if we clicked outside both the navbar and the toggle button
+      const targetNode = event.target as Node;
+      
+      if (
+        isOpen && 
+        navRef.current && 
+        !navRef.current.contains(targetNode) &&
+        buttonRef.current && 
+        !buttonRef.current.contains(targetNode)
+      ) {
         setIsOpen(false);
       }
     };
 
-    document.addEventListener("mousedown", handleClickOutside);
-    document.addEventListener("touchstart", handleClickOutside);
+    // Add both mouse and touch event listeners
+    document.addEventListener("mousedown", handleClickOutside, { passive: false });
+    document.addEventListener("touchstart", handleClickOutside, { passive: false });
     
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
@@ -59,11 +74,13 @@ const Navbar = () => {
           <div className="flex items-center justify-between w-full md:hidden">
             {/* Menu Button with improved styling and touch behavior */}
             <Button
+              ref={buttonRef}
               variant="ghost"
               size="icon"
               onClick={toggleMenu}
               className="inline-flex items-center justify-center hover:bg-accent/50 active:bg-accent/70 touch-manipulation"
               aria-label="Toggle menu"
+              data-test-id="mobile-menu-toggle"
             >
               {isOpen ? (
                 <X className="h-5 w-5" />
