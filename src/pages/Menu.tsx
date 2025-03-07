@@ -1,4 +1,3 @@
-
 import React, { useState, useRef } from "react";
 import { Coffee, CakeSlice, UtensilsCrossed, Candy, Cookie, Wheat, Glasses, IceCream, Croissant, LucideIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -32,7 +31,7 @@ const Menu = () => {
     "מתוקים": [
       { "name": "וופל בלגי מפנק", "description": "וופל בלגי טרי ופריך, מוגש עם רטבי שוקולד לבחירה: נוטלה, שוקולד לבן, קינדר, פיסטוק, מייפל או לוטוס. כולל כדור גלידה לבחירה (שוקולד, וניל, תות ועוד) וקצפת עשירה בצד.", "price": "45₪" },
       { "name": "פנקייק קלאסי", "description": "זוג פנקייקים זהובים, אווריריים וטריים, מוגשים עם רטבים לבחירה: נוטלה, שוקולד לבן, קינדר, פיסטוק, מייפל או לוטוס. כולל כדור גלידה לבחירה (שוקולד, וניל, תות ועוד) וקצפת עשירה בצד.", "price": "35₪" },
-      { "name": "קרפ צרפתי", "description": "קרפ דקיק וזהוב, מוגש עם רטבים מפנקים לבחירה: נוטלה, שוקולד לבן, קינדר, פיסטוק, מייפל או לוטוס. כולל כדור גלידה לבחירה (וניל, שוקולד, תות ועוד) וקצפת מעל. ניתן להוסיף תוספות לבחירה: מקופלת, פירורי לוטוס או אורא������, בוטנים קלויי���, דובדבן מסוכר ועוד.", "price": "25₪" },
+      { "name": "קרפ צרפתי", "description": "קרפ דקיק וזהוב, מוגש עם רטבים מפנקים לבחירה: נוטלה, שוקולד לבן, קינדר, פיסטוק, מייפל או לוטוס. כולל כדור גלידה לבחירה (וניל, שוקולד, תות ועוד) וקצפת מעל. ניתן להוסיף תוספות לבחירה: מקופלת, פירורי לוטוס או אורא������, בוטנים קלויי���, דובדבן מסוכר ו��וד.", "price": "25₪" },
       { "name": "צ'ורוס", "description": "8 יחידות של צ'ורוס טריים, זהובים ופריכים, מצופים בסוכר וקינמון. מוגשים לצד קצפת עם רטבים לבחירה: קינדר, נוטלה או שוקולד לבן.", "price": "45₪" }
     ],
     "כנאפה": [
@@ -71,40 +70,16 @@ const Menu = () => {
   
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const categoryScrollRef = useRef<HTMLDivElement>(null);
-  const lastClickTimeRef = useRef<number>(0);
-  const clickDebounceTime = 300; // ms between allowed clicks
 
-  const handleCategoryClick = (event: React.MouseEvent, category: string) => {
-    event.preventDefault();
-    
-    const now = Date.now();
-    
-    if (now - lastClickTimeRef.current < clickDebounceTime) {
-      return;
-    }
-    
-    lastClickTimeRef.current = now;
-    
+  const handleCategoryClick = (category: string) => {
     if (category === selectedCategory) {
-      console.log("Clearing category selection");
       setSelectedCategory(null);
     } else {
-      console.log("Setting category to:", category);
       setSelectedCategory(category);
     }
   };
 
-  const handleAllCategoryClick = (event: React.MouseEvent) => {
-    event.preventDefault();
-    
-    const now = Date.now();
-    
-    if (now - lastClickTimeRef.current < clickDebounceTime) {
-      return;
-    }
-    
-    lastClickTimeRef.current = now;
-    console.log("Setting category to All (null)");
+  const handleAllCategoryClick = () => {
     setSelectedCategory(null);
   };
 
@@ -119,10 +94,8 @@ const Menu = () => {
     }
   };
 
-  // Group items by category when showing all items
   const renderMenuItems = () => {
     if (selectedCategory) {
-      // When a category is selected, display just those items
       return (
         <motion.div 
           variants={containerVariants}
@@ -144,7 +117,6 @@ const Menu = () => {
         </motion.div>
       );
     } else {
-      // When "All" is selected, group by category
       return (
         <div className="space-y-10">
           {categories.map((category) => (
@@ -245,7 +217,7 @@ const Menu = () => {
                   <Button
                     key={category}
                     variant={selectedCategory === category ? "default" : "outline"}
-                    onClick={(e) => handleCategoryClick(e, category)}
+                    onClick={() => handleCategoryClick(category)}
                     className="whitespace-nowrap gap-1 sm:gap-2 mb-2 text-sm sm:text-base"
                   >
                     <CategoryIcon className="h-3 w-3 sm:h-4 sm:w-4" />
