@@ -1,3 +1,4 @@
+
 import React, { useState, useRef } from "react";
 import { Coffee, CakeSlice, Candy, Cookie, Glasses, LucideIcon } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -46,7 +47,7 @@ const Menu = () => {
       { "name": "סודה", "description": "", "price": "10₪", "image": "images/menu2.jpg" },
       { "name": "פאנטה", "description": "", "price": "10₪", "image": "images/menu2.jpg" },
       { "name": "קוקה קולה", "description": "", "price": "10₪", "image": "images/menu2.jpg" },
-      { "name": "קולה זירו", "description": "", "price": "10₪", image": "images/menu2.jpg" }
+      { "name": "קולה זירו", "description": "", "price": "10₪", "image": "images/menu2.jpg" }
     ],
     "מתוקים": [
       { "name": "וופל בלגי מפנק", "description": "וופל בלגי טרי ופריך, מוגש עם רטבי שוקולד לבחירה: נוטלה, שוקולד לבן, קינדר, פיסטוק, מייפל או לוטוס. כולל כדור גלידה לבחירה (שוקולד, וניל, תות ועוד) וקצפת עשירה בצד.", "price": "45₪", "image": "images/menu2.jpg" },
