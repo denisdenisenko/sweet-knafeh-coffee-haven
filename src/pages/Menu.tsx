@@ -1,4 +1,3 @@
-
 import React, { useState, useRef } from "react";
 import { Coffee, CakeSlice, Candy, Cookie, Glasses, LucideIcon } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -70,18 +69,40 @@ const Menu = () => {
     ]
   };
 
+  const getCategoryDefaultImage = (category: string): string => {
+    switch(category) {
+      case "שתייה חמה":
+        return "https://images.unsplash.com/photo-1509042239860-f0ca3bf6d889";
+      case "שתייה קרה":
+        return "https://images.unsplash.com/photo-1573750215158-97a608a0986d";
+      case "מתוקים":
+        return "https://images.unsplash.com/photo-1565299543923-37dd37887442";
+      case "כנאפה":
+        return "https://images.unsplash.com/photo-1618160702438-9b02ab6515c9";
+      case "בקלאווה":
+        return "https://images.unsplash.com/photo-1514910367230-3be03a9a9528";
+      default:
+        return "https://images.unsplash.com/photo-1509042239860-f0ca3bf6d889";
+    }
+  };
+
   const menuItems = Object.entries(menuData).flatMap(([category, items]) => 
     items.map((item: any) => {
       const categoryIcon = categoryIcons[category] || Coffee;
+      
+      let imagePath = getCategoryDefaultImage(category);
+      
+      if (item.image) {
+        if (item.image.includes('/')) {
+          imagePath = item.image;
+        }
+        else {
+          imagePath = item.image;
+        }
+      }
+      
       return {
-        src: item.image ? 
-             (category === "שתייה חמה" && !item.image.includes('/') ? `https://images.unsplash.com/photo-1509042239860-f0ca3bf6d889` :
-             category === "שתייה קרה" && !item.image.includes('/') ? `https://images.unsplash.com/photo-1573750215158-97a608a0986d` :
-             category === "מתוקים" && !item.image.includes('/') ? `https://images.unsplash.com/photo-1565299543923-37dd37887442` :
-             category === "כנאפה" && !item.image.includes('/') ? `https://images.unsplash.com/photo-1618160702438-9b02ab6515c9` :
-             category === "בקלאווה" && !item.image.includes('/') ? `https://images.unsplash.com/photo-1514910367230-3be03a9a9528` : 
-             item.image) : 
-             "https://images.unsplash.com/photo-1509042239860-f0ca3bf6d889",
+        src: imagePath,
         alt: item.name,
         title: item.name,
         category: category,
