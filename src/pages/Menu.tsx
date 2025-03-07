@@ -72,13 +72,19 @@ const Menu = () => {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const categoryScrollRef = useRef<HTMLDivElement>(null);
   
-  // Ensure proper scrolling behavior when changing categories
+  // Reset scroll position when changing categories
   useEffect(() => {
-    window.scrollTo(0, 0);
+    setTimeout(() => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'instant'
+      });
+    }, 10);
   }, [selectedCategory]);
 
-  // Direct event handlers without debounce to improve mobile responsiveness
+  // Plain direct event handlers for better mobile compatibility
   const handleCategoryClick = (category: string) => {
+    console.log("Category clicked:", category, "Previously selected:", selectedCategory);
     if (category === selectedCategory) {
       setSelectedCategory(null);
     } else {
@@ -87,6 +93,7 @@ const Menu = () => {
   };
 
   const handleAllCategoryClick = () => {
+    console.log("All categories clicked");
     setSelectedCategory(null);
   };
 
@@ -209,27 +216,35 @@ const Menu = () => {
               transition={{ duration: 0.5, delay: 0.3 }}
               className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-6 sm:mb-8 py-2"
             >
-              <Button
-                key="all"
-                variant={selectedCategory === null ? "default" : "outline"}
+              <button
+                type="button"
                 onClick={handleAllCategoryClick}
-                className="whitespace-nowrap mb-2 text-sm sm:text-base"
+                className={`whitespace-nowrap px-4 py-2 rounded-md text-sm sm:text-base mb-2 ${
+                  selectedCategory === null 
+                    ? "bg-primary text-white" 
+                    : "border border-input bg-background hover:bg-accent hover:text-primary"
+                }`}
               >
                 הכל
-              </Button>
+              </button>
+              
               {categories.map((category) => {
                 const CategoryIcon = categoryIcons[category] || Coffee;
                 
                 return (
-                  <Button
+                  <button
+                    type="button"
                     key={category}
-                    variant={selectedCategory === category ? "default" : "outline"}
                     onClick={() => handleCategoryClick(category)}
-                    className="whitespace-nowrap gap-1 sm:gap-2 mb-2 text-sm sm:text-base"
+                    className={`whitespace-nowrap px-4 py-2 rounded-md text-sm sm:text-base mb-2 inline-flex items-center gap-1 sm:gap-2 ${
+                      selectedCategory === category 
+                        ? "bg-primary text-white" 
+                        : "border border-input bg-background hover:bg-accent hover:text-primary"
+                    }`}
                   >
                     <CategoryIcon className="h-3 w-3 sm:h-4 sm:w-4" />
                     <span>{category}</span>
-                  </Button>
+                  </button>
                 );
               })}
             </motion.div>

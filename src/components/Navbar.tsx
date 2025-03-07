@@ -68,22 +68,20 @@ const Navbar = () => {
 
           {/* Mobile layout */}
           <div className="flex items-center justify-between w-full md:hidden">
-            {/* Menu Button with improved styling and touch behavior */}
-            <Button
-              ref={buttonRef}
-              variant="ghost"
-              size="icon"
+            {/* Menu Button with improved mobile compatibility */}
+            <button
+              type="button"
               onClick={toggleMenu}
-              className="inline-flex items-center justify-center hover:bg-accent/50 active:bg-accent/70 touch-manipulation"
+              className="inline-flex items-center justify-center p-2 rounded-md text-foreground hover:bg-accent/50 active:bg-accent/70"
               aria-label="Toggle menu"
               data-test-id="mobile-menu-toggle"
             >
               {isOpen ? (
-                <X className="h-5 w-5" />
+                <X className="h-6 w-6" />
               ) : (
-                <MenuIcon className="h-5 w-5" />
+                <MenuIcon className="h-6 w-6" />
               )}
-            </Button>
+            </button>
 
             {/* Right side logo */}
             <motion.img

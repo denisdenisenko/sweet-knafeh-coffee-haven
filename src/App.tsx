@@ -23,13 +23,16 @@ const ScrollToTop = () => {
   const { pathname } = useLocation();
   
   useEffect(() => {
-    // Use setTimeout to ensure DOM is fully updated
+    // Force immediate scroll to top on route change
+    window.scrollTo(0, 0);
+    
+    // Use setTimeout as a backup to ensure scroll happens after DOM updates
     setTimeout(() => {
       window.scrollTo({
         top: 0,
         behavior: 'instant'
       });
-    }, 0);
+    }, 50);
   }, [pathname]);
   
   return null;
@@ -42,14 +45,22 @@ const AnimatedRoutes = () => {
 
   useEffect(() => {
     setIsPageRefresh(false);
+    
+    // Force immediate scroll on route change
+    window.scrollTo(0, 0);
   }, []);
   
   useEffect(() => {
-    // Force scroll to top on route change
-    window.scrollTo({
-      top: 0,
-      behavior: 'instant'
-    });
+    // Force immediate scroll to top on route change
+    window.scrollTo(0, 0);
+    
+    // Use setTimeout as a backup
+    setTimeout(() => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'instant'
+      });
+    }, 50);
   }, [location.pathname]);
   
   if (isPageRefresh && location.pathname !== "/") {
