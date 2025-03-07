@@ -1,3 +1,4 @@
+
 import React, { useRef, useState, useEffect } from "react";
 import { Coffee, CakeSlice, UtensilsCrossed, Candy, Cookie, Wheat, Glasses, IceCream, Croissant, LucideIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -75,6 +76,7 @@ const Menu = () => {
   const clickDebounceTime = 300; // ms between allowed clicks
   const isotopeRef = useRef<Isotope | null>(null);
   const menuGridRef = useRef<HTMLDivElement>(null);
+  const [isIsotopeInitialized, setIsIsotopeInitialized] = useState(false);
 
   const filteredItems = selectedCategory 
     ? menuItems.filter(item => item.category === selectedCategory)
@@ -84,7 +86,10 @@ const Menu = () => {
     ? [selectedCategory] 
     : categories;
 
-  const handleCategoryClick = (category: string) => {
+  const handleCategoryClick = (event: React.MouseEvent, category: string) => {
+    // Prevent default to avoid page scroll
+    event.preventDefault();
+    
     const now = Date.now();
     
     if (now - lastClickTimeRef.current < clickDebounceTime) {
@@ -102,7 +107,10 @@ const Menu = () => {
     }
   };
 
-  const handleAllCategoryClick = () => {
+  const handleAllCategoryClick = (event: React.MouseEvent) => {
+    // Prevent default to avoid page scroll
+    event.preventDefault();
+    
     const now = Date.now();
     
     if (now - lastClickTimeRef.current < clickDebounceTime) {
@@ -114,13 +122,16 @@ const Menu = () => {
     setSelectedCategory(null);
   };
 
+  // Initialize Isotope with a delay to ensure images are loaded
   useEffect(() => {
-    const initIsotope = () => {
+    const timer = setTimeout(() => {
       if (menuGridRef.current) {
+        // Destroy previous instance if it exists
         if (isotopeRef.current) {
           isotopeRef.current.destroy();
         }
 
+        // Initialize new instance
         isotopeRef.current = new Isotope(menuGridRef.current, {
           itemSelector: '.menu-item',
           layoutMode: 'fitRows',
@@ -129,39 +140,80 @@ const Menu = () => {
           },
           originLeft: false
         });
+        
+        setIsIsotopeInitialized(true);
       }
-    };
-
-    const timer = setTimeout(initIsotope, 100);
+    }, 500); // Longer delay for initial load
     
     return () => {
       clearTimeout(timer);
-      if (isotopeRef.current) {
-        isotopeRef.current.destroy();
-      }
     };
   }, []);
 
+  // Update layout when category changes
   useEffect(() => {
-    if (isotopeRef.current) {
+    if (isotopeRef.current && isIsotopeInitialized) {
       const filterValue = selectedCategory 
         ? `.${selectedCategory.replace(/\s+/g, '-')}`
         : '*';
-        
+      
+      // First update the filter
       isotopeRef.current.arrange({ filter: filterValue });
+      
+      // Then force a layout update after a short delay to ensure all items are positioned correctly
+      setTimeout(() => {
+        if (isotopeRef.current) {
+          isotopeRef.current.layout();
+        }
+      }, 100);
     }
-  }, [selectedCategory]);
+  }, [selectedCategory, isIsotopeInitialized]);
 
+  // Update layout on window resize
   useEffect(() => {
     const handleResize = () => {
-      if (isotopeRef.current) {
+      if (isotopeRef.current && isIsotopeInitialized) {
         isotopeRef.current.layout();
       }
     };
 
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  }, [isIsotopeInitialized]);
+
+  // Force layout update when images are loaded
+  useEffect(() => {
+    const handleImagesLoaded = () => {
+      if (isotopeRef.current && isIsotopeInitialized) {
+        isotopeRef.current.layout();
+      }
+    };
+
+    // Wait for all images to load
+    const images = document.querySelectorAll('.menu-item img');
+    let loadedCount = 0;
+    
+    const onImageLoad = () => {
+      loadedCount++;
+      if (loadedCount === images.length) {
+        handleImagesLoaded();
+      }
+    };
+
+    images.forEach(img => {
+      if ((img as HTMLImageElement).complete) {
+        onImageLoad();
+      } else {
+        img.addEventListener('load', onImageLoad);
+      }
+    });
+
+    return () => {
+      images.forEach(img => {
+        img.removeEventListener('load', onImageLoad);
+      });
+    };
+  }, [filteredItems, isIsotopeInitialized]);
 
   return (
     <motion.div
@@ -214,7 +266,7 @@ const Menu = () => {
                   <Button
                     key={category}
                     variant={selectedCategory === category ? "default" : "outline"}
-                    onClick={() => handleCategoryClick(category)}
+                    onClick={(e) => handleCategoryClick(e, category)}
                     className="whitespace-nowrap gap-1 sm:gap-2 mb-2 text-sm sm:text-base"
                   >
                     <CategoryIcon className="h-3 w-3 sm:h-4 sm:w-4" />

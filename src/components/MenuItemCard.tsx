@@ -25,7 +25,7 @@ const MenuItemCard: React.FC<MenuItemProps> = ({
   icon: Icon,
 }) => {
   return (
-    <div className="h-full glass-morphism rounded-lg overflow-hidden flex flex-col shadow-md hover:shadow-lg transition-shadow duration-300">
+    <div className="h-full w-full glass-morphism rounded-lg overflow-hidden flex flex-col shadow-md hover:shadow-lg transition-shadow duration-300">
       <div className="relative w-full">
         <AspectRatio ratio={16/9}>
           <img
@@ -36,8 +36,8 @@ const MenuItemCard: React.FC<MenuItemProps> = ({
           />
         </AspectRatio>
       </div>
-      <div className="p-4 flex flex-col flex-1">
-        <div className="flex-1">
+      <div className="p-4 flex flex-col flex-grow">
+        <div className="flex-grow">
           <div className="flex items-center justify-between mb-2">
             <div className="flex items-center gap-1">
               <Icon className="w-4 h-4 text-primary" />
@@ -59,7 +59,7 @@ const MenuItemCard: React.FC<MenuItemProps> = ({
           )}
         </div>
         {sizes && (
-          <div className="mt-2 flex flex-wrap gap-1 text-xs">
+          <div className="mt-auto pt-2 flex flex-wrap gap-1 text-xs">
             {Object.entries(sizes).map(([size, price]) => (
               <span key={size} className="bg-primary/10 dark:bg-primary-light/10 px-2 py-1 rounded">
                 {size}: {price}
