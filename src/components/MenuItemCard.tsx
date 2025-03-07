@@ -52,25 +52,25 @@ const MenuItemCard: React.FC<MenuItemProps> = ({
         delay: index * 0.1,
         ease: "easeOut"
       }}
-      className="h-full w-full bg-background/80 dark:bg-background/40 backdrop-blur-sm rounded-lg overflow-hidden flex flex-col shadow-md hover:shadow-xl transition-all duration-300"
+      className="h-full w-full bg-gradient-to-b from-background to-primary/5 dark:from-background/90 dark:to-primary-dark/10 backdrop-blur-sm rounded-xl overflow-hidden flex flex-col shadow-md hover:shadow-xl transition-all duration-300"
     >
-      <div className="w-full flex items-center justify-center p-4 bg-primary/5 dark:bg-primary/10" style={{ height: "200px" }}>
+      <div className="w-full flex items-center justify-center p-5 rounded-t-xl overflow-hidden bg-accent/10 dark:bg-primary/5" style={{ height: "200px" }}>
         <img
           src={src}
           alt={alt}
-          className="max-w-full max-h-full object-contain"
+          className="max-w-full max-h-full object-contain rounded-lg hover:scale-105 transition-transform duration-300"
           loading="lazy"
         />
       </div>
       <div className="p-5 flex flex-col flex-grow">
         <div className="flex-grow">
           <div className="flex items-center justify-between mb-3">
-            <div className="flex items-center gap-2 bg-primary/10 dark:bg-primary/15 px-3 py-1 rounded-full">
+            <div className="flex items-center gap-2 bg-primary/10 dark:bg-primary/20 px-3 py-1 rounded-full shadow-sm">
               <Icon className="w-4 h-4 text-primary" />
-              <span className="text-sm font-medium text-primary/80">{category}</span>
+              <span className="text-sm font-medium text-primary/90">{category}</span>
             </div>
             {price && (
-              <div className="text-lg font-bold text-primary dark:text-primary-light">
+              <div className="text-lg font-bold text-primary dark:text-primary-light px-3 py-1 bg-primary/5 dark:bg-primary-light/5 rounded-full">
                 {price}
               </div>
             )}
@@ -104,9 +104,9 @@ const MenuItemCard: React.FC<MenuItemProps> = ({
           )}
         </div>
         {sizes && (
-          <div className="mt-auto pt-2 flex flex-wrap gap-2 text-sm">
+          <div className="mt-auto pt-3 flex flex-wrap gap-2 text-sm">
             {Object.entries(sizes).map(([size, price]) => (
-              <span key={size} className="bg-primary/10 dark:bg-primary-light/10 px-3 py-1 rounded-full">
+              <span key={size} className="bg-primary/5 dark:bg-primary-light/10 px-3 py-1 rounded-full border border-primary/10 dark:border-primary-light/10 shadow-sm">
                 {size}: {price}
               </span>
             ))}
