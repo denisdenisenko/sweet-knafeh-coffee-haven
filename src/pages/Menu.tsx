@@ -1,4 +1,3 @@
-
 import React, { useRef, useState, useEffect } from "react";
 import { Coffee, CakeSlice, UtensilsCrossed, Candy, Cookie, Wheat, Glasses, IceCream, Croissant, LucideIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -33,7 +32,7 @@ const Menu = () => {
     "מתוקים": [
       { "name": "וופל בלגי מפנק", "description": "וופל בלגי טרי ופריך, מוגש עם רטבי שוקולד לבחירה: נוטלה, שוקולד לבן, קינדר, פיסטוק, מייפל או לוטוס. כולל כדור גלידה לבחירה (שוקולד, וניל, תות ועוד) וקצפת עשירה בצד.", "price": "45₪" },
       { "name": "פנקייק קלאסי", "description": "זוג פנקייקים זהובים, אווריריים וטריים, מוגשים עם רטבים לבחירה: נוטלה, שוקולד לבן, קינדר, פיסטוק, מייפל או לוטוס. כולל כדור גלידה לבחירה (שוקולד, וניל, תות ועוד) וקצפת עשירה בצד.", "price": "35₪" },
-      { "name": "קרפ צרפתי", "description": "קרפ דקיק וזהוב, מוגש עם רטבים מפנקים לבחירה: נוטלה, שוקולד לבן, קינדר, פיסטוק, מייפל או לוטוס. כולל כדור גלידה לבחירה (וניל, שוקולד, תות ועוד) וקצפת מעל. ניתן להוסיף תוספות לבחירה: מקופלת, פירורי לוטוס או אורא���, בוטנים קלויים, דובדבן מסוכר ועוד.", "price": "25₪" },
+      { "name": "קרפ צרפתי", "description": "קרפ דקיק וזהוב, מוגש עם רטבים מפנקים לבחירה: נוטלה, שוקולד לבן, קינדר, פיסטוק, מייפל או לוטוס. כולל כדור גלידה לבחירה (וניל, שוקולד, תות ועוד) וקצפת מעל. ניתן להוסיף תוספות לבחירה: מקופלת, פירורי לוטוס או אורא����, בוטנים קלויים, דובדבן מסוכר ועוד.", "price": "25₪" },
       { "name": "צ'ורוס", "description": "8 יחידות של צ'ורוס טריים, זהובים ופריכים, מצופים בסוכר וקינמון. מוגשים לצד קצפת עם רטבים לבחירה: קינדר, נוטלה או שוקולד לבן.", "price": "45₪" }
     ],
     "כנאפה": [
@@ -116,80 +115,40 @@ const Menu = () => {
   };
 
   useEffect(() => {
-    if (menuGridRef.current) {
-      // Destroy any existing instance first
-      if (isotopeRef.current) {
-        isotopeRef.current.destroy();
-        isotopeRef.current = null;
-      }
-      
-      // Create a new instance with a slight delay
-      setTimeout(() => {
-        if (menuGridRef.current) {
-          isotopeRef.current = new Isotope(menuGridRef.current, {
-            itemSelector: '.menu-item',
-            layoutMode: 'fitRows',
-            fitRows: {
-              gutter: 20
-            },
-            percentPosition: true,
-            stagger: 30,
-            transitionDuration: '0.4s',
-            hiddenStyle: {
-              opacity: 0,
-              transform: 'scale(0.8)'
-            },
-            visibleStyle: {
-              opacity: 1,
-              transform: 'scale(1)'
-            },
-            originLeft: false
-          });
+    const initIsotope = () => {
+      if (menuGridRef.current) {
+        if (isotopeRef.current) {
+          isotopeRef.current.destroy();
         }
-      }, 100);
-    }
 
+        isotopeRef.current = new Isotope(menuGridRef.current, {
+          itemSelector: '.menu-item',
+          layoutMode: 'fitRows',
+          fitRows: {
+            gutter: 20
+          },
+          originLeft: false
+        });
+      }
+    };
+
+    const timer = setTimeout(initIsotope, 100);
+    
     return () => {
+      clearTimeout(timer);
       if (isotopeRef.current) {
         isotopeRef.current.destroy();
-        isotopeRef.current = null;
       }
     };
   }, []);
 
   useEffect(() => {
     if (isotopeRef.current) {
-      // Force layout recalculation
-      isotopeRef.current.destroy();
-      isotopeRef.current = null;
-      
-      setTimeout(() => {
-        if (menuGridRef.current) {
-          isotopeRef.current = new Isotope(menuGridRef.current, {
-            itemSelector: '.menu-item',
-            layoutMode: 'fitRows',
-            fitRows: {
-              gutter: 20
-            },
-            percentPosition: true,
-            stagger: 30,
-            transitionDuration: '0.4s',
-            hiddenStyle: {
-              opacity: 0,
-              transform: 'scale(0.8)'
-            },
-            visibleStyle: {
-              opacity: 1,
-              transform: 'scale(1)'
-            },
-            originLeft: false
-          });
-          
-          isotopeRef.current.arrange({
-            filter: selectedCategory ? `.${selectedCategory.replace(/\s+/g, '-')}` : '*'
-          });
-        }
-      }, 100);
+      const filterValue = selectedCategory 
+        ? `.${selectedCategory.replace(/\s+/g, '-')}`
+        : '*';
+        
+      isotopeRef.current.arrange({ filter: filterValue });
     }
   }, [selectedCategory]);
 
@@ -201,14 +160,8 @@ const Menu = () => {
     };
 
     window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
-
-  useEffect(() => {
-    console.log("Current selected category:", selectedCategory);
-  }, [selectedCategory]);
 
   return (
     <motion.div
@@ -281,19 +234,10 @@ const Menu = () => {
           >
             {filteredItems.map((item, index) => (
               <div 
-                key={`item-${index}`}
-                className={`menu-item ${item.category.replace(/\s+/g, '-')} w-full h-full`}
+                key={`${item.category}-${item.title}-${index}`}
+                className={`menu-item ${item.category.replace(/\s+/g, '-')}`}
               >
-                <MenuItemCard 
-                  src={item.src}
-                  alt={item.alt}
-                  title={item.title}
-                  category={item.category}
-                  price={item.price}
-                  sizes={item.sizes}
-                  description={item.description}
-                  icon={item.icon}
-                />
+                <MenuItemCard {...item} />
               </div>
             ))}
           </div>

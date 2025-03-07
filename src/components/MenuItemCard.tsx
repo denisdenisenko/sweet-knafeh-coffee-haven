@@ -25,11 +25,9 @@ const MenuItemCard: React.FC<MenuItemProps> = ({
   icon: Icon,
 }) => {
   return (
-    <div 
-      className="glass-morphism rounded-lg overflow-hidden flex flex-col shadow-md hover:shadow-lg transition-shadow duration-300 h-full w-full"
-    >
-      <div className="w-full h-[150px] overflow-hidden">
-        <AspectRatio ratio={16/9} className="w-full h-full">
+    <div className="h-full glass-morphism rounded-lg overflow-hidden flex flex-col shadow-md hover:shadow-lg transition-shadow duration-300">
+      <div className="relative w-full">
+        <AspectRatio ratio={16/9}>
           <img
             src={src}
             alt={alt}
@@ -38,8 +36,8 @@ const MenuItemCard: React.FC<MenuItemProps> = ({
           />
         </AspectRatio>
       </div>
-      <div className="p-4 flex flex-col flex-1 justify-between">
-        <div>
+      <div className="p-4 flex flex-col flex-1">
+        <div className="flex-1">
           <div className="flex items-center justify-between mb-2">
             <div className="flex items-center gap-1">
               <Icon className="w-4 h-4 text-primary" />
