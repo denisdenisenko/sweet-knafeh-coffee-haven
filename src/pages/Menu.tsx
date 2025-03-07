@@ -1,4 +1,3 @@
-
 import React, { useState, useRef } from "react";
 import { Coffee, CakeSlice, Candy, Cookie, Glasses, LucideIcon } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -16,49 +15,49 @@ const Menu = () => {
 
   const menuData = {
     "שתייה חמה": [
-      { "name": "תה", "description": "מים חמים עם נענע/ פרוסות לימון/ מקלות קינמון.", "price": "10₪", "image": "images/menu1.jpg" },
-      { "name": "קנקן תה", "description": "מים חמים עם נענע/פרוסות לימון/ מקלות קינמון. (ל-5 סועדים)", "price": "30₪", "image": "images/menu1.jpg" },
+      { "name": "תה", "description": "מים חמים עם נענע/ פרוסות לימון/ מקלות קינמון.", "price": "10₪", "image": "images/tea.jpg" },
+      { "name": "קנקן תה", "description": "מים חמים עם נענע/פרוסות לימון/ מקלות קינמון. (ל-5 סועדים)", "price": "30₪", "image": "images/teapot.jpg" },
       { "name": "אספרסו", "description": "אספרסו קצר/ ארוך/ כפול קצר/ כפול ארוך", "price": "12₪", "image": "images/espresso (2).jpg" },
       { "name": "מקיאטו", "description": "אספרסו קצר/ ארוך/ כפול קצר/ כפול ארוך ומעל חלב חם מוקצף.", "price": "12₪", "image": "images/macchiato.jpg" },
       { "name": "אפוגטו", "description": "כדור גלידה לבחירתכם מוגש עם אספרסו קצר/ ארוך/ כפול קצר/ כפול ארוך.", "price": "15₪", "image": "images/affogato.jpg" },
-      { "name": "קפה שחור", "description": "קפה שחור טחון במקום עם מים חמים.", "price": "12₪", "image": "images/menu1.jpg" },
-      { "name": "אמריקנו", "description": "אספרסו כפול קצר עם מים חמים/ קרים, מוגש לצד חלב חם/ קר לבחירתכם.", "price": "12₪", "image": "images/menu1.jpg" },
+      { "name": "קפה שחור", "description": "קפה שחור טחון במקום עם מים חמים.", "price": "12₪", "image": "images/blackcoffee.jpg" },
+      { "name": "אמריקנו", "description": "אספרסו כפול קצר עם מים חמים/ קרים, מוגש לצד חלב חם/ קר לבחירתכם.", "price": "12₪", "image": "images/americano.jpg" },
       { "name": "קפה הפוך", "description": "קפה חם ועדין המבוסס על מנת אספרסו עם חלב חם מוקצף שמעניק לו מרקם חלק וקרמי.", "price": "15₪", "image": "images/cappuccino.jpg" },
       { "name": "קפה מוקה", "description": "משקה מתוק ומחמם המבוסס על אבקת שוקו – שילוב מפנק של אספרסו איכותי, שוקולד עשיר וחלב מוקצף, עם אבקת קקאו מעל להשלמת הטעם.", "price": "18₪", "image": "images/mocha.jpg" },
-      { "name": "שוקו חם", "description": "משקה מתוק ומחמם המבוסס על אבקת שוקו איכותית עם חלב חם מוקצף. ניתן להוסיף מרשמלו או קצפת לתוספת פינוק.", "price": "15₪", "image": "images/menu1.jpg" },
-      { "name": "סחלב", "description": "משקה חם, סמיך ומפנק המוכן מחלב חם מבושל. ניתן להוסיף תוספות קלאסיות של פיסטוק קצוץ, פירורי לוטוס, קינמון וקוקוס.", "price": "20₪", "image": "images/menu1.jpg" }
+      { "name": "שוקו חם", "description": "משקה מתוק ומחמם המבוסס על אבקת שוקו איכותית עם חלב חם מוקצף. ניתן להוסיף מרשמלו או קצפת לתוספת פינוק.", "price": "15₪", "image": "images/hotchocolate.jpg" },
+      { "name": "סחלב", "description": "משקה חם, סמיך ומפנק המוכן מחלב חם מבושל. ניתן להוסיף תוספות קלאסיות של פיסטוק קצוץ, פירורי לוטוס, קינמון וקוקוס.", "price": "20₪", "image": "images/sahlab.jpg" }
     ],
     "שתייה קרה": [
-      { "name": "מילקשייק", "description": "על בסיס גלידה עשירה בטעמים לבחירה (שוקולד בלגי, וניל קלאסי, תות, וניל-עוגיות, פיסטוק, לוטוס, וניל דובדבן, מסטיק) – מוגש עם קצפת מעל.", "price": "25₪", "image": "images/menu2.jpg" },
-      { "name": "קפה קר", "description": "אספרסו איכותי, מוגש עם חלב טרי, קרח ומעט מתיקות לבחירתכם. מוגש עם קצפת מעל.", "price": "15₪", "image": "images/menu2.jpg" },
-      { "name": "אייס וניל", "description": "משקה קרמי ומפנק על בסיס וניל, קרח גרוס וחלב טרי – מוגש עם קצפת מעל.", "price": "12₪", "image": "images/menu2.jpg" },
-      { "name": "אייס קפה", "description": "משקה קרמי וממכר על בסיס קפה נמס איכותי, קרח גרוס וחלב טרי – מוגש עם קצפת מעל.", "price": "12₪", "image": "images/menu2.jpg" },
-      { "name": "לימונענע גרוס", "description": "שילוב מרענן של לימון חמצמץ ונענע טרייה עם קרח גרוס וסירופ מתקתק במידה הנכונה.", "price": "12₪", "image": "images/menu2.jpg" },
-      { "name": "קנקן לימנענע גרוס", "description": "קנקן גדול של משקה מרענן של לימון חמצמץ ונענע טרייה עם קרח גרוס וסירופ מתקתק במידה הנכונה.", "price": "30₪", "image": "images/menu2.jpg" },
+      { "name": "מילקשייק", "description": "על בסיס גלידה עשירה בטעמים לבחירה (שוקולד בלגי, וניל קלאסי, תות, וניל-עוגיות, פיסטוק, לוטוס, וניל דובדבן, מסטיק) – מוגש עם קצפת מעל.", "price": "25₪", "image": "images/milkshake.jpg" },
+      { "name": "קפה קר", "description": "אספרסו איכותי, מוגש עם חלב טרי, קרח ומעט מתיקות לבחירתכם. מוגש עם קצפת מעל.", "price": "15₪", "image": "images/icedcoffee.jpg" },
+      { "name": "אייס וניל", "description": "משקה קרמי ומפנק על בסיס וניל, קרח גרוס וחלב טרי – מוגש עם קצפת מעל.", "price": "12₪", "image": "images/icedvanilla.jpg" },
+      { "name": "אייס קפה", "description": "משקה קרמי וממכר על בסיס קפה נמס איכותי, קרח גרוס וחלב טרי – מוגש עם קצפת מעל.", "price": "12₪", "image": "images/frozencoffe.jpg" },
+      { "name": "לימונענע גרוס", "description": "שילוב מרענן של לימון חמצמץ ונענע טרייה עם קרח גרוס וסירופ מתקתק במידה הנכונה.", "price": "12₪", "image": "images/mintlemonade.jpg" },
+      { "name": "קנקן לימנענע גרוס", "description": "קנקן גדול של משקה מרענן של לימון חמצמץ ונענע טרייה עם קרח גרוס וסירופ מתקתק במידה הנכונה.", "price": "30₪", "image": "images/mintlemonadejug.jpg" },
       { "name": "תפוזים סחוט טבעי", "description": "תפוזים טריים, נסחטים במקום למיץ טבעי, מתוק ומלא בריאות.", "price": "15₪", "image": "images/orangeJuice.jpg" },
       { "name": "לימונדה קלאסית", "description": "משקה לימונדה מרענן בטעם לימון מתקתק, מוכן במיוחד לרגעים של פינוק ורעננות.", "price": "8₪", "image": "images/lemonade.jpg" },
-      { "name": "קנקן לימונדה קלאסית", "description": "קנקן גדול של משקה לימונדה מרענן בטעם לימון מתקתק, מוכן במיוחד לרגעים של פינוק ורעננות.", "price": "20₪", "image": "images/menu2.jpg" },
-      { "name": "ברד ענבים", "description": "", "price": "10₪", "image": "images/menu2.jpg" },
-      { "name": "ברד פסיפלורה", "description": "", "price": "10₪", "image": "images/menu2.jpg" },
-      { "name": "מים מינרליים", "description": "", "price": "10₪", "image": "images/menu2.jpg" },
-      { "name": "ענבים", "description": "", "price": "10₪", "image": "images/menu2.jpg" },
-      { "name": "אשכוליות", "description": "", "price": "10₪", "image": "images/menu2.jpg" },
-      { "name": "XL", "description": "", "price": "10₪", "image": "images/menu2.jpg" },
-      { "name": "סודה", "description": "", "price": "10₪", "image": "images/menu2.jpg" },
-      { "name": "פאנטה", "description": "", "price": "10₪", "image": "images/menu2.jpg" },
-      { "name": "קוקה קולה", "description": "", "price": "10₪", "image": "images/menu2.jpg" },
-      { "name": "קולה זירו", "description": "", "price": "10₪", "image": "images/menu2.jpg" }
+      { "name": "קנקן לימונדה קלאסית", "description": "קנקן גדול של משקה לימונדה מרענן בטעם לימון מתקתק, מוכן במיוחד לרגעים של פינוק ורעננות.", "price": "20₪", "image": "images/lemonadejug.jpg" },
+      { "name": "ברד ענבים", "description": "", "price": "10₪", "image": "images/grapeslush.jpg" },
+      { "name": "ברד פסיפלורה", "description": "", "price": "10₪", "image": "images/passionslush.jpg" },
+      { "name": "מים מינרליים", "description": "", "price": "10₪", "image": "images/water.jpg" },
+      { "name": "ענבים", "description": "", "price": "10₪", "image": "images/grapejuice.jpg" },
+      { "name": "אשכוליות", "description": "", "price": "10₪", "image": "images/grapefruitjuice.jpg" },
+      { "name": "XL", "description": "", "price": "10₪", "image": "images/energydrink.jpg" },
+      { "name": "סודה", "description": "", "price": "10₪", "image": "images/soda.jpg" },
+      { "name": "פאנטה", "description": "", "price": "10₪", "image": "images/fanta.jpg" },
+      { "name": "קוקה קולה", "description": "", "price": "10₪", "image": "images/cola.jpg" },
+      { "name": "קולה זירו", "description": "", "price": "10₪", "image": "images/zerocolacola.jpg" }
     ],
     "מתוקים": [
-      { "name": "וופל בלגי מפנק", "description": "וופל בלגי טרי ופריך, מוגש עם רטבי שוקולד לבחירה: נוטלה, שוקולד לבן, קינדר, פיסטוק, מייפל או לוטוס. כולל כדור גלידה לבחירה (שוקולד, וניל, תות ועוד) וקצפת עשירה בצד.", "price": "45₪", "image": "images/menu2.jpg" },
-      { "name": "פנקייק קלאסי", "description": "זוג פנקייקים זהובים, אווריריים וטריים, מוגשים עם רטבים לבחירה: נוטלה, שוקולד לבן, קינדר, פיסטוק, מייפל או לוטוס. כולל כדור גלידה לבחירה (שוקולד, וניל, תות ועוד) וקצפת עשירה בצד.", "price": "35₪", "image": "images/menu2.jpg" },
-      { "name": "פנקייק הולנדי", "description": "כדורי פנקייק אווריריים וטריים, מוגשים בגדלים לבחירה: 10 כדורים, 15 כדורים או 20 כדורים. מגיעים עם רטבים מפנקים לבחירה: נוטלה, שוקולד לבן, קינדר, פיסטוק, מייפל או לוטוס.", "price": "28₪", "image": "images/menu2.jpg" },
-      { "name": "קרפ צרפתי", "description": "קרפ דקיק וזהוב, מוגש עם רטבים מפנקים לבחירה: נוטלה, שוקולד לבן, קינדר, פיסטוק, מייפל או לוטוס. כולל כדור גלידה לבחירה (וניל, שוקולד, תות ועוד) וקצפת מעל. ניתן להוסיף תוספות לבחירה: מקופלת, פירורי לוטוס או אוראו, בוטנים קלויים, דובדבן מסוכר ועוד.", "price": "25₪", "image": "images/menu2.jpg" },
-      { "name": "צ'ורוס", "description": "8 יחידות של צ'ורוס טריים, זהובים ופריכים, מצופים בסוכר וקינמון. מוגשים לצד קצפת עם רטבים לבחירה: קינדר, נוטלה או שוקולד לבן.", "price": "45₪", "image": "images/menu2.jpg" }
+      { "name": "וופל ב��גי מפנק", "description": "וופל בלגי טרי ופריך, מוגש עם רטבי שוקולד לבחירה: נוטלה, שוקולד לבן, קינדר, פיסטוק, מייפל או לוטוס. כולל כדור גלידה לבחירה (שוקולד, וניל, תות ועוד) וקצפת עשירה בצד.", "price": "45₪", "image": "images/belgianwaffle.jpg" },
+      { "name": "פנקייק קלאסי", "description": "זוג פנקייקים זהובים, אווריריים וטריים, מוגשים עם רטבים לבחירה: נוטלה, שוקולד לבן, קינדר, פיסטוק, מייפל או לוטוס. כולל כדור גלידה לבחירה (שוקולד, וניל, תות ועוד) וקצפת עשירה בצד.", "price": "35₪", "image": "images/pancakes.jpg" },
+      { "name": "פנקייק הולנדי", "description": "כדורי פנקייק אווריריים וטריים, מוגשים בגדלים לבחירה: 10 כדורים, 15 כדורים או 20 כדורים. מגיעים עם רטבים מפנקים לבחירה: נוטלה, שוקולד לבן, קינדר, פיסטוק, מייפל או לוטוס.", "price": "28₪", "image": "images/dutchpancakes.jpg" },
+      { "name": "קרפ צרפתי", "description": "קרפ דקיק וזהוב, מוגש עם רטבים מפנקים לבחירה: נוטלה, שוקולד לבן, קינדר, פיסטוק, מייפל או לוטוס. כולל כדור גלידה לבחירה (וניל, שוקולד, תות ועוד) וקצפת מעל. ניתן להוסיף תוספות לבחירה: מקופלת, פירורי לוטוס או אוראו, בוטנים קלויים, דובדבן מסוכר ועוד.", "price": "25₪", "image": "images/crepe.jpg" },
+      { "name": "צ'ורוס", "description": "8 יחידות של צ'ורוס טריים, זהובים ופריכים, מצופים בסוכר וקינמון. מוגשים לצד קצפת עם רטבים לבחירה: קינדר, נוטלה או שוקולד לבן.", "price": "45₪", "image": "images/churros.jpg" }
     ],
     "כנאפה": [
       { "name": "כנאפת הבית", "description": "כנאפה טרייה וחמה, עשויה במקום עם גבינה עשירה וסירופ סוכר מתקתק, במרקם מושלם.", "prices": { "אישית": "20₪", "זוגית": "35₪", "משפחתית": "70₪" }, "image": "images/knafeh.jpg" },
-      { "name": "שבלולית אדומה", "description": "כנאפה טרייה וחמה, עשויה במקום עם גבינה עשירה וסירופ סוכר מתקתק, במרקם מושלם.", "price": "40₪", "image": "images/menu2.jpg" },
+      { "name": "שבלולית אדומה", "description": "כנאפה טרייה וחמה, עשויה במקום עם גבינה עשירה וסירופ סוכר מתקתק, במרקם מושלם.", "price": "40₪", "image": "images/redknafeh.jpg" },
       { "name": "כנאפה פיסטוק", "description": "קינוח עשיר בשתי שכבות קדאיף פריכות וביניהן קרם פיסטוק עשיר ושוקולד לבן נמס. מעל, ציפוי נדיב של קרם פיסטוק ושוקולד לבן, מוגש עם קצפת וכדור גלידה לבחירה (וניל, שוקולד, תות ועוד).", "price": "45₪", "image": "images/pistachioKnafeh.jpg" },
       { "name": "כנאפה נוטלה", "description": "קינוח עשיר בשתי שכבות קדאיף פריכות וביניהן שכבת נוטלה מפנקת ושוקולד לבן נמס. מעל, ציפוי נדיב של נוטלה ושוקולד לבן, מוגש עם קצפת וכדור גלידה לבחירה (וניל, שוקולד, תות ועוד).", "price": "45₪", "image": "images/nutellaKnafeh.jpg" },
       { "name": "כנאפה לוטוס", "description": "קינוח עשיר בשתי שכבות קדאיף פריכות וביניהן שכבת קרם לוטוס מלטף. מעל, ציפוי נדיב של קרם לוטוס ופירורי לוטוס פריכים, מוגש עם קצפת וכדור גלידה לבחירה (וניל, שוקולד, תות ועוד).", "price": "45₪", "image": "images/lotusKnafeh.jpg" }
@@ -66,7 +65,7 @@ const Menu = () => {
     "בקלאווה": [
       { "name": "קולאז' אגוזים וקינמון", "description": "שכבות בצק פילו עדינות, ממולאות בתערובת עשירה של אגוזים טחונים עם נגיעות קינמון ארומטי, מצופות בסירופ סוכר מתקתק.", "price": "110₪ לקילו", "image": "images/baklawaNuts.jpg" },
       { "name": "בורמה פיסטוק", "description": "גליל בקלאווה עשוי משכבות דקות של בצק פילו פריך, ממולא בפיסטוק טחון טרי ומצופה בסירופ סוכר מתקתק.", "price": "130₪ לקילו", "image": "images/baklawaPistachio.jpg" },
-      { "name": "הריסה סולת", "description": "עוגת סולת מסורתית, רכה ונימוחה, ספוגה בסירופ סוכר עדין ומעוטרת בשקד מעל.", "price": "40₪ לקילו", "image": "images/baklawaPistachio.jpg" }
+      { "name": "הריסה סולת", "description": "עוגת סולת מסורתית, רכה ונימוחה, ספוגה בסירופ סוכר עדין ומעוטרת בשקד מעל.", "price": "40₪ לקילו", "image": "images/harissa.jpg" }
     ]
   };
 
@@ -74,13 +73,13 @@ const Menu = () => {
     items.map((item: any) => {
       const categoryIcon = categoryIcons[category] || Coffee;
       return {
-        src: item.image ? `/images/${item.image.split('/').pop()}` : 
-             category === "שתייה חמה" ? "/lovable-uploads/64c25164-f773-4859-b6f3-8992fabfdba9.png" :
-             category === "שתייה קרה" ? "https://images.unsplash.com/photo-1573750215158-97a608a0986d" :
-             category === "מתוקים" ? "https://images.unsplash.com/photo-1565299543923-37dd37887442" :
-             category === "כנאפה" ? "https://images.unsplash.com/photo-1618160702438-9b02ab6515c9" :
-             category === "בקלאווה" ? "https://images.unsplash.com/photo-1514910367230-3be03a9a9528" : 
-             "https://images.unsplash.com/photo-1573750215158-97a608a0986d",
+        src: item.image ? 
+             category === "שתייה חמה" && !item.image.includes('/') ? `https://images.unsplash.com/photo-1509042239860-f0ca3bf6d889` :
+             category === "שתייה קרה" && !item.image.includes('/') ? `https://images.unsplash.com/photo-1573750215158-97a608a0986d` :
+             category === "מתוקים" && !item.image.includes('/') ? `https://images.unsplash.com/photo-1565299543923-37dd37887442` :
+             category === "כנאפה" && !item.image.includes('/') ? `https://images.unsplash.com/photo-1618160702438-9b02ab6515c9` :
+             category === "בקלאווה" && !item.image.includes('/') ? `https://images.unsplash.com/photo-1514910367230-3be03a9a9528` : 
+             `/lovable-uploads/64c25164-f773-4859-b6f3-8992fabfdba9.png`,
         alt: item.name,
         title: item.name,
         category: category,
