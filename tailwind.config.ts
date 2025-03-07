@@ -27,22 +27,22 @@ export default {
         foreground: "hsl(var(--foreground))",
         primary: {
           DEFAULT: "#E6A168", // Warm caramel color
-          dark: "#2C1810", // Deep brown
+          dark: "#1A1A1D", // Changed from deep brown to dark charcoal
           light: "#FDE1D3", // Soft peach
         },
         secondary: {
           DEFAULT: "#8B4513", // Saddle brown
-          dark: "#1A0F0A", // Very dark brown
+          dark: "#222222", // Changed to a darker gray
           light: "#DEB887", // Burlywood
         },
         accent: {
           DEFAULT: "#FEF7CD", // Soft cream
-          dark: "#2D2A20", // Dark taupe
+          dark: "#2C2C34", // Changed to a dark slate color
           light: "#FFF8DC", // Cornsilk
         },
         textColor: {
           DEFAULT: "#2C1810", // Deep brown
-          dark: "#FFF8DC", // Cornsilk
+          dark: "#F5F5F5", // Changed to a lighter off-white
           light: "#4A2511", // Rich brown
         }
       },

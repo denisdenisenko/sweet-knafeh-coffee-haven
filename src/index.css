@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -14,11 +13,11 @@
   }
 
   .dark {
-    --background: 24 12% 10%;
-    --foreground: 36 100% 99%;
-    --border: 24 12% 16%;
-    --input: 24 12% 16%;
-    --ring: 36 100% 99%;
+    --background: 240 5% 10%;
+    --foreground: 36 30% 92%;
+    --border: 240 5% 16%;
+    --input: 240 5% 16%;
+    --ring: 36 30% 92%;
   }
 }
 
