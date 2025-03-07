@@ -1,16 +1,36 @@
 
 import { Link } from "react-router-dom";
 import { useTheme } from "next-themes";
-import { Menu as MenuIcon } from "lucide-react";
-import { useState } from "react";
+import { Menu as MenuIcon, X } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
 import { Button } from "./ui/button";
 import { motion } from "framer-motion";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { theme, setTheme } = useTheme();
+  const navRef = useRef<HTMLDivElement>(null);
 
-  const toggleMenu = () => setIsOpen(!isOpen);
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
+
+  // Handle clicks outside the navbar to close the menu
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (isOpen && navRef.current && !navRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("touchstart", handleClickOutside);
+    
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("touchstart", handleClickOutside);
+    };
+  }, [isOpen]);
 
   const menuItems = [
     { name: "בית", path: "/" },
@@ -20,7 +40,7 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="fixed w-full z-50 bg-background/80 backdrop-blur-sm border-b">
+    <nav className="fixed w-full z-50 bg-background/80 backdrop-blur-sm border-b" ref={navRef}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo - Hidden on Mobile */}
@@ -37,15 +57,19 @@ const Navbar = () => {
 
           {/* Mobile layout */}
           <div className="flex items-center justify-between w-full md:hidden">
-            {/* Menu Button with improved styling */}
+            {/* Menu Button with improved styling and touch behavior */}
             <Button
               variant="ghost"
               size="icon"
               onClick={toggleMenu}
-              className="inline-flex items-center justify-center hover:bg-accent/50"
+              className="inline-flex items-center justify-center hover:bg-accent/50 active:bg-accent/70 touch-manipulation"
               aria-label="Toggle menu"
             >
-              <MenuIcon className="h-5 w-5" />
+              {isOpen ? (
+                <X className="h-5 w-5" />
+              ) : (
+                <MenuIcon className="h-5 w-5" />
+              )}
             </Button>
 
             {/* Right side logo */}
