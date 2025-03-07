@@ -69,24 +69,33 @@ const Navbar = () => {
 
           {/* Mobile layout */}
           <div className="flex items-center justify-between w-full md:hidden">
-            {/* Menu Button with improved mobile compatibility */}
+            {/* Menu Button with improved mobile compatibility - BIGGER SIZE */}
             <button
               ref={buttonRef}
               type="button"
               onClick={toggleMenu}
-              className="inline-flex items-center justify-center p-2 rounded-md text-foreground hover:bg-accent/50 active:bg-accent/70 touch-manipulation"
+              className="inline-flex items-center justify-center p-3 rounded-md text-foreground hover:bg-accent/50 active:bg-accent/70 touch-manipulation"
               aria-label="Toggle menu"
               data-test-id="mobile-menu-toggle"
               style={{
                 WebkitTapHighlightColor: "transparent",
                 touchAction: "manipulation",
                 userSelect: "none",
+                outline: "none", // Prevent focus outline that may appear as persistent hover
+              }}
+              onBlur={() => {
+                // Force remove any hover-like states when focus is lost
+                const button = buttonRef.current;
+                if (button) {
+                  button.classList.remove('hover:bg-accent/50');
+                  button.style.backgroundColor = '';
+                }
               }}
             >
               {isOpen ? (
-                <X className="h-6 w-6" />
+                <X className="h-8 w-8" />
               ) : (
-                <MenuIcon className="h-6 w-6" />
+                <MenuIcon className="h-8 w-8" />
               )}
             </button>
 
