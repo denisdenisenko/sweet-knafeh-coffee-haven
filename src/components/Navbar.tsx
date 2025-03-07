@@ -1,7 +1,7 @@
 
 import { Link } from "react-router-dom";
 import { useTheme } from "next-themes";
-import { Menu as MenuIcon, X } from "lucide-react";
+import { Menu as MenuIcon, X, Sun, Moon } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { Button } from "./ui/button";
 import { motion } from "framer-motion";
@@ -113,8 +113,9 @@ const Navbar = () => {
                 size="icon"
                 onClick={() => setTheme(theme === "light" ? "dark" : "light")}
                 className="mr-4"
+                aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
               >
-                {theme === "dark" ? "🌞" : "🌙"}
+                {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
               </Button>
             </div>
           </div>
@@ -143,8 +144,19 @@ const Navbar = () => {
                 setIsOpen(false);
               }}
               className="w-full justify-start px-3 text-base"
+              aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
             >
-              {theme === "dark" ? "מצב יום 🌞" : "מצב לילה 🌙"}
+              {theme === "dark" ? (
+                <div className="flex items-center">
+                  <Sun className="h-5 w-5 ml-1" />
+                  <span className="mr-2">מצב יום</span>
+                </div>
+              ) : (
+                <div className="flex items-center">
+                  <Moon className="h-5 w-5 ml-1" />
+                  <span className="mr-2">מצב לילה</span>
+                </div>
+              )}
             </Button>
           </div>
         </div>
