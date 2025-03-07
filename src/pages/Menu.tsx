@@ -1,7 +1,6 @@
-
-import React, { useState, useRef, useEffect } from "react";
-import { Coffee, CakeSlice, UtensilsCrossed, Candy, Cookie, Wheat, Glasses, IceCream, Croissant, LucideIcon } from "lucide-react";
-import { motion } from "framer-motion";
+import React, { useState, useRef } from "react";
+import { Coffee, CakeSlice, Candy, Cookie, Glasses, LucideIcon } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import MenuItemCard from "@/components/MenuItemCard";
 import { Button } from "@/components/ui/button";
 
@@ -47,7 +46,7 @@ const Menu = () => {
       { "name": "סודה", "description": "", "price": "10₪", "image": "images/menu2.jpg" },
       { "name": "פאנטה", "description": "", "price": "10₪", "image": "images/menu2.jpg" },
       { "name": "קוקה קולה", "description": "", "price": "10₪", "image": "images/menu2.jpg" },
-      { "name": "קולה זירו", "description": "", "price": "10₪", "image": "images/menu2.jpg" }
+      { "name": "קולה זירו", "description": "", "price": "10₪", image": "images/menu2.jpg" }
     ],
     "מתוקים": [
       { "name": "וופל בלגי מפנק", "description": "וופל בלגי טרי ופריך, מוגש עם רטבי שוקולד לבחירה: נוטלה, שוקולד לבן, קינדר, פיסטוק, מייפל או לוטוס. כולל כדור גלידה לבחירה (שוקולד, וניל, תות ועוד) וקצפת עשירה בצד.", "price": "45₪", "image": "images/menu2.jpg" },
@@ -85,7 +84,7 @@ const Menu = () => {
         title: item.name,
         category: category,
         price: item.price,
-        sizes: item.prices, // Handle multiple prices for some items
+        sizes: item.prices,
         description: item.description,
         icon: categoryIcon
       };
@@ -97,25 +96,8 @@ const Menu = () => {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const categoryScrollRef = useRef<HTMLDivElement>(null);
   
-  // Remove the scroll-to-top effect
-  // useEffect(() => {
-  //   const timeouts = [10, 50, 100, 300].map(delay => 
-  //     setTimeout(() => {
-  //       window.scrollTo({
-  //         top: 0,
-  //         behavior: 'instant'
-  //       });
-  //     }, delay)
-  //   );
-    
-  //   return () => {
-  //     timeouts.forEach(timeout => clearTimeout(timeout));
-  //   };
-  // }, [selectedCategory]);
-
   const handleCategoryClick = (category: string) => {
     console.log("Category clicked:", category, "Previously selected:", selectedCategory);
-    
     setSelectedCategory(prevCategory => prevCategory === category ? null : category);
   };
 
@@ -129,8 +111,27 @@ const Menu = () => {
     show: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.3
+        staggerChildren: 0.05,
+        delayChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    show: { 
+      opacity: 1, 
+      y: 0,
+      transition: {
+        duration: 0.3,
+        ease: "easeOut"
+      }
+    },
+    exit: { 
+      opacity: 0,
+      y: -10,
+      transition: {
+        duration: 0.2
       }
     }
   };
@@ -138,24 +139,30 @@ const Menu = () => {
   const renderMenuItems = () => {
     if (selectedCategory) {
       return (
-        <motion.div 
-          variants={containerVariants}
-          initial="hidden"
-          animate="show"
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6" 
-          style={{ direction: "rtl" }}
-        >
-          {menuItems
-            .filter(item => item.category === selectedCategory)
-            .map((item, index) => (
-              <div 
-                key={`${item.category}-${item.title}-${index}`}
-                className="menu-item h-full"
-              >
-                <MenuItemCard {...item} index={index} />
-              </div>
-            ))}
-        </motion.div>
+        <AnimatePresence mode="sync">
+          <motion.div 
+            key={selectedCategory}
+            initial="hidden"
+            animate="show"
+            exit="exit"
+            variants={containerVariants}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6" 
+            style={{ direction: "rtl" }}
+          >
+            {menuItems
+              .filter(item => item.category === selectedCategory)
+              .map((item, index) => (
+                <motion.div 
+                  variants={itemVariants}
+                  key={`${item.category}-${item.title}-${index}`}
+                  className="menu-item h-full"
+                  layout
+                >
+                  <MenuItemCard {...item} index={0} />
+                </motion.div>
+              ))}
+          </motion.div>
+        </AnimatePresence>
       );
     } else {
       return (
@@ -165,7 +172,7 @@ const Menu = () => {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
+                transition={{ duration: 0.4 }}
                 className="flex items-center gap-2 mb-4"
               >
                 {categoryIcons[category] && React.createElement(categoryIcons[category], { className: "h-7 w-7 md:h-6 md:w-6 text-primary" })}
@@ -173,21 +180,22 @@ const Menu = () => {
               </motion.div>
               
               <motion.div 
-                variants={containerVariants}
                 initial="hidden"
                 animate="show"
+                variants={containerVariants}
                 className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6" 
                 style={{ direction: "rtl" }}
               >
                 {menuItems
                   .filter(item => item.category === category)
                   .map((item, index) => (
-                    <div 
+                    <motion.div 
+                      variants={itemVariants}
                       key={`${item.category}-${item.title}-${index}`}
                       className="menu-item h-full"
                     >
-                      <MenuItemCard {...item} index={index} />
-                    </div>
+                      <MenuItemCard {...item} index={0} />
+                    </motion.div>
                   ))}
               </motion.div>
             </div>
@@ -243,29 +251,37 @@ const Menu = () => {
               transition={{ duration: 0.5, delay: 0.3 }}
               className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-6 sm:mb-8 py-2"
             >
-              <Button
-                type="button"
-                onClick={handleAllCategoryClick}
-                variant={selectedCategory === null ? "default" : "outline"}
-                className="whitespace-nowrap text-lg md:text-base mb-2"
+              <motion.div
+                whileTap={{ scale: 0.95 }}
               >
-                הכל
-              </Button>
+                <Button
+                  type="button"
+                  onClick={handleAllCategoryClick}
+                  variant={selectedCategory === null ? "default" : "outline"}
+                  className="whitespace-nowrap text-lg md:text-base mb-2"
+                >
+                  הכל
+                </Button>
+              </motion.div>
               
               {categories.map((category) => {
                 const CategoryIcon = categoryIcons[category] || Coffee;
                 
                 return (
-                  <Button
+                  <motion.div
                     key={category}
-                    type="button"
-                    onClick={() => handleCategoryClick(category)}
-                    variant={selectedCategory === category ? "default" : "outline"}
-                    className="whitespace-nowrap text-lg md:text-base mb-2 inline-flex items-center gap-1 sm:gap-2"
+                    whileTap={{ scale: 0.95 }}
                   >
-                    <CategoryIcon className="h-5 w-5 md:h-4 md:w-4" />
-                    <span>{category}</span>
-                  </Button>
+                    <Button
+                      type="button"
+                      onClick={() => handleCategoryClick(category)}
+                      variant={selectedCategory === category ? "default" : "outline"}
+                      className="whitespace-nowrap text-lg md:text-base mb-2 inline-flex items-center gap-1 sm:gap-2"
+                    >
+                      <CategoryIcon className="h-5 w-5 md:h-4 md:w-4" />
+                      <span>{category}</span>
+                    </Button>
+                  </motion.div>
                 );
               })}
             </motion.div>
