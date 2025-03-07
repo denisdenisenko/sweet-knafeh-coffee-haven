@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { LucideIcon, ChevronDown, ChevronUp } from "lucide-react";
 import { motion } from "framer-motion";
@@ -29,11 +29,20 @@ const MenuItemCard: React.FC<MenuItemProps> = ({
   index = 0,
 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
-  const hasLongDescription = description && description.length > 70;
+  const [isTruncated, setIsTruncated] = useState(false);
+  const textRef = useRef<HTMLParagraphElement>(null);
 
   const toggleDescription = () => {
     setIsExpanded(!isExpanded);
   };
+
+  // Check if text is truncated
+  useEffect(() => {
+    if (textRef.current && description) {
+      const isTextTruncated = textRef.current.scrollHeight > textRef.current.clientHeight;
+      setIsTruncated(isTextTruncated);
+    }
+  }, [description]);
 
   return (
     <motion.div
@@ -74,10 +83,13 @@ const MenuItemCard: React.FC<MenuItemProps> = ({
           </h3>
           {description && (
             <div className="mb-2">
-              <p className={`text-sm text-foreground/70 dark:text-foreground/60 ${isExpanded ? '' : 'line-clamp-2'} transition-all duration-200`}>
+              <p 
+                ref={textRef}
+                className={`text-sm text-foreground/70 dark:text-foreground/60 ${isExpanded ? '' : 'line-clamp-2'} transition-all duration-200`}
+              >
                 {description}
               </p>
-              {hasLongDescription && (
+              {isTruncated && (
                 <Button 
                   variant="ghost" 
                   size="sm" 
