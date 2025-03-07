@@ -32,7 +32,7 @@ const MenuItemCard: React.FC<MenuItemProps> = ({
             src={src}
             alt={alt}
             className="object-cover w-full h-full"
-            loading="eager" // Changed from lazy to eager for initial layout
+            loading="eager"
           />
         </AspectRatio>
       </div>

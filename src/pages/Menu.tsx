@@ -1,8 +1,8 @@
-import React, { useRef, useState, useEffect } from "react";
+
+import React, { useState, useRef, useEffect } from "react";
 import { Coffee, CakeSlice, UtensilsCrossed, Candy, Cookie, Wheat, Glasses, IceCream, Croissant, LucideIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import Isotope from "isotope-layout";
 import MenuItemCard from "@/components/MenuItemCard";
 
 const Menu = () => {
@@ -73,18 +73,11 @@ const Menu = () => {
   const categoryScrollRef = useRef<HTMLDivElement>(null);
   const lastClickTimeRef = useRef<number>(0);
   const clickDebounceTime = 300; // ms between allowed clicks
-  const isotopeRef = useRef<Isotope | null>(null);
-  const menuGridRef = useRef<HTMLDivElement>(null);
-  const [isIsotopeInitialized, setIsIsotopeInitialized] = useState(false);
-  const [imagesLoaded, setImagesLoaded] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const filteredItems = selectedCategory 
     ? menuItems.filter(item => item.category === selectedCategory)
     : menuItems;
-
-  const displayedCategories = selectedCategory 
-    ? [selectedCategory] 
-    : categories;
 
   const handleCategoryClick = (event: React.MouseEvent, category: string) => {
     // Prevent default to avoid page scroll
@@ -122,9 +115,10 @@ const Menu = () => {
     setSelectedCategory(null);
   };
 
-  // Track image loading
+  // Preload images
   useEffect(() => {
     const preloadImages = async () => {
+      setIsLoading(true);
       const imageUrls = [...new Set(menuItems.map(item => item.src))];
       
       // Create an array of promises for image loading
@@ -139,88 +133,11 @@ const Menu = () => {
       
       // Wait for all images to load
       await Promise.all(loadPromises);
-      setImagesLoaded(true);
+      setIsLoading(false);
     };
     
     preloadImages();
   }, [menuItems]);
-
-  // Initialize Isotope after images are loaded
-  useEffect(() => {
-    if (!imagesLoaded || !menuGridRef.current) return;
-    
-    // Add a small delay to ensure DOM is ready
-    const timer = setTimeout(() => {
-      if (menuGridRef.current) {
-        // Destroy previous instance if it exists
-        if (isotopeRef.current) {
-          isotopeRef.current.destroy();
-        }
-
-        // Create new Isotope instance
-        isotopeRef.current = new Isotope(menuGridRef.current, {
-          itemSelector: '.menu-item',
-          layoutMode: 'fitRows',
-          fitRows: {
-            gutter: 20
-          },
-          originLeft: false
-        });
-        
-        setIsIsotopeInitialized(true);
-        
-        // Force layout update
-        setTimeout(() => {
-          if (isotopeRef.current) {
-            isotopeRef.current.layout();
-          }
-        }, 100);
-      }
-    }, 300);
-    
-    return () => clearTimeout(timer);
-  }, [imagesLoaded]);
-
-  // Update layout when category changes
-  useEffect(() => {
-    if (isotopeRef.current && isIsotopeInitialized) {
-      const filterValue = selectedCategory 
-        ? `.${selectedCategory.replace(/\s+/g, '-')}`
-        : '*';
-      
-      // First update the filter
-      isotopeRef.current.arrange({ filter: filterValue });
-      
-      // Then force a layout update after a short delay
-      setTimeout(() => {
-        if (isotopeRef.current) {
-          isotopeRef.current.layout();
-        }
-      }, 100);
-    }
-  }, [selectedCategory, isIsotopeInitialized]);
-
-  // Update layout on window resize
-  useEffect(() => {
-    const handleResize = () => {
-      if (isotopeRef.current && isIsotopeInitialized) {
-        isotopeRef.current.layout();
-      }
-    };
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, [isIsotopeInitialized]);
-
-  // Force layout update when component mounts
-  useEffect(() => {
-    return () => {
-      // Clean up on unmount
-      if (isotopeRef.current) {
-        isotopeRef.current.destroy();
-      }
-    };
-  }, []);
 
   return (
     <motion.div
@@ -286,20 +203,19 @@ const Menu = () => {
         </div>
   
         <div className="mx-auto max-w-7xl">
-          {!imagesLoaded ? (
+          {isLoading ? (
             <div className="flex justify-center items-center min-h-[300px]">
               <div className="animate-pulse text-primary">טוען...</div>
             </div>
           ) : (
             <div 
-              ref={menuGridRef} 
               className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6" 
               style={{ direction: "rtl" }}
             >
               {filteredItems.map((item, index) => (
                 <div 
                   key={`${item.category}-${item.title}-${index}`}
-                  className={`menu-item ${item.category.replace(/\s+/g, '-')}`}
+                  className="menu-item"
                 >
                   <MenuItemCard {...item} />
                 </div>
