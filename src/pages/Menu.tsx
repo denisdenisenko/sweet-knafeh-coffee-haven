@@ -81,9 +81,15 @@ const Menu = () => {
     }, 10);
   }, [selectedCategory]);
 
-  // Improved direct event handlers for mobile compatibility
-  const handleCategoryClick = (category: string) => {
+  // Improved category selection handlers with immediate update
+  const handleCategoryClick = (event: React.MouseEvent | React.TouchEvent, category: string) => {
+    // Prevent default behavior and stop propagation to avoid double-triggering
+    event.preventDefault();
+    event.stopPropagation();
+    
     console.log("Category clicked:", category, "Previously selected:", selectedCategory);
+    
+    // Immediately update the state without checking previous value
     if (category === selectedCategory) {
       setSelectedCategory(null);
     } else {
@@ -91,8 +97,13 @@ const Menu = () => {
     }
   };
 
-  const handleAllCategoryClick = () => {
+  const handleAllCategoryClick = (event: React.MouseEvent | React.TouchEvent) => {
+    // Prevent default behavior and stop propagation
+    event.preventDefault();
+    event.stopPropagation();
+    
     console.log("All categories clicked");
+    // Immediately set to null without checking previous state
     setSelectedCategory(null);
   };
 
@@ -218,7 +229,7 @@ const Menu = () => {
               <button
                 type="button"
                 onClick={handleAllCategoryClick}
-                className={`whitespace-nowrap px-4 py-2 rounded-md text-sm sm:text-base mb-2 touch-manipulation ${
+                className={`whitespace-nowrap px-4 py-2 rounded-md text-sm sm:text-base mb-2 ${
                   selectedCategory === null 
                     ? "bg-primary text-white" 
                     : "border border-input bg-background hover:bg-accent hover:text-primary"
@@ -239,8 +250,8 @@ const Menu = () => {
                   <button
                     type="button"
                     key={category}
-                    onClick={() => handleCategoryClick(category)}
-                    className={`whitespace-nowrap px-4 py-2 rounded-md text-sm sm:text-base mb-2 inline-flex items-center gap-1 sm:gap-2 touch-manipulation ${
+                    onClick={(e) => handleCategoryClick(e, category)}
+                    className={`whitespace-nowrap px-4 py-2 rounded-md text-sm sm:text-base mb-2 inline-flex items-center gap-1 sm:gap-2 ${
                       selectedCategory === category 
                         ? "bg-primary text-white" 
                         : "border border-input bg-background hover:bg-accent hover:text-primary"
