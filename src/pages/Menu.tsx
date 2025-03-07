@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useEffect } from "react";
 import { Coffee, CakeSlice, UtensilsCrossed, Candy, Cookie, Wheat, Glasses, IceCream, Croissant, LucideIcon } from "lucide-react";
 import { motion } from "framer-motion";
@@ -71,7 +70,6 @@ const Menu = () => {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const categoryScrollRef = useRef<HTMLDivElement>(null);
   
-  // Reset scroll position when changing categories
   useEffect(() => {
     setTimeout(() => {
       window.scrollTo({
@@ -81,29 +79,20 @@ const Menu = () => {
     }, 10);
   }, [selectedCategory]);
 
-  // Improved category selection handlers with immediate update
-  const handleCategoryClick = (event: React.MouseEvent | React.TouchEvent, category: string) => {
-    // Prevent default behavior and stop propagation to avoid double-triggering
+  const handleCategoryClick = (event: React.MouseEvent<HTMLButtonElement> | React.TouchEvent<HTMLButtonElement>, category: string) => {
     event.preventDefault();
     event.stopPropagation();
     
     console.log("Category clicked:", category, "Previously selected:", selectedCategory);
     
-    // Immediately update the state without checking previous value
-    if (category === selectedCategory) {
-      setSelectedCategory(null);
-    } else {
-      setSelectedCategory(category);
-    }
+    setSelectedCategory(category === selectedCategory ? null : category);
   };
 
-  const handleAllCategoryClick = (event: React.MouseEvent | React.TouchEvent) => {
-    // Prevent default behavior and stop propagation
+  const handleAllCategoryClick = (event: React.MouseEvent<HTMLButtonElement> | React.TouchEvent<HTMLButtonElement>) => {
     event.preventDefault();
     event.stopPropagation();
     
     console.log("All categories clicked");
-    // Immediately set to null without checking previous state
     setSelectedCategory(null);
   };
 
@@ -238,6 +227,7 @@ const Menu = () => {
                   WebkitTapHighlightColor: "transparent",
                   touchAction: "manipulation",
                   userSelect: "none",
+                  outline: "none"
                 }}
               >
                 הכל
@@ -260,6 +250,7 @@ const Menu = () => {
                       WebkitTapHighlightColor: "transparent",
                       touchAction: "manipulation",
                       userSelect: "none",
+                      outline: "none"
                     }}
                   >
                     <CategoryIcon className="h-3 w-3 sm:h-4 sm:w-4" />
