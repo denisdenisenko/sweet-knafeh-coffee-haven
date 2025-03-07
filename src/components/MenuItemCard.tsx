@@ -55,15 +55,13 @@ const MenuItemCard: React.FC<MenuItemProps> = ({
       }}
       className="h-full w-full glass-morphism rounded-lg overflow-hidden flex flex-col shadow-md hover:shadow-lg transition-shadow duration-300"
     >
-      <div className="relative w-full">
-        <AspectRatio ratio={16/9}>
-          <img
-            src={src}
-            alt={alt}
-            className="object-cover w-full h-full"
-            loading="lazy"
-          />
-        </AspectRatio>
+      <div className="relative w-full h-48 overflow-hidden">
+        <img
+          src={src}
+          alt={alt}
+          className="w-full h-full object-cover"
+          loading="lazy"
+        />
       </div>
       <div className="p-4 flex flex-col flex-grow">
         <div className="flex-grow">
