@@ -90,14 +90,14 @@ const Navbar = () => {
               )}
             </button>
 
-            {/* Right side logo */}
+            {/* Right side logo - INCREASED SIZE */}
             <motion.img
               initial={{ scale: 0.9 }}
               whileHover={{ scale: 1.1 }}
               transition={{ duration: 0.2 }}
               src="/images/knafeh-logo.png"
               alt="House of Knafeh"
-              className="h-8 w-8"
+              className="h-12 w-12" // Changed from h-8 w-8 to h-12 w-12
             />
           </div>
 
