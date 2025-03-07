@@ -12,11 +12,7 @@ const Navbar = () => {
   const navRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
-  const toggleMenu = (e?: React.MouseEvent) => {
-    // If provided, prevent default behavior
-    if (e) {
-      e.preventDefault();
-    }
+  const toggleMenu = () => {
     setIsOpen(prevState => !prevState);
   };
 
@@ -38,8 +34,8 @@ const Navbar = () => {
     };
 
     // Add both mouse and touch event listeners
-    document.addEventListener("mousedown", handleClickOutside, { passive: false });
-    document.addEventListener("touchstart", handleClickOutside, { passive: false });
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("touchstart", handleClickOutside);
     
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);

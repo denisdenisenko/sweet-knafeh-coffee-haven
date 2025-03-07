@@ -1,3 +1,4 @@
+
 import React, { useState, useRef } from "react";
 import { Coffee, CakeSlice, UtensilsCrossed, Candy, Cookie, Wheat, Glasses, IceCream, Croissant, LucideIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -71,6 +72,7 @@ const Menu = () => {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const categoryScrollRef = useRef<HTMLDivElement>(null);
 
+  // Direct event handlers without debounce to improve mobile responsiveness
   const handleCategoryClick = (category: string) => {
     if (category === selectedCategory) {
       setSelectedCategory(null);

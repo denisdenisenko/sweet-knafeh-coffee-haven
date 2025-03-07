@@ -44,14 +44,14 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, asChild = false, ...props }, ref) => {
     const Comp = asChild ? Slot : "button"
     
-    // Create a click handler that ensures button actions fire correctly on mobile
-    const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-      // Prevent any default behaviors that might interfere
-      e.preventDefault();
+    // Improve click handling for mobile
+    const handleButtonAction = (e: React.MouseEvent<HTMLButtonElement> | React.TouchEvent<HTMLButtonElement>) => {
+      // Stop propagation and prevent default to avoid double-tap issues
+      e.stopPropagation();
       
       // If there's an onClick handler in props, call it
-      if (props.onClick) {
-        props.onClick(e);
+      if ('onClick' in props && typeof props.onClick === 'function') {
+        props.onClick(e as React.MouseEvent<HTMLButtonElement>);
       }
     };
     
@@ -65,10 +65,15 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           userSelect: "none", // Prevent text selection during rapid clicks
           ...props.style
         }}
-        onClick={handleClick}
         {...props}
+        // Override onClick and onTouchStart with our improved handlers
+        onClick={handleButtonAction}
         onTouchStart={(e) => {
-          // Ensure touch events are handled properly
+          // Prevent ghost clicks
+          e.preventDefault();
+          handleButtonAction(e);
+          
+          // Call original onTouchStart if it exists
           if (props.onTouchStart) {
             props.onTouchStart(e);
           }
