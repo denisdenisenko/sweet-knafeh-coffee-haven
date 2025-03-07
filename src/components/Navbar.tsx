@@ -112,7 +112,7 @@ const Navbar = () => {
                 variant="ghost"
                 size="icon"
                 onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-                className="mr-4"
+                className="mr-4 rounded-full hover:bg-accent/50 transition-all duration-300 hover:scale-110"
                 aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
               >
                 {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
@@ -143,7 +143,7 @@ const Navbar = () => {
                 setTheme(theme === "light" ? "dark" : "light");
                 setIsOpen(false);
               }}
-              className="w-full justify-start px-3 text-base"
+              className="w-full justify-start px-3 text-base rounded-md hover:bg-accent/50 transition-colors"
               aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
             >
               {theme === "dark" ? (
