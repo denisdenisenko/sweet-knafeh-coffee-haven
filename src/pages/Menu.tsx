@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { Coffee, CakeSlice, UtensilsCrossed, Candy, Cookie, Wheat, Glasses, IceCream, Croissant, LucideIcon } from "lucide-react";
 import { motion } from "framer-motion";
 import MenuItemCard from "@/components/MenuItemCard";
+import { Button } from "@/components/ui/button";
 
 const Menu = () => {
   const categoryIcons: Record<string, LucideIcon> = {
@@ -71,27 +72,27 @@ const Menu = () => {
   const categoryScrollRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
-    setTimeout(() => {
-      window.scrollTo({
-        top: 0,
-        behavior: 'instant'
-      });
-    }, 10);
+    const timeouts = [10, 50, 100, 300].map(delay => 
+      setTimeout(() => {
+        window.scrollTo({
+          top: 0,
+          behavior: 'instant'
+        });
+      }, delay)
+    );
+    
+    return () => {
+      timeouts.forEach(timeout => clearTimeout(timeout));
+    };
   }, [selectedCategory]);
 
-  const handleCategoryClick = (event: React.MouseEvent<HTMLButtonElement> | React.TouchEvent<HTMLButtonElement>, category: string) => {
-    event.preventDefault();
-    event.stopPropagation();
-    
+  const handleCategoryClick = (category: string) => {
     console.log("Category clicked:", category, "Previously selected:", selectedCategory);
     
-    setSelectedCategory(category === selectedCategory ? null : category);
+    setSelectedCategory(prevCategory => prevCategory === category ? null : category);
   };
 
-  const handleAllCategoryClick = (event: React.MouseEvent<HTMLButtonElement> | React.TouchEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-    event.stopPropagation();
-    
+  const handleAllCategoryClick = () => {
     console.log("All categories clicked");
     setSelectedCategory(null);
   };
@@ -215,47 +216,29 @@ const Menu = () => {
               transition={{ duration: 0.5, delay: 0.3 }}
               className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-6 sm:mb-8 py-2"
             >
-              <button
+              <Button
                 type="button"
                 onClick={handleAllCategoryClick}
-                className={`whitespace-nowrap px-4 py-2 rounded-md text-sm sm:text-base mb-2 ${
-                  selectedCategory === null 
-                    ? "bg-primary text-white" 
-                    : "border border-input bg-background hover:bg-accent hover:text-primary"
-                }`}
-                style={{
-                  WebkitTapHighlightColor: "transparent",
-                  touchAction: "manipulation",
-                  userSelect: "none",
-                  outline: "none"
-                }}
+                variant={selectedCategory === null ? "default" : "outline"}
+                className="whitespace-nowrap text-sm sm:text-base mb-2"
               >
                 הכל
-              </button>
+              </Button>
               
               {categories.map((category) => {
                 const CategoryIcon = categoryIcons[category] || Coffee;
                 
                 return (
-                  <button
-                    type="button"
+                  <Button
                     key={category}
-                    onClick={(e) => handleCategoryClick(e, category)}
-                    className={`whitespace-nowrap px-4 py-2 rounded-md text-sm sm:text-base mb-2 inline-flex items-center gap-1 sm:gap-2 ${
-                      selectedCategory === category 
-                        ? "bg-primary text-white" 
-                        : "border border-input bg-background hover:bg-accent hover:text-primary"
-                    }`}
-                    style={{
-                      WebkitTapHighlightColor: "transparent",
-                      touchAction: "manipulation",
-                      userSelect: "none",
-                      outline: "none"
-                    }}
+                    type="button"
+                    onClick={() => handleCategoryClick(category)}
+                    variant={selectedCategory === category ? "default" : "outline"}
+                    className="whitespace-nowrap text-sm sm:text-base mb-2 inline-flex items-center gap-1 sm:gap-2"
                   >
                     <CategoryIcon className="h-3 w-3 sm:h-4 sm:w-4" />
                     <span>{category}</span>
-                  </button>
+                  </Button>
                 );
               })}
             </motion.div>
