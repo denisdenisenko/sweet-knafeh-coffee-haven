@@ -1,3 +1,4 @@
+
 import React, { useState, useRef } from "react";
 import { Coffee, CakeSlice, UtensilsCrossed, Candy, Cookie, Wheat, Glasses, IceCream, Croissant, LucideIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -73,10 +74,6 @@ const Menu = () => {
   const lastClickTimeRef = useRef<number>(0);
   const clickDebounceTime = 300; // ms between allowed clicks
 
-  const filteredItems = selectedCategory 
-    ? menuItems.filter(item => item.category === selectedCategory)
-    : menuItems;
-
   const handleCategoryClick = (event: React.MouseEvent, category: string) => {
     event.preventDefault();
     
@@ -119,6 +116,71 @@ const Menu = () => {
         staggerChildren: 0.1,
         delayChildren: 0.3
       }
+    }
+  };
+
+  // Group items by category when showing all items
+  const renderMenuItems = () => {
+    if (selectedCategory) {
+      // When a category is selected, display just those items
+      return (
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          animate="show"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6" 
+          style={{ direction: "rtl" }}
+        >
+          {menuItems
+            .filter(item => item.category === selectedCategory)
+            .map((item, index) => (
+              <div 
+                key={`${item.category}-${item.title}-${index}`}
+                className="menu-item h-full"
+              >
+                <MenuItemCard {...item} index={index} />
+              </div>
+            ))}
+        </motion.div>
+      );
+    } else {
+      // When "All" is selected, group by category
+      return (
+        <div className="space-y-10">
+          {categories.map((category) => (
+            <div key={category} className="mb-12">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                className="flex items-center gap-2 mb-4"
+              >
+                {categoryIcons[category] && React.createElement(categoryIcons[category], { className: "h-6 w-6 text-primary" })}
+                <h2 className="text-2xl font-bold text-primary">{category}</h2>
+              </motion.div>
+              
+              <motion.div 
+                variants={containerVariants}
+                initial="hidden"
+                animate="show"
+                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6" 
+                style={{ direction: "rtl" }}
+              >
+                {menuItems
+                  .filter(item => item.category === category)
+                  .map((item, index) => (
+                    <div 
+                      key={`${item.category}-${item.title}-${index}`}
+                      className="menu-item h-full"
+                    >
+                      <MenuItemCard {...item} index={index} />
+                    </div>
+                  ))}
+              </motion.div>
+            </div>
+          ))}
+        </div>
+      );
     }
   };
 
@@ -196,22 +258,7 @@ const Menu = () => {
         </div>
   
         <div className="mx-auto max-w-7xl">
-          <motion.div 
-            variants={containerVariants}
-            initial="hidden"
-            animate="show"
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6" 
-            style={{ direction: "rtl" }}
-          >
-            {filteredItems.map((item, index) => (
-              <div 
-                key={`${item.category}-${item.title}-${index}`}
-                className="menu-item h-full"
-              >
-                <MenuItemCard {...item} index={index} />
-              </div>
-            ))}
-          </motion.div>
+          {renderMenuItems()}
         </div>
       </div>
     </motion.div>
