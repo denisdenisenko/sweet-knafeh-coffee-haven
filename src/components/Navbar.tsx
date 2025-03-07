@@ -13,6 +13,7 @@ const Navbar = () => {
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   const toggleMenu = () => {
+    console.log("Toggle menu clicked, current state:", isOpen);
     setIsOpen(prevState => !prevState);
   };
 
@@ -70,11 +71,17 @@ const Navbar = () => {
           <div className="flex items-center justify-between w-full md:hidden">
             {/* Menu Button with improved mobile compatibility */}
             <button
+              ref={buttonRef}
               type="button"
               onClick={toggleMenu}
-              className="inline-flex items-center justify-center p-2 rounded-md text-foreground hover:bg-accent/50 active:bg-accent/70"
+              className="inline-flex items-center justify-center p-2 rounded-md text-foreground hover:bg-accent/50 active:bg-accent/70 touch-manipulation"
               aria-label="Toggle menu"
               data-test-id="mobile-menu-toggle"
+              style={{
+                WebkitTapHighlightColor: "transparent",
+                touchAction: "manipulation",
+                userSelect: "none",
+              }}
             >
               {isOpen ? (
                 <X className="h-6 w-6" />

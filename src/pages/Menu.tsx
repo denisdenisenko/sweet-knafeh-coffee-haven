@@ -1,7 +1,6 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import { Coffee, CakeSlice, UtensilsCrossed, Candy, Cookie, Wheat, Glasses, IceCream, Croissant, LucideIcon } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import MenuItemCard from "@/components/MenuItemCard";
 
@@ -82,7 +81,7 @@ const Menu = () => {
     }, 10);
   }, [selectedCategory]);
 
-  // Plain direct event handlers for better mobile compatibility
+  // Improved direct event handlers for mobile compatibility
   const handleCategoryClick = (category: string) => {
     console.log("Category clicked:", category, "Previously selected:", selectedCategory);
     if (category === selectedCategory) {
@@ -219,11 +218,16 @@ const Menu = () => {
               <button
                 type="button"
                 onClick={handleAllCategoryClick}
-                className={`whitespace-nowrap px-4 py-2 rounded-md text-sm sm:text-base mb-2 ${
+                className={`whitespace-nowrap px-4 py-2 rounded-md text-sm sm:text-base mb-2 touch-manipulation ${
                   selectedCategory === null 
                     ? "bg-primary text-white" 
                     : "border border-input bg-background hover:bg-accent hover:text-primary"
                 }`}
+                style={{
+                  WebkitTapHighlightColor: "transparent",
+                  touchAction: "manipulation",
+                  userSelect: "none",
+                }}
               >
                 הכל
               </button>
@@ -236,11 +240,16 @@ const Menu = () => {
                     type="button"
                     key={category}
                     onClick={() => handleCategoryClick(category)}
-                    className={`whitespace-nowrap px-4 py-2 rounded-md text-sm sm:text-base mb-2 inline-flex items-center gap-1 sm:gap-2 ${
+                    className={`whitespace-nowrap px-4 py-2 rounded-md text-sm sm:text-base mb-2 inline-flex items-center gap-1 sm:gap-2 touch-manipulation ${
                       selectedCategory === category 
                         ? "bg-primary text-white" 
                         : "border border-input bg-background hover:bg-accent hover:text-primary"
                     }`}
+                    style={{
+                      WebkitTapHighlightColor: "transparent",
+                      touchAction: "manipulation",
+                      userSelect: "none",
+                    }}
                   >
                     <CategoryIcon className="h-3 w-3 sm:h-4 sm:w-4" />
                     <span>{category}</span>

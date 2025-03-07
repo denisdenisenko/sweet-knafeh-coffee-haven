@@ -23,7 +23,7 @@ const ScrollToTop = () => {
   const { pathname } = useLocation();
   
   useEffect(() => {
-    // Force immediate scroll to top on route change
+    // Force immediate scroll to top on route change without animation
     window.scrollTo(0, 0);
     
     // Use setTimeout as a backup to ensure scroll happens after DOM updates
@@ -33,6 +33,14 @@ const ScrollToTop = () => {
         behavior: 'instant'
       });
     }, 50);
+
+    // Add another delay for mobile devices
+    setTimeout(() => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'instant'
+      });
+    }, 150);
   }, [pathname]);
   
   return null;
@@ -46,21 +54,27 @@ const AnimatedRoutes = () => {
   useEffect(() => {
     setIsPageRefresh(false);
     
-    // Force immediate scroll on route change
+    // Force immediate scroll without animation
     window.scrollTo(0, 0);
   }, []);
   
   useEffect(() => {
-    // Force immediate scroll to top on route change
+    // Reset scroll position on route change
     window.scrollTo(0, 0);
     
-    // Use setTimeout as a backup
-    setTimeout(() => {
-      window.scrollTo({
-        top: 0,
-        behavior: 'instant'
-      });
-    }, 50);
+    // Add multiple backup scroll resets with increasing delays
+    const timeouts = [10, 50, 150, 300].map(delay => 
+      setTimeout(() => {
+        window.scrollTo({
+          top: 0,
+          behavior: 'instant'
+        });
+      }, delay)
+    );
+    
+    return () => {
+      timeouts.forEach(timeout => clearTimeout(timeout));
+    };
   }, [location.pathname]);
   
   if (isPageRefresh && location.pathname !== "/") {
