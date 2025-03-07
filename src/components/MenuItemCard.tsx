@@ -1,6 +1,5 @@
 
 import React, { useState, useRef, useEffect } from "react";
-import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { LucideIcon, ChevronDown, ChevronUp } from "lucide-react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
@@ -55,11 +54,11 @@ const MenuItemCard: React.FC<MenuItemProps> = ({
       }}
       className="h-full w-full glass-morphism rounded-lg overflow-hidden flex flex-col shadow-md hover:shadow-lg transition-shadow duration-300"
     >
-      <div className="relative w-full h-48 overflow-hidden">
+      <div className="w-full" style={{ height: "220px" }}>
         <img
           src={src}
           alt={alt}
-          className="w-full h-full object-cover"
+          className="w-full h-full object-contain"
           loading="lazy"
         />
       </div>
