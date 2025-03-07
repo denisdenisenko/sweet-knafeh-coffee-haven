@@ -38,7 +38,7 @@ const MenuItemCard: React.FC<MenuItemProps> = ({
           />
         </AspectRatio>
       </div>
-      <div className="p-4 flex flex-col flex-1 justify-between overflow-hidden">
+      <div className="p-4 flex flex-col flex-1 justify-between">
         <div>
           <div className="flex items-center justify-between mb-2">
             <div className="flex items-center gap-1">
@@ -59,16 +59,16 @@ const MenuItemCard: React.FC<MenuItemProps> = ({
               {description}
             </p>
           )}
-          {sizes && (
-            <div className="mt-1 flex flex-wrap gap-1 text-xs">
-              {Object.entries(sizes).map(([size, price]) => (
-                <span key={size} className="bg-primary/10 dark:bg-primary-light/10 px-2 py-1 rounded">
-                  {size}: {price}
-                </span>
-              ))}
-            </div>
-          )}
         </div>
+        {sizes && (
+          <div className="mt-2 flex flex-wrap gap-1 text-xs">
+            {Object.entries(sizes).map(([size, price]) => (
+              <span key={size} className="bg-primary/10 dark:bg-primary-light/10 px-2 py-1 rounded">
+                {size}: {price}
+              </span>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

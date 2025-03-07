@@ -1,3 +1,4 @@
+
 import React, { useRef, useState, useEffect } from "react";
 import { Coffee, CakeSlice, UtensilsCrossed, Candy, Cookie, Wheat, Glasses, IceCream, Croissant, LucideIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -116,13 +117,20 @@ const Menu = () => {
 
   useEffect(() => {
     if (menuGridRef.current) {
+      // Destroy any existing instance first
+      if (isotopeRef.current) {
+        isotopeRef.current.destroy();
+        isotopeRef.current = null;
+      }
+      
+      // Create a new instance with a slight delay
       setTimeout(() => {
         if (menuGridRef.current) {
           isotopeRef.current = new Isotope(menuGridRef.current, {
             itemSelector: '.menu-item',
             layoutMode: 'fitRows',
             fitRows: {
-              gutter: 32 // Increased gutter for better spacing
+              gutter: 20
             },
             percentPosition: true,
             stagger: 30,
@@ -144,23 +152,42 @@ const Menu = () => {
     return () => {
       if (isotopeRef.current) {
         isotopeRef.current.destroy();
+        isotopeRef.current = null;
       }
     };
   }, []);
 
   useEffect(() => {
     if (isotopeRef.current) {
+      // Force layout recalculation
+      isotopeRef.current.destroy();
+      isotopeRef.current = null;
+      
       setTimeout(() => {
-        if (isotopeRef.current) {
+        if (menuGridRef.current) {
+          isotopeRef.current = new Isotope(menuGridRef.current, {
+            itemSelector: '.menu-item',
+            layoutMode: 'fitRows',
+            fitRows: {
+              gutter: 20
+            },
+            percentPosition: true,
+            stagger: 30,
+            transitionDuration: '0.4s',
+            hiddenStyle: {
+              opacity: 0,
+              transform: 'scale(0.8)'
+            },
+            visibleStyle: {
+              opacity: 1,
+              transform: 'scale(1)'
+            },
+            originLeft: false
+          });
+          
           isotopeRef.current.arrange({
             filter: selectedCategory ? `.${selectedCategory.replace(/\s+/g, '-')}` : '*'
           });
-          
-          setTimeout(() => {
-            if (isotopeRef.current) {
-              isotopeRef.current.layout();
-            }
-          }, 100);
         }
       }, 100);
     }
@@ -249,13 +276,13 @@ const Menu = () => {
         <div className="mx-auto max-w-7xl">
           <div 
             ref={menuGridRef} 
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8 md:gap-10" 
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6" 
             style={{ direction: "rtl" }}
           >
             {filteredItems.map((item, index) => (
               <div 
                 key={`item-${index}`}
-                className={`menu-item ${item.category.replace(/\s+/g, '-')} w-full`}
+                className={`menu-item ${item.category.replace(/\s+/g, '-')} w-full h-full`}
               >
                 <MenuItemCard 
                   src={item.src}
