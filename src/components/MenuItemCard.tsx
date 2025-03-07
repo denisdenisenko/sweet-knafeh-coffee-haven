@@ -52,13 +52,13 @@ const MenuItemCard: React.FC<MenuItemProps> = ({
         delay: index * 0.1,
         ease: "easeOut"
       }}
-      className="h-full w-full bg-gradient-to-b from-background to-primary/5 dark:from-background/90 dark:to-primary-dark/10 backdrop-blur-sm rounded-xl overflow-hidden flex flex-col shadow-md hover:shadow-xl transition-all duration-300"
+      className="h-full w-full bg-white/90 dark:bg-gray-900/80 backdrop-blur-sm rounded-xl overflow-hidden flex flex-col shadow-md hover:shadow-xl transition-all duration-300 border border-primary/5 dark:border-primary/10"
     >
-      <div className="w-full flex items-center justify-center p-5 rounded-t-xl overflow-hidden bg-accent/10 dark:bg-primary/5" style={{ height: "200px" }}>
+      <div className="w-full flex items-center justify-center p-5 rounded-t-xl overflow-hidden bg-accent/5 dark:bg-primary/5" style={{ height: "200px" }}>
         <img
           src={src}
           alt={alt}
-          className="max-w-full max-h-full object-contain rounded-lg hover:scale-105 transition-transform duration-300"
+          className="max-w-full max-h-full object-contain rounded-2xl hover:scale-105 transition-transform duration-300"
           loading="lazy"
         />
       </div>

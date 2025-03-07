@@ -97,20 +97,21 @@ const Menu = () => {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const categoryScrollRef = useRef<HTMLDivElement>(null);
   
-  useEffect(() => {
-    const timeouts = [10, 50, 100, 300].map(delay => 
-      setTimeout(() => {
-        window.scrollTo({
-          top: 0,
-          behavior: 'instant'
-        });
-      }, delay)
-    );
+  // Remove the scroll-to-top effect
+  // useEffect(() => {
+  //   const timeouts = [10, 50, 100, 300].map(delay => 
+  //     setTimeout(() => {
+  //       window.scrollTo({
+  //         top: 0,
+  //         behavior: 'instant'
+  //       });
+  //     }, delay)
+  //   );
     
-    return () => {
-      timeouts.forEach(timeout => clearTimeout(timeout));
-    };
-  }, [selectedCategory]);
+  //   return () => {
+  //     timeouts.forEach(timeout => clearTimeout(timeout));
+  //   };
+  // }, [selectedCategory]);
 
   const handleCategoryClick = (category: string) => {
     console.log("Category clicked:", category, "Previously selected:", selectedCategory);
