@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -8,6 +7,7 @@ import { ThemeProvider } from "next-themes";
 import { useState, useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 import Index from "./pages/Index";
 import Menu from "./pages/Menu";
 import Location from "./pages/Location";
@@ -17,17 +17,14 @@ import LoadingScreen from "./components/LoadingScreen";
 
 const queryClient = new QueryClient();
 
-// Component to handle AnimatePresence with routes
 const AnimatedRoutes = () => {
   const location = useLocation();
   const [isPageRefresh, setIsPageRefresh] = useState(true);
 
   useEffect(() => {
-    // Set isPageRefresh to false after first render
     setIsPageRefresh(false);
   }, []);
   
-  // If page was refreshed and we're not on the home page, redirect to home
   if (isPageRefresh && location.pathname !== "/") {
     return <Navigate to="/" replace />;
   }
@@ -49,10 +46,9 @@ const App = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Simulate loading time
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 2000); // Loading time for better UX
+    }, 2000);
 
     return () => clearTimeout(timer);
   }, []);
@@ -65,11 +61,12 @@ const App = () => {
           <Sonner />
           <BrowserRouter>
             {isLoading && <LoadingScreen />}
-            <div className="min-h-screen bg-background">
+            <div className="min-h-screen bg-background flex flex-col">
               <Navbar />
-              <main className="pt-16">
+              <main className="pt-16 flex-grow">
                 <AnimatedRoutes />
               </main>
+              <Footer />
             </div>
           </BrowserRouter>
         </TooltipProvider>
