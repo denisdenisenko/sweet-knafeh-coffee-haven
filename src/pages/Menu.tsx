@@ -142,8 +142,8 @@ const Menu = () => {
                 transition={{ duration: 0.5 }}
                 className="flex items-center gap-2 mb-4"
               >
-                {categoryIcons[category] && React.createElement(categoryIcons[category], { className: "h-6 w-6 text-primary" })}
-                <h2 className="text-2xl sm:text-2xl md:text-3xl font-bold text-primary">{category}</h2>
+                {categoryIcons[category] && React.createElement(categoryIcons[category], { className: "h-7 w-7 md:h-6 md:w-6 text-primary" })}
+                <h2 className="text-3xl sm:text-2xl md:text-3xl font-bold text-primary">{category}</h2>
               </motion.div>
               
               <motion.div 
@@ -204,7 +204,7 @@ const Menu = () => {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-xl md:text-2xl font-bold mb-4"
+            className="text-2xl md:text-2xl font-bold mb-4"
           >
             בחר קטגוריה
           </motion.h2>
@@ -221,7 +221,7 @@ const Menu = () => {
                 type="button"
                 onClick={handleAllCategoryClick}
                 variant={selectedCategory === null ? "default" : "outline"}
-                className="whitespace-nowrap text-base sm:text-base mb-2"
+                className="whitespace-nowrap text-lg md:text-base mb-2"
               >
                 הכל
               </Button>
@@ -235,9 +235,9 @@ const Menu = () => {
                     type="button"
                     onClick={() => handleCategoryClick(category)}
                     variant={selectedCategory === category ? "default" : "outline"}
-                    className="whitespace-nowrap text-base sm:text-base mb-2 inline-flex items-center gap-1 sm:gap-2"
+                    className="whitespace-nowrap text-lg md:text-base mb-2 inline-flex items-center gap-1 sm:gap-2"
                   >
-                    <CategoryIcon className="h-4 w-4 sm:h-4 sm:w-4" />
+                    <CategoryIcon className="h-5 w-5 md:h-4 md:w-4" />
                     <span>{category}</span>
                   </Button>
                 );
