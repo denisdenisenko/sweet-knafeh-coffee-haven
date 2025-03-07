@@ -26,7 +26,7 @@ const MenuItemCard: React.FC<MenuItemProps> = ({
 }) => {
   return (
     <div 
-      className="glass-morphism rounded-lg overflow-hidden flex flex-col shadow-md hover:shadow-lg transition-shadow duration-300 h-[290px] w-full"
+      className="glass-morphism rounded-lg overflow-hidden flex flex-col shadow-md hover:shadow-lg transition-shadow duration-300 h-full w-full"
     >
       <div className="w-full h-[150px] overflow-hidden">
         <AspectRatio ratio={16/9} className="w-full h-full">
@@ -55,7 +55,7 @@ const MenuItemCard: React.FC<MenuItemProps> = ({
             {title}
           </h3>
           {description && (
-            <p className="text-sm text-foreground/70 dark:text-foreground/60 line-clamp-2">
+            <p className="text-sm text-foreground/70 dark:text-foreground/60 line-clamp-2 mb-2">
               {description}
             </p>
           )}
