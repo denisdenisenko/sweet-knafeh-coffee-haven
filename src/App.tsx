@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -20,6 +21,7 @@ const queryClient = new QueryClient();
 const AnimatedRoutes = () => {
   const location = useLocation();
   const [isPageRefresh, setIsPageRefresh] = useState(true);
+  const isMenuPage = location.pathname === "/menu";
 
   useEffect(() => {
     setIsPageRefresh(false);
@@ -38,6 +40,7 @@ const AnimatedRoutes = () => {
         <Route path="/our-story" element={<OurStory />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
+      {isMenuPage && <Footer />}
     </AnimatePresence>
   );
 };
@@ -66,7 +69,6 @@ const App = () => {
               <main className="pt-16 flex-grow">
                 <AnimatedRoutes />
               </main>
-              <Footer />
             </div>
           </BrowserRouter>
         </TooltipProvider>
