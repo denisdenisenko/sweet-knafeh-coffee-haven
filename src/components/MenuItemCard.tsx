@@ -32,7 +32,7 @@ const MenuItemCard: React.FC<MenuItemProps> = ({
             src={src}
             alt={alt}
             className="object-cover w-full h-full"
-            loading="lazy"
+            loading="eager" // Changed from lazy to eager for initial layout
           />
         </AspectRatio>
       </div>
@@ -53,7 +53,7 @@ const MenuItemCard: React.FC<MenuItemProps> = ({
             {title}
           </h3>
           {description && (
-            <p className="text-sm text-foreground/70 dark:text-foreground/60 line-clamp-2 mb-2">
+            <p className="text-sm text-foreground/70 dark:text-foreground/60 line-clamp-2 mb-2 h-10">
               {description}
             </p>
           )}
