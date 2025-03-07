@@ -1,5 +1,5 @@
 
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Coffee, CakeSlice, UtensilsCrossed, Candy, Cookie, Wheat, Glasses, IceCream, Croissant, LucideIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
@@ -71,6 +71,11 @@ const Menu = () => {
   
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const categoryScrollRef = useRef<HTMLDivElement>(null);
+  
+  // Ensure proper scrolling behavior when changing categories
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [selectedCategory]);
 
   // Direct event handlers without debounce to improve mobile responsiveness
   const handleCategoryClick = (category: string) => {
@@ -202,7 +207,7 @@ const Menu = () => {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
-              className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-6 sm:mb-8 overflow-x-auto py-2"
+              className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-6 sm:mb-8 py-2"
             >
               <Button
                 key="all"
