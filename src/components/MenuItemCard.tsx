@@ -2,6 +2,7 @@
 import React from "react";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { LucideIcon } from "lucide-react";
+import { motion } from "framer-motion";
 
 interface MenuItemProps {
   src: string;
@@ -12,6 +13,7 @@ interface MenuItemProps {
   sizes?: Record<string, string>;
   description?: string;
   icon: LucideIcon;
+  index?: number;
 }
 
 const MenuItemCard: React.FC<MenuItemProps> = ({
@@ -23,9 +25,19 @@ const MenuItemCard: React.FC<MenuItemProps> = ({
   sizes,
   description,
   icon: Icon,
+  index = 0,
 }) => {
   return (
-    <div className="h-full w-full glass-morphism rounded-lg overflow-hidden flex flex-col shadow-md hover:shadow-lg transition-shadow duration-300">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ 
+        duration: 0.4, 
+        delay: index * 0.1,
+        ease: "easeOut"
+      }}
+      className="h-full w-full glass-morphism rounded-lg overflow-hidden flex flex-col shadow-md hover:shadow-lg transition-shadow duration-300"
+    >
       <div className="relative w-full">
         <AspectRatio ratio={16/9}>
           <img
@@ -68,7 +80,7 @@ const MenuItemCard: React.FC<MenuItemProps> = ({
           </div>
         )}
       </div>
-    </div>
+    </motion.div>
   );
 };
 

@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import { Coffee, CakeSlice, UtensilsCrossed, Candy, Cookie, Wheat, Glasses, IceCream, Croissant, LucideIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
@@ -31,7 +31,7 @@ const Menu = () => {
     "מתוקים": [
       { "name": "וופל בלגי מפנק", "description": "וופל בלגי טרי ופריך, מוגש עם רטבי שוקולד לבחירה: נוטלה, שוקולד לבן, קינדר, פיסטוק, מייפל או לוטוס. כולל כדור גלידה לבחירה (שוקולד, וניל, תות ועוד) וקצפת עשירה בצד.", "price": "45₪" },
       { "name": "פנקייק קלאסי", "description": "זוג פנקייקים זהובים, אווריריים וטריים, מוגשים עם רטבים לבחירה: נוטלה, שוקולד לבן, קינדר, פיסטוק, מייפל או לוטוס. כולל כדור גלידה לבחירה (שוקולד, וניל, תות ועוד) וקצפת עשירה בצד.", "price": "35₪" },
-      { "name": "קרפ צרפתי", "description": "קרפ דקיק וזהוב, מוגש עם רטבים מפנקים לבחירה: נוטלה, שוקולד לבן, קינדר, פיסטוק, מייפל או לוטוס. כולל כדור גלידה לבחירה (וניל, שוקולד, תות ועוד) וקצפת מעל. ניתן להוסיף תוספות לבחירה: מקופלת, פירורי לוטוס או אורא������, בוטנים קלויי��, דובדבן מסוכר ועוד.", "price": "25₪" },
+      { "name": "קרפ צרפתי", "description": "קרפ דקיק וזהוב, מוגש עם רטבים מפנקים לבחירה: נוטלה, שוקולד לבן, קינדר, פיסטוק, מייפל או לוטוס. כולל כדור גלידה לבחירה (וניל, שוקולד, תות ועוד) וקצפת מעל. ניתן להוסיף תוספות לבחירה: מקופלת, פירורי לוטוס או אורא������, בוטנים קלויי���, דובדבן מסוכר ועוד.", "price": "25₪" },
       { "name": "צ'ורוס", "description": "8 יחידות של צ'ורוס טריים, זהובים ופריכים, מצופים בסוכר וקינמון. מוגשים לצד קצפת עם רטבים לבחירה: קינדר, נוטלה או שוקולד לבן.", "price": "45₪" }
     ],
     "כנאפה": [
@@ -72,14 +72,12 @@ const Menu = () => {
   const categoryScrollRef = useRef<HTMLDivElement>(null);
   const lastClickTimeRef = useRef<number>(0);
   const clickDebounceTime = 300; // ms between allowed clicks
-  const [isLoading, setIsLoading] = useState(false);
 
   const filteredItems = selectedCategory 
     ? menuItems.filter(item => item.category === selectedCategory)
     : menuItems;
 
   const handleCategoryClick = (event: React.MouseEvent, category: string) => {
-    // Prevent default to avoid page scroll
     event.preventDefault();
     
     const now = Date.now();
@@ -100,7 +98,6 @@ const Menu = () => {
   };
 
   const handleAllCategoryClick = (event: React.MouseEvent) => {
-    // Prevent default to avoid page scroll
     event.preventDefault();
     
     const now = Date.now();
@@ -112,6 +109,17 @@ const Menu = () => {
     lastClickTimeRef.current = now;
     console.log("Setting category to All (null)");
     setSelectedCategory(null);
+  };
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.3
+      }
+    }
   };
 
   return (
@@ -143,11 +151,21 @@ const Menu = () => {
 
       <div className="container mx-auto px-4 py-6 md:py-12">
         <div className="relative mb-6 md:mb-10 text-center max-w-5xl mx-auto">
-          <h2 className="text-xl md:text-2xl font-bold mb-4">בחר קטגוריה</h2>
+          <motion.h2 
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="text-xl md:text-2xl font-bold mb-4"
+          >
+            בחר קטגוריה
+          </motion.h2>
           
           <div className="relative">
-            <div 
+            <motion.div 
               ref={categoryScrollRef}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
               className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-6 sm:mb-8 overflow-x-auto py-2"
             >
               <Button
@@ -173,12 +191,15 @@ const Menu = () => {
                   </Button>
                 );
               })}
-            </div>
+            </motion.div>
           </div>
         </div>
   
         <div className="mx-auto max-w-7xl">
-          <div 
+          <motion.div 
+            variants={containerVariants}
+            initial="hidden"
+            animate="show"
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6" 
             style={{ direction: "rtl" }}
           >
@@ -187,10 +208,10 @@ const Menu = () => {
                 key={`${item.category}-${item.title}-${index}`}
                 className="menu-item h-full"
               >
-                <MenuItemCard {...item} />
+                <MenuItemCard {...item} index={index} />
               </div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </div>
     </motion.div>
