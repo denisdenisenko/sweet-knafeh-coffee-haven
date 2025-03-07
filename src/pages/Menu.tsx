@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useEffect } from "react";
 import { Coffee, CakeSlice, UtensilsCrossed, Candy, Cookie, Wheat, Glasses, IceCream, Croissant, LucideIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -32,7 +31,7 @@ const Menu = () => {
     "מתוקים": [
       { "name": "וופל בלגי מפנק", "description": "וופל בלגי טרי ופריך, מוגש עם רטבי שוקולד לבחירה: נוטלה, שוקולד לבן, קינדר, פיסטוק, מייפל או לוטוס. כולל כדור גלידה לבחירה (שוקולד, וניל, תות ועוד) וקצפת עשירה בצד.", "price": "45₪" },
       { "name": "פנקייק קלאסי", "description": "זוג פנקייקים זהובים, אווריריים וטריים, מוגשים עם רטבים לבחירה: נוטלה, שוקולד לבן, קינדר, פיסטוק, מייפל או לוטוס. כולל כדור גלידה לבחירה (שוקולד, וניל, תות ועוד) וקצפת עשירה בצד.", "price": "35₪" },
-      { "name": "קרפ צרפתי", "description": "קרפ דקיק וזהוב, מוגש עם רטבים מפנקים לבחירה: נוטלה, שוקולד לבן, קינדר, פיסטוק, מייפל או לוטוס. כולל כדור גלידה לבחירה (וניל, שוקולד, תות ועוד) וקצפת מעל. ניתן להוסיף תוספות לבחירה: מקופלת, פירורי לוטוס או אורא������, בוטנים קלויים, דובדבן מסוכר ועוד.", "price": "25₪" },
+      { "name": "קרפ צרפתי", "description": "קרפ דקיק וזהוב, מוגש עם רטבים מפנקים לבחירה: נוטלה, שוקולד לבן, קינדר, פיסטוק, מייפל או לוטוס. כולל כדור גלידה לבחירה (וניל, שוקולד, תות ועוד) וקצפת מעל. ניתן להוסיף תוספות לבחירה: מקופלת, פירורי לוטוס או אורא������, בוטנים קלויי��, דובדבן מסוכר ועוד.", "price": "25₪" },
       { "name": "צ'ורוס", "description": "8 יחידות של צ'ורוס טריים, זהובים ופריכים, מצופים בסוכר וקינמון. מוגשים לצד קצפת עם רטבים לבחירה: קינדר, נוטלה או שוקולד לבן.", "price": "45₪" }
     ],
     "כנאפה": [
@@ -73,7 +72,7 @@ const Menu = () => {
   const categoryScrollRef = useRef<HTMLDivElement>(null);
   const lastClickTimeRef = useRef<number>(0);
   const clickDebounceTime = 300; // ms between allowed clicks
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   const filteredItems = selectedCategory 
     ? menuItems.filter(item => item.category === selectedCategory)
@@ -114,30 +113,6 @@ const Menu = () => {
     console.log("Setting category to All (null)");
     setSelectedCategory(null);
   };
-
-  // Preload images
-  useEffect(() => {
-    const preloadImages = async () => {
-      setIsLoading(true);
-      const imageUrls = [...new Set(menuItems.map(item => item.src))];
-      
-      // Create an array of promises for image loading
-      const loadPromises = imageUrls.map(url => {
-        return new Promise((resolve) => {
-          const img = new Image();
-          img.onload = () => resolve(true);
-          img.onerror = () => resolve(false);
-          img.src = url;
-        });
-      });
-      
-      // Wait for all images to load
-      await Promise.all(loadPromises);
-      setIsLoading(false);
-    };
-    
-    preloadImages();
-  }, [menuItems]);
 
   return (
     <motion.div
@@ -203,25 +178,19 @@ const Menu = () => {
         </div>
   
         <div className="mx-auto max-w-7xl">
-          {isLoading ? (
-            <div className="flex justify-center items-center min-h-[300px]">
-              <div className="animate-pulse text-primary">טוען...</div>
-            </div>
-          ) : (
-            <div 
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6" 
-              style={{ direction: "rtl" }}
-            >
-              {filteredItems.map((item, index) => (
-                <div 
-                  key={`${item.category}-${item.title}-${index}`}
-                  className="menu-item"
-                >
-                  <MenuItemCard {...item} />
-                </div>
-              ))}
-            </div>
-          )}
+          <div 
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6" 
+            style={{ direction: "rtl" }}
+          >
+            {filteredItems.map((item, index) => (
+              <div 
+                key={`${item.category}-${item.title}-${index}`}
+                className="menu-item h-full"
+              >
+                <MenuItemCard {...item} />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </motion.div>
