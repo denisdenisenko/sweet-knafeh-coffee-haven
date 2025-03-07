@@ -18,6 +18,17 @@ import LoadingScreen from "./components/LoadingScreen";
 
 const queryClient = new QueryClient();
 
+// ScrollToTop component that scrolls to top on route change
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+  
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  
+  return null;
+};
+
 const AnimatedRoutes = () => {
   const location = useLocation();
   const [isPageRefresh, setIsPageRefresh] = useState(true);
@@ -64,6 +75,7 @@ const App = () => {
           <Sonner />
           <BrowserRouter>
             {isLoading && <LoadingScreen />}
+            <ScrollToTop />
             <div className="min-h-screen bg-background flex flex-col">
               <Navbar />
               <main className="pt-16 flex-grow">
