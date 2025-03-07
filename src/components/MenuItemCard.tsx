@@ -52,22 +52,22 @@ const MenuItemCard: React.FC<MenuItemProps> = ({
         delay: index * 0.1,
         ease: "easeOut"
       }}
-      className="h-full w-full glass-morphism rounded-lg overflow-hidden flex flex-col shadow-md hover:shadow-lg transition-shadow duration-300"
+      className="h-full w-full bg-background/80 dark:bg-background/40 backdrop-blur-sm rounded-lg overflow-hidden flex flex-col shadow-md hover:shadow-xl transition-all duration-300"
     >
-      <div className="w-full" style={{ height: "220px" }}>
+      <div className="w-full flex items-center justify-center p-4 bg-primary/5 dark:bg-primary/10" style={{ height: "200px" }}>
         <img
           src={src}
           alt={alt}
-          className="w-full h-full object-contain"
+          className="max-w-full max-h-full object-contain"
           loading="lazy"
         />
       </div>
-      <div className="p-4 flex flex-col flex-grow">
+      <div className="p-5 flex flex-col flex-grow">
         <div className="flex-grow">
-          <div className="flex items-center justify-between mb-2">
-            <div className="flex items-center gap-1">
-              <Icon className="w-5 h-5 text-primary" />
-              <span className="text-base text-foreground/60">{category}</span>
+          <div className="flex items-center justify-between mb-3">
+            <div className="flex items-center gap-2 bg-primary/10 dark:bg-primary/15 px-3 py-1 rounded-full">
+              <Icon className="w-4 h-4 text-primary" />
+              <span className="text-sm font-medium text-primary/80">{category}</span>
             </div>
             {price && (
               <div className="text-lg font-bold text-primary dark:text-primary-light">
@@ -75,14 +75,14 @@ const MenuItemCard: React.FC<MenuItemProps> = ({
               </div>
             )}
           </div>
-          <h3 className="text-xl font-semibold text-foreground/90 dark:text-foreground/80 mb-2 line-clamp-1">
+          <h3 className="text-xl font-semibold text-foreground/90 dark:text-foreground/80 mb-3 line-clamp-1">
             {title}
           </h3>
           {description && (
-            <div className="mb-3">
+            <div className="mb-4">
               <p 
                 ref={textRef}
-                className={`text-lg text-foreground/70 dark:text-foreground/60 ${isExpanded ? '' : 'line-clamp-2'} transition-all duration-200`}
+                className={`text-md text-foreground/70 dark:text-foreground/60 ${isExpanded ? '' : 'line-clamp-2'} transition-all duration-200`}
               >
                 {description}
               </p>
@@ -91,7 +91,7 @@ const MenuItemCard: React.FC<MenuItemProps> = ({
                   variant="ghost" 
                   size="sm" 
                   onClick={toggleDescription} 
-                  className="mt-2 h-8 px-4 py-0 text-base text-primary hover:bg-primary/10"
+                  className="mt-2 h-8 px-3 py-0 text-sm text-primary hover:bg-primary/10"
                 >
                   {isExpanded ? (
                     <span className="flex items-center gap-1">הסתר <ChevronUp className="w-4 h-4" /></span>
@@ -104,9 +104,9 @@ const MenuItemCard: React.FC<MenuItemProps> = ({
           )}
         </div>
         {sizes && (
-          <div className="mt-auto pt-2 flex flex-wrap gap-2 text-base">
+          <div className="mt-auto pt-2 flex flex-wrap gap-2 text-sm">
             {Object.entries(sizes).map(([size, price]) => (
-              <span key={size} className="bg-primary/10 dark:bg-primary-light/10 px-3 py-1 rounded">
+              <span key={size} className="bg-primary/10 dark:bg-primary-light/10 px-3 py-1 rounded-full">
                 {size}: {price}
               </span>
             ))}
